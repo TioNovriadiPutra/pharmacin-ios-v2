@@ -1,0 +1,8 @@
+<svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g id="invoice-01">
+<rect width="32" height="32" rx="8" fill="#58BE62"/>
+<path id="Vector" d="M9 21.9812V12.4488C9 9.88023 9 8.59592 9.76885 7.79797C10.5377 7 11.7751 7 14.25 7H17.75C20.2248 7 21.4623 7 22.2311 7.79797C23 8.59592 23 9.88023 23 12.4488V21.9812C23 23.3417 23 24.022 22.5958 24.2897C21.9352 24.7274 20.9141 23.8097 20.4005 23.4766C19.9761 23.2013 19.764 23.0637 19.5284 23.0557C19.274 23.0471 19.058 23.1791 18.5995 23.4766L16.9275 24.5612C16.4764 24.8537 16.2509 25 16 25C15.7491 25 15.5236 24.8537 15.0725 24.5612L13.4005 23.4766C12.9761 23.2013 12.764 23.0637 12.5285 23.0557C12.274 23.0471 12.0581 23.1791 11.5995 23.4766C11.086 23.8097 10.0648 24.7274 9.40421 24.2897C9 24.022 9 23.3417 9 21.9812Z" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+<path id="Vector_2" d="M15 16H13" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+<path id="Vector_3" d="M18 12H13" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+</g>
+</svg>
