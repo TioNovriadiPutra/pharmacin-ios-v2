@@ -9,7 +9,16 @@ import SwiftUI
 
 struct StatusKasirBelumDibayar: View {
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        ZStack{
+            Rectangle()
+                .frame(width: 125, height: 34)
+                .cornerRadius(6)
+                .foregroundColor(Color(red: 1, green: 0.89, blue: 0.89))
+            
+            Text("Belum dibayar")
+                .font(.custom("PlusJakartaSans-Medium", size: 14))
+                .foregroundColor(Color("Red"))
+        }
     }
 }
 

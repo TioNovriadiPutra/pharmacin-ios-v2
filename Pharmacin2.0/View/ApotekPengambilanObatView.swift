@@ -9,7 +9,11 @@ import SwiftUI
 
 struct ApotekPengambilanObatView: View {
     @State private var searchText: String = ""
+    @Binding var isShowingPopUpView : Bool
+    @State private var isShowingDetailApotek = false
+    
     var body: some View {
+        NavigationStack{
         GeometryReader { geometry in
             ZStack{
                 Color(red: 0.98, green: 0.98, blue: 0.99)
@@ -18,11 +22,11 @@ struct ApotekPengambilanObatView: View {
                 VStack(alignment:.leading, spacing: 14){
                     
                     HStack{
-                        Text("Kasir")
+                        Text("Apotek")
                             .font(.custom("PlusJakartaSans-Bold", size: 24))
                             .foregroundColor(Color("Title"))
                         
-                        Text("/ Menunggu Pembayaran")
+                        Text("/ Pengambilan Obat")
                             .font(.custom("PlusJakartaSans-SemiBold", size: 16))
                             .foregroundColor(Color("Gray"))
                         
@@ -52,36 +56,45 @@ struct ApotekPengambilanObatView: View {
                     }
                     
                     HStack(spacing: 14){
-                        DashboardCard("Total Transaksi Jual", value: "190", image: "TransactionIcon", sizeValue: 20)
-                        DashboardCard("Total Penjualan", value: "Rp.1.000.000", image: "PenjualanIcon", sizeValue: 14)
-                        DashboardCard("Kadaluarsa", value: "33", image: "KadaluarsaIcon", sizeValue: 20)
-                        DashboardCard("Stok Menipis", value: "421", image: "StokMenipisIcon", sizeValue: 20)
+                        DashboardCard("Total Transaksi Jual", value: "190", image: "PeopleBlueIcon", sizeValue: 20)
+                        DashboardCard("Total Penjualan", value: "Rp.1.000.000", image: "PeopleGreenIcon", sizeValue: 14)
+                        DashboardCard("Kadaluarsa", value: "33", image: "PeopleYellowIcon", sizeValue: 20)
+                        DashboardCard("Stok Menipis", value: "421", image: "PeopleRedIcon", sizeValue: 20)
                         
                     }
                     
                     
-                    KasirList()
-                    KasirList()
-                    KasirList()
-                    KasirList()
-                    KasirList()
+                    ApotekList(showDeletePopUp: $isShowingPopUpView, showDetailApotek: $isShowingDetailApotek)
+                    ApotekList(showDeletePopUp: $isShowingPopUpView, showDetailApotek: $isShowingDetailApotek)
+                    ApotekList(showDeletePopUp: $isShowingPopUpView, showDetailApotek: $isShowingDetailApotek)
+                    ApotekList(showDeletePopUp: $isShowingPopUpView, showDetailApotek: $isShowingDetailApotek)
                     
                     Spacer()
+                    
+                    
                     
                 }
                 
                 .padding()
+                .navigationDestination(isPresented: $isShowingDetailApotek) {
+                        DetailApotekView().navigationBarBackButtonHidden()
+                    }
                 
-                
+//                NavigationLink(destination: DetailApotekView().navigationBarBackButtonHidden(), isActive: $isShowingDetailApotek) {
+//                    EmptyView()
+//                }
+//                .hidden()
             }
         }
     }
-}
-
-struct ApotikPengambilanObat_Previews: PreviewProvider {
-    static var previews: some View {
-        
-        ApotekPengambilanObatView().previewInterfaceOrientation(.landscapeRight)
         
     }
 }
+
+//struct ApotikPengambilanObat_Previews: PreviewProvider {
+//    static var previews: some View {
+//        
+//        ApotekPengambilanObatView().previewInterfaceOrientation(.landscapeRight)
+//        
+//    }
+//}

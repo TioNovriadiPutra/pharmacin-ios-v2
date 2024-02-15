@@ -9,7 +9,19 @@ import SwiftUI
 
 struct InvoiceList: View {
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        HStack{
+            Text("0000")
+                .font(.custom("PlusJakartaSans-Regular", size: 14))
+                .foregroundColor(Color("RegularText"))
+                .frame(width: 160, alignment: .leading)
+            Spacer()
+            Text("Lorem Ipsum")
+                .font(.custom("PlusJakartaSans-Regular", size: 14))
+                .foregroundColor(Color("RegularText"))
+                .frame(width: 200, alignment: .leading)
+        }
+        .padding()
+       
     }
 }
 

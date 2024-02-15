@@ -9,15 +9,13 @@ import SwiftUI
 
 struct RincianPembayaranHeader: View {
     var body: some View {
-        
             VStack{
-                
                 HStack (spacing:80){
                     VStack (alignment: .leading, spacing: 12){
                         HStack{
                             Text("No. Registrasi")
                                 .font(.custom("PlusJakartaSans-Medium", size: 16))
-                                .foregroundColor(Color("LightGray"))
+                                .foregroundColor(Color("Gray"))
                                 .frame(width: 120, alignment: .leading)
                             
                             
@@ -33,13 +31,13 @@ struct RincianPembayaranHeader: View {
                         HStack{
                             Text("No. RM")
                                 .font(.custom("PlusJakartaSans-Medium", size: 16))
-                                .foregroundColor(Color("LightGray"))
+                                .foregroundColor(Color("Gray"))
                                 .frame(width: 120, alignment: .leading)
                             
                             
                             Text(":")
                                 .font(.custom("PlusJakartaSans-Medium", size: 16))
-                                .foregroundColor(Color("RegularText"))
+                                .foregroundColor(Color("Gray"))
                             Text("000000")
                                 .font(.custom("PlusJakartaSans-Medium", size: 16))
                                 .foregroundColor(Color("RegularText"))
@@ -49,7 +47,7 @@ struct RincianPembayaranHeader: View {
                         HStack{
                             Text("Nama")
                                 .font(.custom("PlusJakartaSans-Medium", size: 16))
-                                .foregroundColor(Color("LightGray"))
+                                .foregroundColor(Color("Gray"))
                                 .frame(width: 120, alignment: .leading)
                             
                             
@@ -64,7 +62,7 @@ struct RincianPembayaranHeader: View {
                         HStack{
                             Text("TTL")
                                 .font(.custom("PlusJakartaSans-Medium", size: 16))
-                                .foregroundColor(Color("LightGray"))
+                                .foregroundColor(Color("Gray"))
                                 .frame(width: 120, alignment: .leading)
                             Text(":")
                                 .font(.custom("PlusJakartaSans-Medium", size: 16))
@@ -81,7 +79,7 @@ struct RincianPembayaranHeader: View {
                         HStack{
                             Text("Alamat")
                                 .font(.custom("PlusJakartaSans-Medium", size: 16))
-                                .foregroundColor(Color("LightGray"))
+                                .foregroundColor(Color("Gray"))
                                 .frame(width: 120, alignment: .leading)
                             
                             Text(":")
@@ -101,7 +99,7 @@ struct RincianPembayaranHeader: View {
                         HStack{
                             Text("Tgl. Periksa")
                                 .font(.custom("PlusJakartaSans-Medium", size: 16))
-                                .foregroundColor(Color("LightGray"))
+                                .foregroundColor(Color("Gray"))
                                 .frame(width: 150, alignment: .leading)
                             
                             
@@ -117,7 +115,7 @@ struct RincianPembayaranHeader: View {
                         HStack{
                             Text("Dokter")
                                 .font(.custom("PlusJakartaSans-Medium", size: 16))
-                                .foregroundColor(Color("LightGray"))
+                                .foregroundColor(Color("Gray"))
                                 .frame(width: 150, alignment: .leading)
                             
                             
@@ -133,7 +131,7 @@ struct RincianPembayaranHeader: View {
                         HStack{
                             Text("Alergi")
                                 .font(.custom("PlusJakartaSans-Medium", size: 16))
-                                .foregroundColor(Color("LightGray"))
+                                .foregroundColor(Color("Gray"))
                                 .frame(width: 150, alignment: .leading)
                             
                             

@@ -8,17 +8,82 @@
 import SwiftUI
 
 struct ContentView: View {
+    @State private var activeView: ActiveView = .Dashboard
+    @State private var showingPopUpRawatPasienDelete = false
+    @State private var showingPopUpKasirDelete = false
+    @State private var showingPopUpApotekDelete = false
+
+
+    
     var body: some View {
-        VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundStyle(.tint)
-            Text("Hello, world!")
+        
+            GeometryReader { geometry in
+            ZStack {
+                
+                
+                VStack{
+                    HStack {
+                        SidebarView(activeView: $activeView)
+                        
+                         
+                        getViewForActiveView()
+                        
+                        Spacer()
+                    }
+                }
+                
+                
+                if showingPopUpRawatPasienDelete {
+                    Color.black.opacity(0.4) // Background overlay
+                        .edgesIgnoringSafeArea(.all)
+                        .onTapGesture {
+                            showingPopUpRawatPasienDelete = false
+                        }
+                    
+                    RawatPasienPopUp(tutupPopUp: $showingPopUpRawatPasienDelete)
+                }
+                
+                if showingPopUpKasirDelete {
+                    Color.black.opacity(0.4) // Background overlay
+                        .edgesIgnoringSafeArea(.all)
+                        .onTapGesture {
+                            showingPopUpKasirDelete = false
+                        }
+                    
+                    RawatPasienPopUp(tutupPopUp: $showingPopUpKasirDelete)
+                }
+                
+                if showingPopUpApotekDelete {
+                    Color.black.opacity(0.4) // Background overlay
+                        .edgesIgnoringSafeArea(.all)
+                        .onTapGesture {
+                            showingPopUpApotekDelete = false
+                        }
+                    
+                    RawatPasienPopUp(tutupPopUp: $showingPopUpApotekDelete)
+                }
+            }.ignoresSafeArea(.keyboard)
         }
-        .padding()
+     }
+    
+    @ViewBuilder
+    func getViewForActiveView() -> some View {
+        switch activeView {
+        case .Dashboard:
+            DashboardView()
+        case .RawatPasien:
+            RawatPasienView(showPopUpDelete: $showingPopUpRawatPasienDelete)
+        case .Kasir:
+            KasirView(showPopUpDeleteKasir: $showingPopUpKasirDelete)
+        case .Apotek:
+            ApotekPengambilanObatView(isShowingPopUpView: $showingPopUpApotekDelete)
+        }
     }
+
 }
 
-#Preview {
-    ContentView()
+struct ContentView_Preview: PreviewProvider {
+    static var previews: some View {
+        ContentView().previewInterfaceOrientation(.landscapeRight)
+    }
 }

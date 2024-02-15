@@ -8,11 +8,94 @@
 import SwiftUI
 
 struct KasirView: View {
+    @State private var searchText: String = ""
+    @State private var isShowingTambahPenjualanView = false
+    @State private var isShowingDetailKasir = false
+    
+    @Binding var showPopUpDeleteKasir : Bool
+    
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        NavigationStack{
+            GeometryReader { geometry in
+                ZStack{
+                    Color(red: 0.98, green: 0.98, blue: 0.99)
+                        .ignoresSafeArea()
+                    
+                    VStack(alignment:.leading, spacing: 14){
+                        
+                        HStack{
+                            Text("Kasir")
+                                .font(.custom("PlusJakartaSans-Bold", size: 24))
+                                .foregroundColor(Color("Title"))
+                            
+                            Text("/ Menunggu Pembayaran")
+                                .font(.custom("PlusJakartaSans-SemiBold", size: 16))
+                                .foregroundColor(Color("Gray"))
+                            
+                            Spacer()
+                            
+                            HStack(spacing:14){
+                                Button {
+                                    isShowingTambahPenjualanView = true
+                                } label: {
+                                    ActionButton(title: "Tambah Penjualan Obat", width: 266, height: 44, radius: 10, bgColor: "DarkBlue")
+                                }
+                                
+                                HStack {
+                                    Image(systemName: "magnifyingglass")
+                                        .foregroundColor(.gray)
+                                        .padding(.leading, 8)
+                                    
+                                    TextField("Search here...", text: $searchText)
+                                        .autocapitalization(.none)
+                                        .font(.custom("PlusJakartaSans-Medium", size: 16))
+                                        
+                                    
+                                    
+                                }
+                                
+                                .frame(width: 350, height: 44)
+                                .background(Color(red: 0.94, green: 0.94, blue: 0.94))
+                                .cornerRadius(10)
+                            }
+                            
+                            
+                            
+                            
+                        }
+                        
+                        
+                        KasirList(showPopUpDeleteKasir: $showPopUpDeleteKasir, showDetailKasir: $isShowingDetailKasir)
+                        KasirList(showPopUpDeleteKasir: $showPopUpDeleteKasir, showDetailKasir: $isShowingDetailKasir)
+                        KasirList(showPopUpDeleteKasir: $showPopUpDeleteKasir, showDetailKasir: $isShowingDetailKasir)
+                        KasirList(showPopUpDeleteKasir: $showPopUpDeleteKasir, showDetailKasir: $isShowingDetailKasir)
+                        KasirList(showPopUpDeleteKasir: $showPopUpDeleteKasir, showDetailKasir: $isShowingDetailKasir)
+                        
+                        
+                        Spacer()
+                        
+                    }
+                    
+                    .padding()
+                    
+                    .navigationDestination(isPresented: $isShowingTambahPenjualanView) {
+                        KasirTambahPenjualanView().navigationBarBackButtonHidden()
+                    }
+                    
+                    .navigationDestination(isPresented: $isShowingDetailKasir) {
+                        DetailKasirView().navigationBarBackButtonHidden()
+                    }
+                        
+                }
+            }
+        }
     }
 }
 
-#Preview {
-    KasirView()
-}
+//struct KasirView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        
+//        KasirView().previewInterfaceOrientation(.landscapeRight)
+//        
+//    }
+//}

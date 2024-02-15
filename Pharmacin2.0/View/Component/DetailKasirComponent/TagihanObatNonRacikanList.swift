@@ -10,7 +10,7 @@ import SwiftUI
 struct TagihanObatNonRacikanList: View {
     var body: some View {
         VStack(alignment: .leading) {
-            Text("Obat Non Racikan")
+            Text("Tagihan Obat Non Racikan")
                 .font(.custom("PlusJakartaSans-Semibold", size: 18))
                 .foregroundColor(Color("Title"))
                 .padding()
@@ -60,13 +60,12 @@ struct TagihanObatNonRacikanList: View {
             
             VStack {
                 
-//                ApotekObatNonRacikanListTable()
-//                ApotekObatNonRacikanListTable()
-//                ApotekObatNonRacikanListTable()
+                TagihanObatNonRacikanListTable()
+                TagihanObatNonRacikanListTable()
+                TagihanObatNonRacikanListTable()
                 
             }
-            
-            .frame(width: UIScreen.main.bounds.size.width - 140)
+        
             .background(.white)
             .cornerRadius(10)
             

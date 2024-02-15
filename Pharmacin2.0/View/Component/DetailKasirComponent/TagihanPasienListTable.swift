@@ -9,7 +9,33 @@ import SwiftUI
 
 struct TagihanPasienListTable: View {
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        HStack {
+            Text("OBAT SJDH SISJ DSISMDH")
+                .font(.custom("PlusJakartaSans-Regular", size: 14))
+                .foregroundColor(Color("RegularText"))
+                .frame(width: 200, alignment: .leading)
+            Spacer()
+            Text("10")
+                .font(.custom("PlusJakartaSans-Regular", size: 14))
+                .foregroundColor(Color("RegularText"))
+                .frame(width: 120, alignment: .leading)
+            Spacer()
+            Text("Sachet")
+                .font(.custom("PlusJakartaSans-Regular", size: 14))
+                .foregroundColor(Color("RegularText"))
+                .frame(width: 150, alignment: .leading)
+            Spacer()
+            Button {
+                
+            } label: {
+                Image("CrossRed")
+                    .frame(width: 100, alignment: .center)
+            }
+
+            
+        }
+        .padding()
+
     }
 }
 

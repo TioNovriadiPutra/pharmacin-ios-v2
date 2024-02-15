@@ -43,9 +43,6 @@ struct TagihanObatNonRacikanListTable: View {
             }
 
             
-            
-
-
         }
         .padding()
 

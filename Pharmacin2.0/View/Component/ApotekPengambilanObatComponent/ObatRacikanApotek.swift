@@ -19,7 +19,7 @@ struct ObatRacikanApotek: View {
                     Text("Item")
                         .font(.custom("PlusJakartaSans-Medium", size: 16))
                         .foregroundColor(Color("Gray"))
-                        .frame(width: 200, alignment: .leading)
+                        .frame(width: 300, alignment: .leading)
                     Spacer()
                     Text("QTY")
                         .font(.custom("PlusJakartaSans-Medium", size: 16))
@@ -40,11 +40,7 @@ struct ObatRacikanApotek: View {
                         .font(.custom("PlusJakartaSans-Medium", size: 16))
                         .foregroundColor(Color("Gray"))
                         .frame(width: 150, alignment: .leading)
-                    Spacer()
-                    Text("Tindakan")
-                        .font(.custom("PlusJakartaSans-Medium", size: 16))
-                        .foregroundColor(Color("Gray"))
-                        .frame(width: 100, alignment: .center)
+            
                     
                     
                 }
@@ -60,9 +56,9 @@ struct ObatRacikanApotek: View {
             
             VStack {
                 
-                TagihanObatRacikanListTable()
-                TagihanObatRacikanListTable()
-                TagihanObatRacikanListTable()
+                ObatRacikanApotekListTable()
+                ObatRacikanApotekListTable()
+                ObatRacikanApotekListTable()
                 
             }
         
@@ -88,6 +84,8 @@ struct ObatRacikanApotek: View {
             .frame(height: 54)
             .background(Color(red: 0.98, green: 0.98, blue: 0.99))
             .cornerRadius(10)
+            
+            
             
             
         }

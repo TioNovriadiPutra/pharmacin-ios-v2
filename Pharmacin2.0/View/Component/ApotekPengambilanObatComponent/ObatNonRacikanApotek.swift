@@ -19,7 +19,7 @@ struct ObatNonRacikanApotek: View {
                     Text("Item")
                         .font(.custom("PlusJakartaSans-Medium", size: 16))
                         .foregroundColor(Color("Gray"))
-                        .frame(width: 200, alignment: .leading)
+                        .frame(width: 300, alignment: .leading)
                     Spacer()
                     Text("QTY")
                         .font(.custom("PlusJakartaSans-Medium", size: 16))
@@ -40,12 +40,6 @@ struct ObatNonRacikanApotek: View {
                         .font(.custom("PlusJakartaSans-Medium", size: 16))
                         .foregroundColor(Color("Gray"))
                         .frame(width: 150, alignment: .leading)
-                    Spacer()
-                    Text("Tindakan")
-                        .font(.custom("PlusJakartaSans-Medium", size: 16))
-                        .foregroundColor(Color("Gray"))
-                        .frame(width: 100, alignment: .center)
-                    
                     
                 }
             }
@@ -60,9 +54,9 @@ struct ObatNonRacikanApotek: View {
             
             VStack {
                 
-                TagihanObatNonRacikanApotekListTable()
-                TagihanObatNonRacikanApotekListTable()
-                TagihanObatNonRacikanApotekListTable()
+                ObatNonRacikanApotekListTable()
+                ObatNonRacikanApotekListTable()
+                ObatNonRacikanApotekListTable()
                 
             }
         

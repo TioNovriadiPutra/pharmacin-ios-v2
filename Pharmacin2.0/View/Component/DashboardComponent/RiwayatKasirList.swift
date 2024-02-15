@@ -9,7 +9,24 @@ import SwiftUI
 
 struct RiwayatKasirList: View {
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        HStack{
+            Text("DD-MM-YY")
+                .font(.custom("PlusJakartaSans-Regular", size: 14))
+                .foregroundColor(Color("RegularText"))
+                .frame(width: 150, alignment: .leading)
+            Spacer()
+            Text("00.00")
+                .font(.custom("PlusJakartaSans-Regular", size: 14))
+                .foregroundColor(Color("RegularText"))
+                .frame(width: 100, alignment: .leading)
+            Spacer()
+            Text("00.00")
+                .font(.custom("PlusJakartaSans-Regular", size: 14))
+                .foregroundColor(Color("RegularText"))
+                .frame(width: 100, alignment: .leading)
+            
+        }.padding()
+        
     }
 }
 

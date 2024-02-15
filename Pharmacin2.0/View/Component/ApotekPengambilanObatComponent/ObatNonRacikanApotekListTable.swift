@@ -13,7 +13,7 @@ struct ObatNonRacikanApotekListTable: View {
             Text("OBAT SJDH SISJ DSISMDH")
                 .font(.custom("PlusJakartaSans-Regular", size: 14))
                 .foregroundColor(Color("RegularText"))
-                .frame(width: 200, alignment: .leading)
+                .frame(width: 300, alignment: .leading)
             Spacer()
             Text("10")
                 .font(.custom("PlusJakartaSans-Regular", size: 14))
@@ -34,14 +34,6 @@ struct ObatNonRacikanApotekListTable: View {
                 .font(.custom("PlusJakartaSans-Regular", size: 14))
                 .foregroundColor(Color("RegularText"))
                 .frame(width: 150, alignment: .leading)
-            Spacer()
-            Button {
-                
-            } label: {
-                Image("CrossRed")
-                    .frame(width: 100, alignment: .center)
-            }
-
             
         }
         .padding()
