@@ -16,6 +16,11 @@ struct KasirTambahPenjualanView: View {
     @State private var selectionPayment = ""
     @Environment(\.presentationMode) var presentationMode
     
+    @Binding var listObat: [Obat]
+    @Binding var isShowPopUp: Bool
+    @Binding var editObatIndex: Int?
+    @Binding var isEditing: Bool
+    
     
     var body: some View {
         NavigationStack{
@@ -200,7 +205,7 @@ struct KasirTambahPenjualanView: View {
                                     
                                 }
                                 
-                                TambahPenjualanList()
+                                TambahPenjualanList(listObat: $listObat, isShowPopUp: $isShowPopUp, editObatIndex: $editObatIndex, isEditing: $isEditing)
                                 
                                 
                                 
@@ -222,9 +227,9 @@ struct KasirTambahPenjualanView: View {
     
 }
 
-struct Penjualan_Preview: PreviewProvider {
-    static var previews: some View {
-        KasirTambahPenjualanView().previewInterfaceOrientation(.landscapeRight)
-        
-    }
-}
+//struct Penjualan_Preview: PreviewProvider {
+//    static var previews: some View {
+//        KasirTambahPenjualanView().previewInterfaceOrientation(.landscapeRight)
+//        
+//    }
+//}

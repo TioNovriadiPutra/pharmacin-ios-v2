@@ -14,6 +14,11 @@ struct KasirView: View {
     
     @Binding var showPopUpDeleteKasir : Bool
     
+    @Binding var listObat: [Obat]
+    @Binding var isShowPopUp: Bool
+    @Binding var editObatIndex: Int?
+    @Binding var isEditing: Bool
+    
     var body: some View {
         NavigationStack{
             GeometryReader { geometry in
@@ -79,7 +84,7 @@ struct KasirView: View {
                     .padding()
                     
                     .navigationDestination(isPresented: $isShowingTambahPenjualanView) {
-                        KasirTambahPenjualanView().navigationBarBackButtonHidden()
+                        KasirTambahPenjualanView(listObat: $listObat, isShowPopUp: $isShowPopUp, editObatIndex: $editObatIndex, isEditing: $isEditing).navigationBarBackButtonHidden()
                     }
                     
                     .navigationDestination(isPresented: $isShowingDetailKasir) {

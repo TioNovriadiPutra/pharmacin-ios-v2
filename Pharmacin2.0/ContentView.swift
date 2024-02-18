@@ -13,7 +13,22 @@ struct ContentView: View {
     @State private var showingPopUpKasirDelete = false
     @State private var showingPopUpApotekDelete = false
 
+    @State private var showingPopUpTambahObat = false
+    @State private var editObatIndex: Int? = nil
+    @State private var isEditing: Bool = false
+    @State private var listObat: [Obat] = []
+    
+    
+    
+    
 
+    func tambahObatBaru(obat: Obat) {
+        listObat.append(obat)
+    }
+    
+    func updateItem(at index: Int, with newObat: Obat) {
+        listObat[index] = newObat
+    }
     
     var body: some View {
         
@@ -22,14 +37,14 @@ struct ContentView: View {
                 
                 
                 VStack{
-                    HStack {
+                    HStack(spacing:0){
                         SidebarView(activeView: $activeView)
                         
                          
                         getViewForActiveView()
                         
                         Spacer()
-                    }
+                    }.background( Color(red: 0.98, green: 0.98, blue: 0.99))
                 }
                 
                 
@@ -62,6 +77,23 @@ struct ContentView: View {
                     
                     RawatPasienPopUp(tutupPopUp: $showingPopUpApotekDelete)
                 }
+                
+                
+                if showingPopUpTambahObat{
+                    ZStack {
+                        Color.black.opacity(0.4)
+                            .edgesIgnoringSafeArea(.all)
+                            .onTapGesture {
+                                showingPopUpTambahObat = false
+                            }
+                        
+                        TambahObatPopUp(listObat: $listObat,
+                                        tambahObatBaru: tambahObatBaru,
+                                        obatToEdit: editObatIndex != nil && listObat.indices.contains(editObatIndex!) ? listObat[editObatIndex!] : nil,
+                                        isEditing: $isEditing, showPopUp: $showingPopUpTambahObat)
+                            
+                    }
+                }
             }.ignoresSafeArea(.keyboard)
         }
      }
@@ -74,7 +106,7 @@ struct ContentView: View {
         case .RawatPasien:
             RawatPasienView(showPopUpDelete: $showingPopUpRawatPasienDelete)
         case .Kasir:
-            KasirView(showPopUpDeleteKasir: $showingPopUpKasirDelete)
+            KasirView(showPopUpDeleteKasir: $showingPopUpKasirDelete, listObat: $listObat, isShowPopUp: $showingPopUpTambahObat, editObatIndex: $editObatIndex, isEditing: $isEditing)
         case .Apotek:
             ApotekPengambilanObatView(isShowingPopUpView: $showingPopUpApotekDelete)
         }

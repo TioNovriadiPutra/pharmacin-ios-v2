@@ -57,6 +57,8 @@
 		16EFD5482B75383B008351C5 /* DetailApotekView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16EFD5472B75383B008351C5 /* DetailApotekView.swift */; };
 		16EFD54A2B7539DB008351C5 /* DetailApotekHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16EFD5492B7539DB008351C5 /* DetailApotekHeader.swift */; };
 		16EFD54C2B753A84008351C5 /* PopUpPenyerahanObat.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16EFD54B2B753A84008351C5 /* PopUpPenyerahanObat.swift */; };
+		533337602B7FA4F60037B772 /* TambahObatPopUp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5333375F2B7FA4F60037B772 /* TambahObatPopUp.swift */; };
+		533337662B80744B0037B772 /* ObatModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 533337652B80744B0037B772 /* ObatModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -112,6 +114,8 @@
 		16EFD5472B75383B008351C5 /* DetailApotekView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailApotekView.swift; sourceTree = "<group>"; };
 		16EFD5492B7539DB008351C5 /* DetailApotekHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailApotekHeader.swift; sourceTree = "<group>"; };
 		16EFD54B2B753A84008351C5 /* PopUpPenyerahanObat.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopUpPenyerahanObat.swift; sourceTree = "<group>"; };
+		5333375F2B7FA4F60037B772 /* TambahObatPopUp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TambahObatPopUp.swift; sourceTree = "<group>"; };
+		533337652B80744B0037B772 /* ObatModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObatModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -146,9 +150,9 @@
 			children = (
 				16EFD4F02B74C8F9008351C5 /* Pharmacin2-0-Info.plist */,
 				16EFD4E72B74C80E008351C5 /* Font */,
-				16EFD4E12B74C2D7008351C5 /* Model */,
+				533337642B80742D0037B772 /* ViewModel */,
+				533337632B8074290037B772 /* Model */,
 				16EFD4E22B74C2DB008351C5 /* View */,
-				16EFD4E32B74C2DF008351C5 /* ViewModel */,
 				16EFD4D32B74C2AB008351C5 /* Pharmacin2_0App.swift */,
 				16EFD4D52B74C2AB008351C5 /* ContentView.swift */,
 				16EFD4D72B74C2AC008351C5 /* Assets.xcassets */,
@@ -165,13 +169,6 @@
 			path = "Preview Content";
 			sourceTree = "<group>";
 		};
-		16EFD4E12B74C2D7008351C5 /* Model */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Model;
-			sourceTree = "<group>";
-		};
 		16EFD4E22B74C2DB008351C5 /* View */ = {
 			isa = PBXGroup;
 			children = (
@@ -186,13 +183,6 @@
 				16EFD5472B75383B008351C5 /* DetailApotekView.swift */,
 			);
 			path = View;
-			sourceTree = "<group>";
-		};
-		16EFD4E32B74C2DF008351C5 /* ViewModel */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = ViewModel;
 			sourceTree = "<group>";
 		};
 		16EFD4E42B74C2FB008351C5 /* Component */ = {
@@ -277,6 +267,7 @@
 				16EFD5322B7525D9008351C5 /* TambahPenjualanTable.swift */,
 				16EFD5302B75254D008351C5 /* TambahPenjualanListTable.swift */,
 				16EFD5342B752CB8008351C5 /* KonfirmasiPembayaranPopUp.swift */,
+				5333375F2B7FA4F60037B772 /* TambahObatPopUp.swift */,
 			);
 			path = KasirTambahPenjualanComponent;
 			sourceTree = "<group>";
@@ -293,6 +284,21 @@
 				16EFD54B2B753A84008351C5 /* PopUpPenyerahanObat.swift */,
 			);
 			path = ApotekPengambilanObatComponent;
+			sourceTree = "<group>";
+		};
+		533337632B8074290037B772 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				533337652B80744B0037B772 /* ObatModel.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		533337642B80742D0037B772 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ViewModel;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -405,8 +411,10 @@
 				16EFD5482B75383B008351C5 /* DetailApotekView.swift in Sources */,
 				16EFD52A2B751F06008351C5 /* TagihanPasienListTable.swift in Sources */,
 				16EFD4D62B74C2AB008351C5 /* ContentView.swift in Sources */,
+				533337602B7FA4F60037B772 /* TambahObatPopUp.swift in Sources */,
 				16EFD4D42B74C2AB008351C5 /* Pharmacin2_0App.swift in Sources */,
 				16EFD5082B74EA5D008351C5 /* RawatPasienView.swift in Sources */,
+				533337662B80744B0037B772 /* ObatModel.swift in Sources */,
 				16EFD53C2B7530D0008351C5 /* StatusPengambilanObatDiserahkan.swift in Sources */,
 				16EFD5122B750448008351C5 /* KasirView.swift in Sources */,
 				16EFD4FA2B74D6A0008351C5 /* ActionButton.swift in Sources */,
