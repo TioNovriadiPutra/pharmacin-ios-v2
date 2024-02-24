@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct ContentView: View {
+struct MainViewKaryawan: View {
     @State private var activeView: ActiveView = .Dashboard
     @State private var showingPopUpRawatPasienDelete = false
     @State private var showingPopUpKasirDelete = false
@@ -17,6 +17,7 @@ struct ContentView: View {
     @State private var editObatIndex: Int? = nil
     @State private var isEditing: Bool = false
     @State private var listObat: [Obat] = []
+    @State private var showKonfirmasiPembayaranKasir = false
     
     
     
@@ -94,6 +95,20 @@ struct ContentView: View {
                             
                     }
                 }
+                
+                if showKonfirmasiPembayaranKasir{
+                    ZStack {
+                        Color.black.opacity(0.4)
+                            .edgesIgnoringSafeArea(.all)
+                            .onTapGesture {
+                                showingPopUpTambahObat = false
+                            }
+                        
+                        KonfirmasiPembayaranPopUp(showKonfirmsasiPembayaranPopup: $showKonfirmasiPembayaranKasir)
+                            
+                    }
+
+                }
             }.ignoresSafeArea(.keyboard)
         }
      }
@@ -106,7 +121,7 @@ struct ContentView: View {
         case .RawatPasien:
             RawatPasienView(showPopUpDelete: $showingPopUpRawatPasienDelete)
         case .Kasir:
-            KasirView(showPopUpDeleteKasir: $showingPopUpKasirDelete, listObat: $listObat, isShowPopUp: $showingPopUpTambahObat, editObatIndex: $editObatIndex, isEditing: $isEditing)
+            KasirView(showPopUpDeleteKasir: $showingPopUpKasirDelete, listObat: $listObat, isShowPopUp: $showingPopUpTambahObat, editObatIndex: $editObatIndex, isEditing: $isEditing, isShowKonfirmasiPembayaran: $showKonfirmasiPembayaranKasir)
         case .Apotek:
             ApotekPengambilanObatView(isShowingPopUpView: $showingPopUpApotekDelete)
         }
@@ -116,6 +131,6 @@ struct ContentView: View {
 
 struct ContentView_Preview: PreviewProvider {
     static var previews: some View {
-        ContentView().previewInterfaceOrientation(.landscapeRight)
+        MainViewKaryawan().previewInterfaceOrientation(.landscapeRight)
     }
 }

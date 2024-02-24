@@ -11,7 +11,7 @@ enum ActiveView {
     case Dashboard, RawatPasien, Kasir, Apotek
 }
 
-struct SidebarView: View {
+struct SidebarKaryawanView: View {
     @Binding var activeView: ActiveView
     @State private var isActiveDashboard = false
     @State private var isActiveRawatPasien = false
@@ -28,6 +28,7 @@ struct SidebarView: View {
             VStack(spacing:24){
                 VStack{
                     Image("PharmacinLogo")
+                        .padding(.top,24)
                 }
                 VStack(spacing: 14) {
                     
@@ -79,8 +80,20 @@ struct SidebarView: View {
                 }
                 
                 Spacer()
+                
+                Rectangle()
+                .foregroundColor(.clear)
+                .frame(width: 38, height: 1)
+                .background(Color(red: 0.88, green: 0.87, blue: 0.87))
+
+                Button(action: {
+                    
+                }) {
+                   Image("ProfileIcon")
+                        .padding(.bottom,10)
+                }
             }
-            .padding(.top,24)
+            .padding(.vertical)
             
         }
         .ignoresSafeArea()
@@ -93,6 +106,6 @@ struct SidebarView: View {
 
 struct SideBarView_Preview: PreviewProvider {
     static var previews: some View {
-        SidebarView(activeView: .constant(.Dashboard)).previewInterfaceOrientation(.landscapeRight)
+        SidebarKaryawanView(activeView: .constant(.Dashboard)).previewInterfaceOrientation(.landscapeRight)
     }
 }
