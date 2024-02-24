@@ -20,6 +20,7 @@ struct KasirTambahPenjualanView: View {
     @Binding var isShowPopUp: Bool
     @Binding var editObatIndex: Int?
     @Binding var isEditing: Bool
+    @Binding var isShowKonfirmasiPembayaran : Bool
     
     
     var body: some View {
@@ -54,7 +55,7 @@ struct KasirTambahPenjualanView: View {
                                 }
                                 
                                 Button{
-                                    //                                    showSuccessPopup = true
+                                    isShowKonfirmasiPembayaran = true
                                 }label: {
                                     ActionButton(title: "Konfirmasi", width: 180, height: 44, radius: 10, bgColor: "Green")
                                     

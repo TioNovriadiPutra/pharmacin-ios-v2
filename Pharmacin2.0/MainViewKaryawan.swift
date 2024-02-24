@@ -9,7 +9,6 @@ import SwiftUI
 
 struct MainViewKaryawan: View {
     @State private var activeView: ActiveView = .Dashboard
-    @State private var showingPopUpRawatPasienDelete = false
     @State private var showingPopUpKasirDelete = false
     @State private var showingPopUpApotekDelete = false
 
@@ -18,10 +17,6 @@ struct MainViewKaryawan: View {
     @State private var isEditing: Bool = false
     @State private var listObat: [Obat] = []
     @State private var showKonfirmasiPembayaranKasir = false
-    
-    
-    
-    
 
     func tambahObatBaru(obat: Obat) {
         listObat.append(obat)
@@ -39,24 +34,13 @@ struct MainViewKaryawan: View {
                 
                 VStack{
                     HStack(spacing:0){
-                        SidebarView(activeView: $activeView)
+                        SidebarKaryawanView(activeView: $activeView)
                         
                          
                         getViewForActiveView()
                         
                         Spacer()
                     }.background( Color(red: 0.98, green: 0.98, blue: 0.99))
-                }
-                
-                
-                if showingPopUpRawatPasienDelete {
-                    Color.black.opacity(0.4) // Background overlay
-                        .edgesIgnoringSafeArea(.all)
-                        .onTapGesture {
-                            showingPopUpRawatPasienDelete = false
-                        }
-                    
-                    RawatPasienPopUp(tutupPopUp: $showingPopUpRawatPasienDelete)
                 }
                 
                 if showingPopUpKasirDelete {
@@ -118,8 +102,6 @@ struct MainViewKaryawan: View {
         switch activeView {
         case .Dashboard:
             DashboardView()
-        case .RawatPasien:
-            RawatPasienView(showPopUpDelete: $showingPopUpRawatPasienDelete)
         case .Kasir:
             KasirView(showPopUpDeleteKasir: $showingPopUpKasirDelete, listObat: $listObat, isShowPopUp: $showingPopUpTambahObat, editObatIndex: $editObatIndex, isEditing: $isEditing, isShowKonfirmasiPembayaran: $showKonfirmasiPembayaranKasir)
         case .Apotek:

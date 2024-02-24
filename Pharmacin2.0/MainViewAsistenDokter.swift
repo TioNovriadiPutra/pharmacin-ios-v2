@@ -8,11 +8,48 @@
 import SwiftUI
 
 struct MainViewAsistenDokter: View {
+    @State private var showingPopUpRawatPasienDelete = false
+    
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        
+        GeometryReader { geometry in
+            ZStack {
+
+                VStack{
+                    HStack(spacing:0){
+                        SideBarAsistenDokterView()
+                        
+                        
+                        getViewForActiveView()
+                        
+                        Spacer()
+                    }.background( Color(red: 0.98, green: 0.98, blue: 0.99))
+                }
+                
+                
+                if showingPopUpRawatPasienDelete {
+                    Color.black.opacity(0.4) // Background overlay
+                        .edgesIgnoringSafeArea(.all)
+                        .onTapGesture {
+                            showingPopUpRawatPasienDelete = false
+                        }
+                    
+                    RawatPasienPopUp(tutupPopUp: $showingPopUpRawatPasienDelete)
+                }
+
+            }.ignoresSafeArea(.keyboard)
+        }
+    }
+    
+    @ViewBuilder
+    func getViewForActiveView() -> some View {
+            RawatPasienView(showPopUpDelete: $showingPopUpRawatPasienDelete)
+
     }
 }
 
-#Preview {
-    MainViewAsistenDokter()
+struct MainView_Preview: PreviewProvider {
+    static var previews: some View {
+        MainViewAsistenDokter().previewInterfaceOrientation(.landscapeRight)
+    }
 }

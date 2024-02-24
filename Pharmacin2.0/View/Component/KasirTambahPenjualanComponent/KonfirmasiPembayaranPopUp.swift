@@ -8,14 +8,14 @@
 import SwiftUI
 
 struct KonfirmasiPembayaranPopUp: View {
-    //@Binding var showSelesaiPembayaranPopup: Bool
+    @Binding var showKonfirmsasiPembayaranPopup: Bool
     
     var body: some View {
         VStack{
             HStack{
                 
                 Button(action: {
-                    
+                    showKonfirmsasiPembayaranPopup = false
                 }, label: {
                     Image("BackIcon")
                         .padding(.leading,40)
@@ -62,7 +62,7 @@ struct KonfirmasiPembayaranPopUp: View {
                 .padding()
             
             Button{
-                //showSelesaiPembayaranPopup = true
+                showKonfirmsasiPembayaranPopup = false
             }label: {
                 ActionButton(title: "Konfirmasi", width: 450, height: 44, radius: 10, bgColor: "Green")
                 
@@ -78,5 +78,5 @@ struct KonfirmasiPembayaranPopUp: View {
 }
 
 #Preview {
-    KonfirmasiPembayaranPopUp()
+    KonfirmasiPembayaranPopUp(showKonfirmsasiPembayaranPopup: .constant(true))
 }

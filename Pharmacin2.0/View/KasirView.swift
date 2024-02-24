@@ -18,6 +18,7 @@ struct KasirView: View {
     @Binding var isShowPopUp: Bool
     @Binding var editObatIndex: Int?
     @Binding var isEditing: Bool
+    @Binding var isShowKonfirmasiPembayaran: Bool
     
     var body: some View {
         NavigationStack{
@@ -84,7 +85,7 @@ struct KasirView: View {
                     .padding()
                     
                     .navigationDestination(isPresented: $isShowingTambahPenjualanView) {
-                        KasirTambahPenjualanView(listObat: $listObat, isShowPopUp: $isShowPopUp, editObatIndex: $editObatIndex, isEditing: $isEditing).navigationBarBackButtonHidden()
+                        KasirTambahPenjualanView(listObat: $listObat, isShowPopUp: $isShowPopUp, editObatIndex: $editObatIndex, isEditing: $isEditing, isShowKonfirmasiPembayaran: $isShowKonfirmasiPembayaran).navigationBarBackButtonHidden()
                     }
                     
                     .navigationDestination(isPresented: $isShowingDetailKasir) {

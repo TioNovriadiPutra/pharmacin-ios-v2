@@ -6,3 +6,13 @@
 //
 
 import Foundation
+
+struct ErrorResponse2:Decodable, LocalizedError{
+    let error: error2
+}
+
+struct error2: Codable{
+    let message: String
+    let code: String
+    let status: Int
+}

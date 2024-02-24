@@ -8,10 +8,10 @@
 
 /* Begin PBXBuildFile section */
 		16EFD4D42B74C2AB008351C5 /* Pharmacin2_0App.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16EFD4D32B74C2AB008351C5 /* Pharmacin2_0App.swift */; };
-		16EFD4D62B74C2AB008351C5 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16EFD4D52B74C2AB008351C5 /* ContentView.swift */; };
+		16EFD4D62B74C2AB008351C5 /* MainViewKaryawan.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16EFD4D52B74C2AB008351C5 /* MainViewKaryawan.swift */; };
 		16EFD4D82B74C2AC008351C5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 16EFD4D72B74C2AC008351C5 /* Assets.xcassets */; };
 		16EFD4DB2B74C2AC008351C5 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 16EFD4DA2B74C2AC008351C5 /* Preview Assets.xcassets */; };
-		16EFD4E62B74C30E008351C5 /* SideBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16EFD4E52B74C30E008351C5 /* SideBarView.swift */; };
+		16EFD4E62B74C30E008351C5 /* SideBarKaryawanView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16EFD4E52B74C30E008351C5 /* SideBarKaryawanView.swift */; };
 		16EFD4E92B74C87E008351C5 /* PlusJakartaSans-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 16EFD4E82B74C87E008351C5 /* PlusJakartaSans-Medium.ttf */; };
 		16EFD4ED2B74C8BB008351C5 /* PlusJakartaSans-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 16EFD4EC2B74C8BB008351C5 /* PlusJakartaSans-Bold.ttf */; };
 		16EFD4EF2B74C8D1008351C5 /* PlusJakartaSans-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 16EFD4EE2B74C8D1008351C5 /* PlusJakartaSans-Regular.ttf */; };
@@ -59,15 +59,26 @@
 		16EFD54C2B753A84008351C5 /* PopUpPenyerahanObat.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16EFD54B2B753A84008351C5 /* PopUpPenyerahanObat.swift */; };
 		533337602B7FA4F60037B772 /* TambahObatPopUp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5333375F2B7FA4F60037B772 /* TambahObatPopUp.swift */; };
 		533337662B80744B0037B772 /* ObatModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 533337652B80744B0037B772 /* ObatModel.swift */; };
+		533337C12B8648EC0037B772 /* SignInView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 533337C02B8648EC0037B772 /* SignInView.swift */; };
+		53994F7B2B88BE75001BFA2B /* GlobalVariable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53994F7A2B88BE75001BFA2B /* GlobalVariable.swift */; };
+		53994F7D2B88BF1A001BFA2B /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53994F7C2B88BF1A001BFA2B /* NetworkService.swift */; };
+		53994F7F2B88BF50001BFA2B /* ErrorResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53994F7E2B88BF50001BFA2B /* ErrorResponse.swift */; };
+		53994F812B88BFDF001BFA2B /* SignInModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53994F802B88BFDF001BFA2B /* SignInModel.swift */; };
+		53994F832B88C339001BFA2B /* SignInVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53994F822B88C339001BFA2B /* SignInVM.swift */; };
+		53994F852B89A997001BFA2B /* ErrorResponse2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53994F842B89A997001BFA2B /* ErrorResponse2.swift */; };
+		53994F882B89D16D001BFA2B /* SuccessToast.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53994F872B89D16D001BFA2B /* SuccessToast.swift */; };
+		53994F8A2B89D2DB001BFA2B /* FailedToast.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53994F892B89D2DB001BFA2B /* FailedToast.swift */; };
+		53994F8D2B89DF24001BFA2B /* MainViewAsistenDokter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53994F8C2B89DF24001BFA2B /* MainViewAsistenDokter.swift */; };
+		53994F8F2B89DFE8001BFA2B /* SideBarAsistenDokterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53994F8E2B89DFE8001BFA2B /* SideBarAsistenDokterView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		16EFD4D02B74C2AB008351C5 /* Pharmacin2.0.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Pharmacin2.0.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		16EFD4D32B74C2AB008351C5 /* Pharmacin2_0App.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Pharmacin2_0App.swift; sourceTree = "<group>"; };
-		16EFD4D52B74C2AB008351C5 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		16EFD4D52B74C2AB008351C5 /* MainViewKaryawan.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewKaryawan.swift; sourceTree = "<group>"; };
 		16EFD4D72B74C2AC008351C5 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		16EFD4DA2B74C2AC008351C5 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
-		16EFD4E52B74C30E008351C5 /* SideBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideBarView.swift; sourceTree = "<group>"; };
+		16EFD4E52B74C30E008351C5 /* SideBarKaryawanView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideBarKaryawanView.swift; sourceTree = "<group>"; };
 		16EFD4E82B74C87E008351C5 /* PlusJakartaSans-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "PlusJakartaSans-Medium.ttf"; sourceTree = "<group>"; };
 		16EFD4EC2B74C8BB008351C5 /* PlusJakartaSans-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "PlusJakartaSans-Bold.ttf"; sourceTree = "<group>"; };
 		16EFD4EE2B74C8D1008351C5 /* PlusJakartaSans-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "PlusJakartaSans-Regular.ttf"; sourceTree = "<group>"; };
@@ -116,6 +127,17 @@
 		16EFD54B2B753A84008351C5 /* PopUpPenyerahanObat.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopUpPenyerahanObat.swift; sourceTree = "<group>"; };
 		5333375F2B7FA4F60037B772 /* TambahObatPopUp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TambahObatPopUp.swift; sourceTree = "<group>"; };
 		533337652B80744B0037B772 /* ObatModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObatModel.swift; sourceTree = "<group>"; };
+		533337C02B8648EC0037B772 /* SignInView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInView.swift; sourceTree = "<group>"; };
+		53994F7A2B88BE75001BFA2B /* GlobalVariable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlobalVariable.swift; sourceTree = "<group>"; };
+		53994F7C2B88BF1A001BFA2B /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
+		53994F7E2B88BF50001BFA2B /* ErrorResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorResponse.swift; sourceTree = "<group>"; };
+		53994F802B88BFDF001BFA2B /* SignInModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInModel.swift; sourceTree = "<group>"; };
+		53994F822B88C339001BFA2B /* SignInVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInVM.swift; sourceTree = "<group>"; };
+		53994F842B89A997001BFA2B /* ErrorResponse2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorResponse2.swift; sourceTree = "<group>"; };
+		53994F872B89D16D001BFA2B /* SuccessToast.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuccessToast.swift; sourceTree = "<group>"; };
+		53994F892B89D2DB001BFA2B /* FailedToast.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FailedToast.swift; sourceTree = "<group>"; };
+		53994F8C2B89DF24001BFA2B /* MainViewAsistenDokter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewAsistenDokter.swift; sourceTree = "<group>"; };
+		53994F8E2B89DFE8001BFA2B /* SideBarAsistenDokterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideBarAsistenDokterView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -150,11 +172,14 @@
 			children = (
 				16EFD4F02B74C8F9008351C5 /* Pharmacin2-0-Info.plist */,
 				16EFD4E72B74C80E008351C5 /* Font */,
+				53994F792B88BE51001BFA2B /* Others */,
+				53994F782B88BDC2001BFA2B /* NetworkService */,
 				533337642B80742D0037B772 /* ViewModel */,
 				533337632B8074290037B772 /* Model */,
 				16EFD4E22B74C2DB008351C5 /* View */,
 				16EFD4D32B74C2AB008351C5 /* Pharmacin2_0App.swift */,
-				16EFD4D52B74C2AB008351C5 /* ContentView.swift */,
+				16EFD4D52B74C2AB008351C5 /* MainViewKaryawan.swift */,
+				53994F8C2B89DF24001BFA2B /* MainViewAsistenDokter.swift */,
 				16EFD4D72B74C2AC008351C5 /* Assets.xcassets */,
 				16EFD4D92B74C2AC008351C5 /* Preview Content */,
 			);
@@ -173,7 +198,8 @@
 			isa = PBXGroup;
 			children = (
 				16EFD4E42B74C2FB008351C5 /* Component */,
-				16EFD4E52B74C30E008351C5 /* SideBarView.swift */,
+				16EFD4E52B74C30E008351C5 /* SideBarKaryawanView.swift */,
+				53994F8E2B89DFE8001BFA2B /* SideBarAsistenDokterView.swift */,
 				16EFD4FB2B74DDDF008351C5 /* DashboardView.swift */,
 				16EFD5072B74EA5D008351C5 /* RawatPasienView.swift */,
 				16EFD5112B750448008351C5 /* KasirView.swift */,
@@ -181,6 +207,7 @@
 				16EFD52B2B7521D7008351C5 /* KasirTambahPenjualanView.swift */,
 				16EFD5362B752F23008351C5 /* ApotekPengambilanObatView.swift */,
 				16EFD5472B75383B008351C5 /* DetailApotekView.swift */,
+				533337C02B8648EC0037B772 /* SignInView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -290,6 +317,7 @@
 			isa = PBXGroup;
 			children = (
 				533337652B80744B0037B772 /* ObatModel.swift */,
+				53994F802B88BFDF001BFA2B /* SignInModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -297,8 +325,37 @@
 		533337642B80742D0037B772 /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
+				53994F822B88C339001BFA2B /* SignInVM.swift */,
 			);
 			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		53994F782B88BDC2001BFA2B /* NetworkService */ = {
+			isa = PBXGroup;
+			children = (
+				53994F7C2B88BF1A001BFA2B /* NetworkService.swift */,
+				53994F7E2B88BF50001BFA2B /* ErrorResponse.swift */,
+				53994F842B89A997001BFA2B /* ErrorResponse2.swift */,
+			);
+			path = NetworkService;
+			sourceTree = "<group>";
+		};
+		53994F792B88BE51001BFA2B /* Others */ = {
+			isa = PBXGroup;
+			children = (
+				53994F862B89D153001BFA2B /* ShowToast */,
+				53994F7A2B88BE75001BFA2B /* GlobalVariable.swift */,
+			);
+			path = Others;
+			sourceTree = "<group>";
+		};
+		53994F862B89D153001BFA2B /* ShowToast */ = {
+			isa = PBXGroup;
+			children = (
+				53994F872B89D16D001BFA2B /* SuccessToast.swift */,
+				53994F892B89D2DB001BFA2B /* FailedToast.swift */,
+			);
+			path = ShowToast;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -376,9 +433,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				16EFD54A2B7539DB008351C5 /* DetailApotekHeader.swift in Sources */,
+				53994F8F2B89DFE8001BFA2B /* SideBarAsistenDokterView.swift in Sources */,
+				533337C12B8648EC0037B772 /* SignInView.swift in Sources */,
 				16EFD5372B752F23008351C5 /* ApotekPengambilanObatView.swift in Sources */,
 				16EFD52C2B7521D7008351C5 /* KasirTambahPenjualanView.swift in Sources */,
 				16EFD5202B751C8B008351C5 /* TagihanObatNonRacikanList.swift in Sources */,
+				53994F7F2B88BF50001BFA2B /* ErrorResponse.swift in Sources */,
 				16EFD5242B751E7C008351C5 /* TagihanObatRacikanList.swift in Sources */,
 				16EFD5052B74E528008351C5 /* RiwayatKasirList.swift in Sources */,
 				16EFD5282B751EF8008351C5 /* TagihanTindakanPasienList.swift in Sources */,
@@ -387,6 +447,7 @@
 				16EFD5442B753494008351C5 /* ObatRacikanApotek.swift in Sources */,
 				16EFD50A2B74EA84008351C5 /* RawatPasienList.swift in Sources */,
 				16EFD5332B7525D9008351C5 /* TambahPenjualanTable.swift in Sources */,
+				53994F7D2B88BF1A001BFA2B /* NetworkService.swift in Sources */,
 				16EFD5422B753456008351C5 /* ObatNonRacikanApotekListTable.swift in Sources */,
 				16EFD5402B7533FA008351C5 /* ObatNonRacikanApotek.swift in Sources */,
 				16EFD5102B74F603008351C5 /* RawatPasienPopUp.swift in Sources */,
@@ -395,29 +456,36 @@
 				16EFD5032B74E4E3008351C5 /* RiwayatKasir.swift in Sources */,
 				16EFD5462B7534A3008351C5 /* ObatRacikanApotekListTable.swift in Sources */,
 				16EFD53A2B75309E008351C5 /* ApotekList.swift in Sources */,
+				53994F882B89D16D001BFA2B /* SuccessToast.swift in Sources */,
 				16EFD4F82B74D5E4008351C5 /* DashboardCard.swift in Sources */,
 				16EFD5312B75254D008351C5 /* TambahPenjualanListTable.swift in Sources */,
-				16EFD4E62B74C30E008351C5 /* SideBarView.swift in Sources */,
+				16EFD4E62B74C30E008351C5 /* SideBarKaryawanView.swift in Sources */,
 				16EFD53E2B7530E4008351C5 /* StatusPengambilanObatBelumDiserahkan.swift in Sources */,
 				16EFD5352B752CB8008351C5 /* KonfirmasiPembayaranPopUp.swift in Sources */,
 				16EFD54C2B753A84008351C5 /* PopUpPenyerahanObat.swift in Sources */,
 				16EFD5172B750CC6008351C5 /* StatusKasirSudahDibayar.swift in Sources */,
 				16EFD51E2B750FDD008351C5 /* RincianPembayaranHeader.swift in Sources */,
 				16EFD5012B74E310008351C5 /* InvoiceList.swift in Sources */,
+				53994F812B88BFDF001BFA2B /* SignInModel.swift in Sources */,
 				16EFD5152B7509AC008351C5 /* KasirList.swift in Sources */,
 				16EFD4FC2B74DDDF008351C5 /* DashboardView.swift in Sources */,
+				53994F852B89A997001BFA2B /* ErrorResponse2.swift in Sources */,
 				16EFD52F2B752520008351C5 /* TambahPenjualanList.swift in Sources */,
+				53994F8D2B89DF24001BFA2B /* MainViewAsistenDokter.swift in Sources */,
 				16EFD50E2B74ED8D008351C5 /* StatusAntrianSudahDipanggil.swift in Sources */,
 				16EFD5482B75383B008351C5 /* DetailApotekView.swift in Sources */,
 				16EFD52A2B751F06008351C5 /* TagihanPasienListTable.swift in Sources */,
-				16EFD4D62B74C2AB008351C5 /* ContentView.swift in Sources */,
+				16EFD4D62B74C2AB008351C5 /* MainViewKaryawan.swift in Sources */,
 				533337602B7FA4F60037B772 /* TambahObatPopUp.swift in Sources */,
+				53994F7B2B88BE75001BFA2B /* GlobalVariable.swift in Sources */,
 				16EFD4D42B74C2AB008351C5 /* Pharmacin2_0App.swift in Sources */,
+				53994F8A2B89D2DB001BFA2B /* FailedToast.swift in Sources */,
 				16EFD5082B74EA5D008351C5 /* RawatPasienView.swift in Sources */,
 				533337662B80744B0037B772 /* ObatModel.swift in Sources */,
 				16EFD53C2B7530D0008351C5 /* StatusPengambilanObatDiserahkan.swift in Sources */,
 				16EFD5122B750448008351C5 /* KasirView.swift in Sources */,
 				16EFD4FA2B74D6A0008351C5 /* ActionButton.swift in Sources */,
+				53994F832B88C339001BFA2B /* SignInVM.swift in Sources */,
 				16EFD5262B751E85008351C5 /* TagihanObatRacikanListTable.swift in Sources */,
 				16EFD5222B751D14008351C5 /* TagihanObatNonRacikanListTable.swift in Sources */,
 				16EFD5192B750D10008351C5 /* StatusKasirBelumDibayar.swift in Sources */,

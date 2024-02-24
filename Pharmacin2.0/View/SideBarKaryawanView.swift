@@ -8,13 +8,12 @@
 import SwiftUI
 
 enum ActiveView {
-    case Dashboard, RawatPasien, Kasir, Apotek
+    case Dashboard, Kasir, Apotek
 }
 
 struct SidebarKaryawanView: View {
     @Binding var activeView: ActiveView
     @State private var isActiveDashboard = false
-    @State private var isActiveRawatPasien = false
     @State private var isActiveKasir = false
     @State private var isActiveApotek = false
     
@@ -35,7 +34,6 @@ struct SidebarKaryawanView: View {
                     Button(action: {
                         activeView = .Dashboard
                         isActiveDashboard = true
-                        isActiveRawatPasien = false
                         isActiveKasir = false
                         isActiveApotek = false
                     }) {
@@ -48,19 +46,8 @@ struct SidebarKaryawanView: View {
                     }
                     
                     Button(action: {
-                        activeView = .RawatPasien
-                        isActiveDashboard = false
-                        isActiveRawatPasien = true
-                        isActiveKasir = false
-                        isActiveApotek = false
-                    }) {
-                        ButtonSideBar(backgroundColor: isActiveRawatPasien ? "Green" : "backgroundIcon", image: isActiveRawatPasien ? "RawatPasienIconActive" : "RawatPasienIcon")
-                    }
-                    
-                    Button(action: {
                         activeView = .Kasir
                         isActiveDashboard = false
-                        isActiveRawatPasien = false
                         isActiveKasir = true
                         isActiveApotek = false
                     }) {
@@ -70,7 +57,6 @@ struct SidebarKaryawanView: View {
                     Button(action: {
                         activeView = .Apotek
                         isActiveDashboard = false
-                        isActiveRawatPasien = false
                         isActiveKasir = false
                         isActiveApotek = true
                     }) {
