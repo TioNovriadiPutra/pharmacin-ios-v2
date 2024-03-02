@@ -60,6 +60,8 @@
 		533337602B7FA4F60037B772 /* TambahObatPopUp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5333375F2B7FA4F60037B772 /* TambahObatPopUp.swift */; };
 		533337662B80744B0037B772 /* ObatModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 533337652B80744B0037B772 /* ObatModel.swift */; };
 		533337C12B8648EC0037B772 /* SignInView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 533337C02B8648EC0037B772 /* SignInView.swift */; };
+		533938AB2B9202E7003D5781 /* RawatPasienModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 533938AA2B9202E7003D5781 /* RawatPasienModel.swift */; };
+		533938AE2B9206D7003D5781 /* RawatPasienVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 533938AD2B9206D6003D5781 /* RawatPasienVM.swift */; };
 		53994F7B2B88BE75001BFA2B /* GlobalVariable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53994F7A2B88BE75001BFA2B /* GlobalVariable.swift */; };
 		53994F7D2B88BF1A001BFA2B /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53994F7C2B88BF1A001BFA2B /* NetworkService.swift */; };
 		53994F7F2B88BF50001BFA2B /* ErrorResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53994F7E2B88BF50001BFA2B /* ErrorResponse.swift */; };
@@ -70,6 +72,7 @@
 		53994F8A2B89D2DB001BFA2B /* FailedToast.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53994F892B89D2DB001BFA2B /* FailedToast.swift */; };
 		53994F8D2B89DF24001BFA2B /* MainViewAsistenDokter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53994F8C2B89DF24001BFA2B /* MainViewAsistenDokter.swift */; };
 		53994F8F2B89DFE8001BFA2B /* SideBarAsistenDokterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53994F8E2B89DFE8001BFA2B /* SideBarAsistenDokterView.swift */; };
+		53994F912B8A1682001BFA2B /* PanggilanPasienPopUp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53994F902B8A1682001BFA2B /* PanggilanPasienPopUp.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -128,6 +131,8 @@
 		5333375F2B7FA4F60037B772 /* TambahObatPopUp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TambahObatPopUp.swift; sourceTree = "<group>"; };
 		533337652B80744B0037B772 /* ObatModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObatModel.swift; sourceTree = "<group>"; };
 		533337C02B8648EC0037B772 /* SignInView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInView.swift; sourceTree = "<group>"; };
+		533938AA2B9202E7003D5781 /* RawatPasienModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RawatPasienModel.swift; sourceTree = "<group>"; };
+		533938AD2B9206D6003D5781 /* RawatPasienVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RawatPasienVM.swift; sourceTree = "<group>"; };
 		53994F7A2B88BE75001BFA2B /* GlobalVariable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlobalVariable.swift; sourceTree = "<group>"; };
 		53994F7C2B88BF1A001BFA2B /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
 		53994F7E2B88BF50001BFA2B /* ErrorResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorResponse.swift; sourceTree = "<group>"; };
@@ -138,6 +143,7 @@
 		53994F892B89D2DB001BFA2B /* FailedToast.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FailedToast.swift; sourceTree = "<group>"; };
 		53994F8C2B89DF24001BFA2B /* MainViewAsistenDokter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewAsistenDokter.swift; sourceTree = "<group>"; };
 		53994F8E2B89DFE8001BFA2B /* SideBarAsistenDokterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideBarAsistenDokterView.swift; sourceTree = "<group>"; };
+		53994F902B8A1682001BFA2B /* PanggilanPasienPopUp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PanggilanPasienPopUp.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -261,6 +267,7 @@
 			children = (
 				16EFD5092B74EA84008351C5 /* RawatPasienList.swift */,
 				16EFD50F2B74F603008351C5 /* RawatPasienPopUp.swift */,
+				53994F902B8A1682001BFA2B /* PanggilanPasienPopUp.swift */,
 			);
 			path = RawatPasienComponent;
 			sourceTree = "<group>";
@@ -316,6 +323,7 @@
 		533337632B8074290037B772 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				533938A92B92029F003D5781 /* Rawat Pasien */,
 				533337652B80744B0037B772 /* ObatModel.swift */,
 				53994F802B88BFDF001BFA2B /* SignInModel.swift */,
 			);
@@ -325,9 +333,26 @@
 		533337642B80742D0037B772 /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
+				533938AC2B9206C3003D5781 /* Rawat Pasien */,
 				53994F822B88C339001BFA2B /* SignInVM.swift */,
 			);
 			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		533938A92B92029F003D5781 /* Rawat Pasien */ = {
+			isa = PBXGroup;
+			children = (
+				533938AA2B9202E7003D5781 /* RawatPasienModel.swift */,
+			);
+			path = "Rawat Pasien";
+			sourceTree = "<group>";
+		};
+		533938AC2B9206C3003D5781 /* Rawat Pasien */ = {
+			isa = PBXGroup;
+			children = (
+				533938AD2B9206D6003D5781 /* RawatPasienVM.swift */,
+			);
+			path = "Rawat Pasien";
 			sourceTree = "<group>";
 		};
 		53994F782B88BDC2001BFA2B /* NetworkService */ = {
@@ -440,6 +465,7 @@
 				16EFD5202B751C8B008351C5 /* TagihanObatNonRacikanList.swift in Sources */,
 				53994F7F2B88BF50001BFA2B /* ErrorResponse.swift in Sources */,
 				16EFD5242B751E7C008351C5 /* TagihanObatRacikanList.swift in Sources */,
+				533938AE2B9206D7003D5781 /* RawatPasienVM.swift in Sources */,
 				16EFD5052B74E528008351C5 /* RiwayatKasirList.swift in Sources */,
 				16EFD5282B751EF8008351C5 /* TagihanTindakanPasienList.swift in Sources */,
 				16EFD50C2B74ECAB008351C5 /* StatusAntrianBelumDipanggil.swift in Sources */,
@@ -460,9 +486,11 @@
 				16EFD4F82B74D5E4008351C5 /* DashboardCard.swift in Sources */,
 				16EFD5312B75254D008351C5 /* TambahPenjualanListTable.swift in Sources */,
 				16EFD4E62B74C30E008351C5 /* SideBarKaryawanView.swift in Sources */,
+				53994F912B8A1682001BFA2B /* PanggilanPasienPopUp.swift in Sources */,
 				16EFD53E2B7530E4008351C5 /* StatusPengambilanObatBelumDiserahkan.swift in Sources */,
 				16EFD5352B752CB8008351C5 /* KonfirmasiPembayaranPopUp.swift in Sources */,
 				16EFD54C2B753A84008351C5 /* PopUpPenyerahanObat.swift in Sources */,
+				533938AB2B9202E7003D5781 /* RawatPasienModel.swift in Sources */,
 				16EFD5172B750CC6008351C5 /* StatusKasirSudahDibayar.swift in Sources */,
 				16EFD51E2B750FDD008351C5 /* RincianPembayaranHeader.swift in Sources */,
 				16EFD5012B74E310008351C5 /* InvoiceList.swift in Sources */,

@@ -187,7 +187,7 @@ struct LoginView: View {
         }
         
         
-        let endpoint = "/auth/login"
+        let endpoint = "/auth/login/mobile"
         let parameters = ["email": email, "password": password]
         
         signInViewModel.getData(endpoint: endpoint, param: parameters, token: nil) {
@@ -197,7 +197,7 @@ struct LoginView: View {
                 successToastMessage = signInViewModel.successMessage ?? "Unknown error"
                 showSuccessToast = true
                 
-                if signInViewModel.roleID == 1{
+                if signInViewModel.roleID == 3{
                     DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
                         withAnimation {
                             showSuccessToast = false
@@ -216,6 +216,8 @@ struct LoginView: View {
             } else {
                 failedToastMessage = signInViewModel.errorMessage ?? "Unknown error"
                 showFailedToast = true
+                
+                print(failedToastMessage)
                 
                 DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
                     withAnimation {

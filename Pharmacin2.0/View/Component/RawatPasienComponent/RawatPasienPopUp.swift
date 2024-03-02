@@ -52,6 +52,7 @@ struct RawatPasienPopUp: View {
                 
                 Button(action: {
                     print("Hapus")
+                    tutupPopUp = false
                 }, label: {
                     ActionButton(title: "Hapus", width: 225, height: 44, radius: 10, bgColor: "Red")
                 })

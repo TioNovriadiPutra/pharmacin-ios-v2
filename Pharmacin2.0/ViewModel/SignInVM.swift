@@ -25,8 +25,10 @@ class SignInViewModel : ObservableObject{
             case .success(let response):
                 // Handle successful response
                 self?.token = response.token.token
+                GlobalVariable.authToken = response.token.token
                 self?.roleID = response.roleId
                 self?.successMessage = response.message
+                
                 completion(response.message, true)
                 print(response.message)
                 

@@ -6,3 +6,55 @@
 //
 
 import Foundation
+
+struct RawatPasienModel: Codable {
+    let message: String
+    let data: [Pasien]
+    
+    init(message: String, data: [Pasien]) {
+        self.message = message
+        self.data = data
+    }
+}
+
+struct Pasien: Codable, Identifiable{
+    let id: Int
+    let registration_number : String
+    let full_name: String
+    let record_number : String
+    let gender: String
+    let created_at : String
+    let status: String
+    
+    init(id: Int, registration_number: String, full_name: String, record_number: String, gender: String, created_at: String, status: String) {
+        self.id = id
+        self.registration_number = registration_number
+        self.full_name = full_name
+        self.record_number = record_number
+        self.gender = gender
+        self.created_at = created_at
+        self.status = status
+    }
+}
+
+
+
+
+
+//struct Token: Codable {
+//    let type: String
+//    let name: String?
+//    let token: String
+//    let abilities: [String]
+//    let lastUsedAt: String? // Jika nilainya null, Anda bisa gunakan tipe String dan atur nilainya ke nil saat inisialisasi
+//    let expiresAt: String? // Jika nilainya null, Anda bisa gunakan tipe String dan atur nilainya ke nil saat inisialisasi
+//    
+//    init(type: String, name: String?, token: String, abilities: [String], lastUsedAt: String?, expiresAt: String?) {
+//        self.type = type
+//        self.name = name
+//        self.token = token
+//        self.abilities = abilities
+//        self.lastUsedAt = lastUsedAt
+//        self.expiresAt = expiresAt
+//    }
+//}

@@ -9,7 +9,7 @@ import Foundation
 
 class NetworkingService{
 //    let prefixURL = "http://103.164.219.2:7800"
-    let prefixURL = "https://5e1c-2001-448a-2083-f680-cc0c-969a-8680-d2ac.ngrok-free.app"
+    let prefixURL = "https://1d3a-2001-448a-2083-f680-cc63-9c-5973-d4db.ngrok-free.app"
     
     //MARK: - Retrieve Data (get method)
     func requestGET<T:Decodable>(endpoint: String,
@@ -51,7 +51,7 @@ class NetworkingService{
                         if let user = try? JSONDecoder().decode(expecting.self, from: data){
                             completion(.success(user))
                         }else {
-                            let errorResponse = try JSONDecoder().decode(ErrorResponse.self, from: data)
+                            let errorResponse = try JSONDecoder().decode(ErrorResponse2.self, from: data)
                             completion(.failure(errorResponse ))
                         }
                     }catch {

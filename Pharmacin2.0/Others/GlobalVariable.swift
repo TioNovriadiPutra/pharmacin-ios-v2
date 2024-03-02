@@ -9,5 +9,4 @@ import Foundation
 
 struct GlobalVariable{
     static var authToken = ""
-    static let baseImgURL = "https://image.nimbus9.tech"
 }

@@ -9,6 +9,9 @@ import SwiftUI
 
 struct MainViewAsistenDokter: View {
     @State private var showingPopUpRawatPasienDelete = false
+    @State private var showingPopUpPanggilPasien = false
+    
+    @State private var pasienToCall: Pasien?
     
     var body: some View {
         
@@ -36,6 +39,16 @@ struct MainViewAsistenDokter: View {
                     
                     RawatPasienPopUp(tutupPopUp: $showingPopUpRawatPasienDelete)
                 }
+                
+                if showingPopUpPanggilPasien {
+                    Color.black.opacity(0.4) // Background overlay
+                        .edgesIgnoringSafeArea(.all)
+                        .onTapGesture {
+                            showingPopUpRawatPasienDelete = false
+                        }
+                    
+                    PanggilanPasienPopUp(showPanggilPasienPopUp: $showingPopUpPanggilPasien, pasien: pasienToCall!)
+                }
 
             }.ignoresSafeArea(.keyboard)
         }
@@ -43,13 +56,13 @@ struct MainViewAsistenDokter: View {
     
     @ViewBuilder
     func getViewForActiveView() -> some View {
-            RawatPasienView(showPopUpDelete: $showingPopUpRawatPasienDelete)
+        RawatPasienView(showPopUpDelete: $showingPopUpRawatPasienDelete, showPanggilPasienPopUp: $showingPopUpPanggilPasien, selectedPasien: $pasienToCall)
 
     }
 }
 
-struct MainView_Preview: PreviewProvider {
-    static var previews: some View {
-        MainViewAsistenDokter().previewInterfaceOrientation(.landscapeRight)
-    }
-}
+//struct MainView_Preview: PreviewProvider {
+//    static var previews: some View {
+//        MainViewAsistenDokter(pasienToCall: <#Pasien#>).previewInterfaceOrientation(.landscapeRight)
+//    }
+//}
