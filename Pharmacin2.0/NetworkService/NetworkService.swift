@@ -9,7 +9,7 @@ import Foundation
 
 class NetworkingService{
 //    let prefixURL = "http://103.164.219.2:7800"
-    let prefixURL = "https://1d3a-2001-448a-2083-f680-cc63-9c-5973-d4db.ngrok-free.app"
+    let prefixURL = "https://b496-2001-448a-2083-f680-a8a9-f105-4623-ddb2.ngrok-free.app"
     
     //MARK: - Retrieve Data (get method)
     func requestGET<T:Decodable>(endpoint: String,
@@ -282,7 +282,59 @@ class NetworkingService{
                         completion(.success(user))
                         
                     }else {
-                        let errorResponse = try JSONDecoder().decode(ErrorResponse.self, from: data)
+                        let errorResponse = try JSONDecoder().decode(ErrorResponse2.self, from: data)
+                        completion(.failure(errorResponse ))
+                    }
+                }catch {
+                    completion(.failure(error))
+                }
+            }
+        }.resume()
+    }
+    
+    //MARK: - Patch Data
+    func requestPATCH<T:Decodable>(endpoint: String,
+                                    parameters: [String: Any],
+                                    token: String?,
+                                    expecting: T.Type,
+                                    completion: @escaping (Result<T, Error>) -> Void){
+        
+        //step 1. guard let url since we dont have data yet
+        guard let url = URL(string: prefixURL + endpoint) else{
+            completion(.failure(NetworkingError.badUrl))
+            return
+        }
+        
+        //step 2. set the request body/header
+        var request = URLRequest(url: url)
+        request.httpMethod = "PATCH"
+        request.httpBody = try? JSONSerialization.data(withJSONObject: parameters, options: .fragmentsAllowed)
+        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        if token != nil {
+            request.setValue("Bearer \(token!)", forHTTPHeaderField: "Authorization")
+        }
+        
+        //step 3. actual networking
+        URLSession.shared.dataTask(with: request){ (data, res, error) in
+            //print error kalau ada
+            if error != nil {
+                completion(.failure(error!))
+            }
+            
+            guard let response = res as? HTTPURLResponse else {
+                completion(.failure(NetworkingError.badResponse))
+                return
+            }
+            print("\(response.statusCode) - \(endpoint)")
+            
+            //cek data ada tidak
+            if let data = data {
+                do{
+                    if let user = try? JSONDecoder().decode(expecting.self, from: data){
+                        completion(.success(user))
+                        
+                    }else {
+                        let errorResponse = try JSONDecoder().decode(ErrorResponse2.self, from: data)
                         completion(.failure(errorResponse ))
                     }
                 }catch {

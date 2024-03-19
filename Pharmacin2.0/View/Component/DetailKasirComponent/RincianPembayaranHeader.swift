@@ -8,6 +8,9 @@
 import SwiftUI
 
 struct RincianPembayaranHeader: View {
+    
+    var pasien : Pasien
+    
     var body: some View {
             VStack{
                 HStack (spacing:80){
@@ -22,7 +25,7 @@ struct RincianPembayaranHeader: View {
                             Text(":")
                                 .font(.custom("PlusJakartaSans-Medium", size: 16))
                                 .foregroundColor(Color("RegularText"))
-                            Text("REG/20230910/0012")
+                            Text("\(pasien.registration_number)")
                                 .font(.custom("PlusJakartaSans-Medium", size: 16))
                                 .foregroundColor(Color("RegularText"))
                             
@@ -38,7 +41,7 @@ struct RincianPembayaranHeader: View {
                             Text(":")
                                 .font(.custom("PlusJakartaSans-Medium", size: 16))
                                 .foregroundColor(Color("Gray"))
-                            Text("000000")
+                            Text("\(pasien.record_number)")
                                 .font(.custom("PlusJakartaSans-Medium", size: 16))
                                 .foregroundColor(Color("RegularText"))
                             
@@ -54,7 +57,7 @@ struct RincianPembayaranHeader: View {
                             Text(":")
                                 .font(.custom("PlusJakartaSans-Medium", size: 16))
                                 .foregroundColor(Color("RegularText"))
-                            Text("Naufal Athallahardi")
+                            Text("\(pasien.full_name)")
                                 .font(.custom("PlusJakartaSans-Medium", size: 16))
                                 .foregroundColor(Color("RegularText"))
                         }
@@ -67,7 +70,7 @@ struct RincianPembayaranHeader: View {
                             Text(":")
                                 .font(.custom("PlusJakartaSans-Medium", size: 16))
                                 .foregroundColor(Color("RegularText"))
-                            Text("Jakarta, 10 September 2001")
+                            Text("\(pasien.registration_number)")
                                 .font(.custom("PlusJakartaSans-Medium", size: 16))
                                 .foregroundColor(Color("RegularText"))
                             Text("(2 Tahun 3 Bulan)")
@@ -156,6 +159,6 @@ struct RincianPembayaranHeader: View {
     }
 }
 
-#Preview {
-    RincianPembayaranHeader()
-}
+//#Preview {
+//    RincianPembayaranHeader()
+//}

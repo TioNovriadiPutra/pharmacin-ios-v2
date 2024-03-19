@@ -24,7 +24,7 @@ struct KasirTambahPenjualanView: View {
     
     
     var body: some View {
-        NavigationStack{
+//        NavigationStack{
             GeometryReader { geometry in
                 ZStack{
                     Color(red: 0.98, green: 0.98, blue: 0.99)
@@ -89,14 +89,14 @@ struct KasirTambahPenjualanView: View {
                                             .font(.custom("PlusJakartaSans-medium", size: 16))
                                             .foregroundColor(Color("Gray"))
                                         HStack{
-                                            if selectionPayment.isEmpty {
-                                                Text("Pilih Jenis Pembayaran")
-                                                    .font(.custom("PlusJakartaSans-Regular", size: 14))
-                                                    .foregroundColor(Color("Gray"))
-                                            } else {
-                                                Text(selectionPayment)
-                                            }
-                                            Spacer()
+//                                            if selectionPayment.isEmpty {
+//                                                Text("Pilih Jenis Pembayaran")
+//                                                    .font(.custom("PlusJakartaSans-Regular", size: 14))
+//                                                    .foregroundColor(Color("Gray"))
+//                                            } else {
+//                                                Text(selectionPayment)
+//                                            }
+//                                            Spacer()
                                             Menu {
                                                 ForEach(searchPaymentList, id: \.self) { option in
                                                     Button(action: {
@@ -106,7 +106,14 @@ struct KasirTambahPenjualanView: View {
                                                     }
                                                 }
                                             } label: {
-                                                Image("ArrowDownIcon")
+                                                HStack {
+                                                    Text(selectionPayment.isEmpty ? "Pilih Jenis Pembayaran" : selectionPayment)
+                                                        .font(.custom("PlusJakartaSans-Regular", size: 14))
+                                                        .foregroundColor(selectionPayment.isEmpty ? Color("Gray") : .primary)
+                                                    
+                                                    Spacer()
+                                                    Image("ArrowDownIcon")
+                                                }
                                             }
                                             .menuStyle(BorderlessButtonMenuStyle())
                                             
@@ -223,7 +230,7 @@ struct KasirTambahPenjualanView: View {
                     
                 }.ignoresSafeArea(.keyboard)
             }
-        }
+//        }
     }
     
 }

@@ -62,6 +62,9 @@
 		533337C12B8648EC0037B772 /* SignInView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 533337C02B8648EC0037B772 /* SignInView.swift */; };
 		533938AB2B9202E7003D5781 /* RawatPasienModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 533938AA2B9202E7003D5781 /* RawatPasienModel.swift */; };
 		533938AE2B9206D7003D5781 /* RawatPasienVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 533938AD2B9206D6003D5781 /* RawatPasienVM.swift */; };
+		5353F5C12B9CD48D00CDB275 /* PopUpLogOut.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5353F5C02B9CD48D00CDB275 /* PopUpLogOut.swift */; };
+		539525782B9F59130009AF07 /* PopUpDeleteKasir.swift in Sources */ = {isa = PBXBuildFile; fileRef = 539525772B9F59130009AF07 /* PopUpDeleteKasir.swift */; };
+		5395257A2B9F5BE00009AF07 /* PopUpDeletePengambilanObat.swift in Sources */ = {isa = PBXBuildFile; fileRef = 539525792B9F5BE00009AF07 /* PopUpDeletePengambilanObat.swift */; };
 		53994F7B2B88BE75001BFA2B /* GlobalVariable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53994F7A2B88BE75001BFA2B /* GlobalVariable.swift */; };
 		53994F7D2B88BF1A001BFA2B /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53994F7C2B88BF1A001BFA2B /* NetworkService.swift */; };
 		53994F7F2B88BF50001BFA2B /* ErrorResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53994F7E2B88BF50001BFA2B /* ErrorResponse.swift */; };
@@ -73,6 +76,9 @@
 		53994F8D2B89DF24001BFA2B /* MainViewAsistenDokter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53994F8C2B89DF24001BFA2B /* MainViewAsistenDokter.swift */; };
 		53994F8F2B89DFE8001BFA2B /* SideBarAsistenDokterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53994F8E2B89DFE8001BFA2B /* SideBarAsistenDokterView.swift */; };
 		53994F912B8A1682001BFA2B /* PanggilanPasienPopUp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53994F902B8A1682001BFA2B /* PanggilanPasienPopUp.swift */; };
+		53A6FFCF2BA492830035BC6C /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53A6FFCE2BA492830035BC6C /* ContentView.swift */; };
+		53A6FFEC2BA587630035BC6C /* KasirMenungguPembayaranVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53A6FFEB2BA587630035BC6C /* KasirMenungguPembayaranVM.swift */; };
+		53A6FFEF2BA588F50035BC6C /* AntrianBayarKasirModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53A6FFEE2BA588F50035BC6C /* AntrianBayarKasirModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -133,6 +139,9 @@
 		533337C02B8648EC0037B772 /* SignInView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInView.swift; sourceTree = "<group>"; };
 		533938AA2B9202E7003D5781 /* RawatPasienModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RawatPasienModel.swift; sourceTree = "<group>"; };
 		533938AD2B9206D6003D5781 /* RawatPasienVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RawatPasienVM.swift; sourceTree = "<group>"; };
+		5353F5C02B9CD48D00CDB275 /* PopUpLogOut.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopUpLogOut.swift; sourceTree = "<group>"; };
+		539525772B9F59130009AF07 /* PopUpDeleteKasir.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopUpDeleteKasir.swift; sourceTree = "<group>"; };
+		539525792B9F5BE00009AF07 /* PopUpDeletePengambilanObat.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopUpDeletePengambilanObat.swift; sourceTree = "<group>"; };
 		53994F7A2B88BE75001BFA2B /* GlobalVariable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlobalVariable.swift; sourceTree = "<group>"; };
 		53994F7C2B88BF1A001BFA2B /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
 		53994F7E2B88BF50001BFA2B /* ErrorResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorResponse.swift; sourceTree = "<group>"; };
@@ -144,6 +153,9 @@
 		53994F8C2B89DF24001BFA2B /* MainViewAsistenDokter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewAsistenDokter.swift; sourceTree = "<group>"; };
 		53994F8E2B89DFE8001BFA2B /* SideBarAsistenDokterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideBarAsistenDokterView.swift; sourceTree = "<group>"; };
 		53994F902B8A1682001BFA2B /* PanggilanPasienPopUp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PanggilanPasienPopUp.swift; sourceTree = "<group>"; };
+		53A6FFCE2BA492830035BC6C /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		53A6FFEB2BA587630035BC6C /* KasirMenungguPembayaranVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KasirMenungguPembayaranVM.swift; sourceTree = "<group>"; };
+		53A6FFEE2BA588F50035BC6C /* AntrianBayarKasirModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AntrianBayarKasirModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -188,6 +200,7 @@
 				53994F8C2B89DF24001BFA2B /* MainViewAsistenDokter.swift */,
 				16EFD4D72B74C2AC008351C5 /* Assets.xcassets */,
 				16EFD4D92B74C2AC008351C5 /* Preview Content */,
+				53A6FFCE2BA492830035BC6C /* ContentView.swift */,
 			);
 			path = Pharmacin2.0;
 			sourceTree = "<group>";
@@ -221,6 +234,7 @@
 		16EFD4E42B74C2FB008351C5 /* Component */ = {
 			isa = PBXGroup;
 			children = (
+				5353F5BF2B9CD47400CDB275 /* LogOutComponent */,
 				16EFD5382B75306D008351C5 /* ApotekPengambilanObatComponent */,
 				16EFD52D2B7524F9008351C5 /* KasirTambahPenjualanComponent */,
 				16EFD4FD2B74E2B5008351C5 /* DashboardComponent */,
@@ -276,6 +290,7 @@
 			isa = PBXGroup;
 			children = (
 				16EFD5142B7509AC008351C5 /* KasirList.swift */,
+				539525772B9F59130009AF07 /* PopUpDeleteKasir.swift */,
 			);
 			path = KasirComponent;
 			sourceTree = "<group>";
@@ -316,6 +331,7 @@
 				16EFD5452B7534A3008351C5 /* ObatRacikanApotekListTable.swift */,
 				16EFD5492B7539DB008351C5 /* DetailApotekHeader.swift */,
 				16EFD54B2B753A84008351C5 /* PopUpPenyerahanObat.swift */,
+				539525792B9F5BE00009AF07 /* PopUpDeletePengambilanObat.swift */,
 			);
 			path = ApotekPengambilanObatComponent;
 			sourceTree = "<group>";
@@ -323,6 +339,7 @@
 		533337632B8074290037B772 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				53A6FFED2BA588760035BC6C /* Kasir */,
 				533938A92B92029F003D5781 /* Rawat Pasien */,
 				533337652B80744B0037B772 /* ObatModel.swift */,
 				53994F802B88BFDF001BFA2B /* SignInModel.swift */,
@@ -333,7 +350,8 @@
 		533337642B80742D0037B772 /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
-				533938AC2B9206C3003D5781 /* Rawat Pasien */,
+				539525762B9F512E0009AF07 /* Asisten Dokter */,
+				539525752B9F51250009AF07 /* Karyawan */,
 				53994F822B88C339001BFA2B /* SignInVM.swift */,
 			);
 			path = ViewModel;
@@ -353,6 +371,30 @@
 				533938AD2B9206D6003D5781 /* RawatPasienVM.swift */,
 			);
 			path = "Rawat Pasien";
+			sourceTree = "<group>";
+		};
+		5353F5BF2B9CD47400CDB275 /* LogOutComponent */ = {
+			isa = PBXGroup;
+			children = (
+				5353F5C02B9CD48D00CDB275 /* PopUpLogOut.swift */,
+			);
+			path = LogOutComponent;
+			sourceTree = "<group>";
+		};
+		539525752B9F51250009AF07 /* Karyawan */ = {
+			isa = PBXGroup;
+			children = (
+				53A6FFEA2BA587420035BC6C /* Kasir */,
+			);
+			path = Karyawan;
+			sourceTree = "<group>";
+		};
+		539525762B9F512E0009AF07 /* Asisten Dokter */ = {
+			isa = PBXGroup;
+			children = (
+				533938AC2B9206C3003D5781 /* Rawat Pasien */,
+			);
+			path = "Asisten Dokter";
 			sourceTree = "<group>";
 		};
 		53994F782B88BDC2001BFA2B /* NetworkService */ = {
@@ -381,6 +423,22 @@
 				53994F892B89D2DB001BFA2B /* FailedToast.swift */,
 			);
 			path = ShowToast;
+			sourceTree = "<group>";
+		};
+		53A6FFEA2BA587420035BC6C /* Kasir */ = {
+			isa = PBXGroup;
+			children = (
+				53A6FFEB2BA587630035BC6C /* KasirMenungguPembayaranVM.swift */,
+			);
+			path = Kasir;
+			sourceTree = "<group>";
+		};
+		53A6FFED2BA588760035BC6C /* Kasir */ = {
+			isa = PBXGroup;
+			children = (
+				53A6FFEE2BA588F50035BC6C /* AntrianBayarKasirModel.swift */,
+			);
+			path = Kasir;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -462,6 +520,7 @@
 				533337C12B8648EC0037B772 /* SignInView.swift in Sources */,
 				16EFD5372B752F23008351C5 /* ApotekPengambilanObatView.swift in Sources */,
 				16EFD52C2B7521D7008351C5 /* KasirTambahPenjualanView.swift in Sources */,
+				5353F5C12B9CD48D00CDB275 /* PopUpLogOut.swift in Sources */,
 				16EFD5202B751C8B008351C5 /* TagihanObatNonRacikanList.swift in Sources */,
 				53994F7F2B88BF50001BFA2B /* ErrorResponse.swift in Sources */,
 				16EFD5242B751E7C008351C5 /* TagihanObatRacikanList.swift in Sources */,
@@ -490,20 +549,25 @@
 				16EFD53E2B7530E4008351C5 /* StatusPengambilanObatBelumDiserahkan.swift in Sources */,
 				16EFD5352B752CB8008351C5 /* KonfirmasiPembayaranPopUp.swift in Sources */,
 				16EFD54C2B753A84008351C5 /* PopUpPenyerahanObat.swift in Sources */,
+				53A6FFCF2BA492830035BC6C /* ContentView.swift in Sources */,
 				533938AB2B9202E7003D5781 /* RawatPasienModel.swift in Sources */,
 				16EFD5172B750CC6008351C5 /* StatusKasirSudahDibayar.swift in Sources */,
 				16EFD51E2B750FDD008351C5 /* RincianPembayaranHeader.swift in Sources */,
+				53A6FFEC2BA587630035BC6C /* KasirMenungguPembayaranVM.swift in Sources */,
 				16EFD5012B74E310008351C5 /* InvoiceList.swift in Sources */,
 				53994F812B88BFDF001BFA2B /* SignInModel.swift in Sources */,
 				16EFD5152B7509AC008351C5 /* KasirList.swift in Sources */,
 				16EFD4FC2B74DDDF008351C5 /* DashboardView.swift in Sources */,
 				53994F852B89A997001BFA2B /* ErrorResponse2.swift in Sources */,
+				5395257A2B9F5BE00009AF07 /* PopUpDeletePengambilanObat.swift in Sources */,
 				16EFD52F2B752520008351C5 /* TambahPenjualanList.swift in Sources */,
 				53994F8D2B89DF24001BFA2B /* MainViewAsistenDokter.swift in Sources */,
 				16EFD50E2B74ED8D008351C5 /* StatusAntrianSudahDipanggil.swift in Sources */,
 				16EFD5482B75383B008351C5 /* DetailApotekView.swift in Sources */,
 				16EFD52A2B751F06008351C5 /* TagihanPasienListTable.swift in Sources */,
+				53A6FFEF2BA588F50035BC6C /* AntrianBayarKasirModel.swift in Sources */,
 				16EFD4D62B74C2AB008351C5 /* MainViewKaryawan.swift in Sources */,
+				539525782B9F59130009AF07 /* PopUpDeleteKasir.swift in Sources */,
 				533337602B7FA4F60037B772 /* TambahObatPopUp.swift in Sources */,
 				53994F7B2B88BE75001BFA2B /* GlobalVariable.swift in Sources */,
 				16EFD4D42B74C2AB008351C5 /* Pharmacin2_0App.swift in Sources */,

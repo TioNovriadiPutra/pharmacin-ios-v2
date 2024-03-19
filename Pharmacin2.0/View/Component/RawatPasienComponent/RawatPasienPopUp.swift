@@ -9,6 +9,10 @@ import SwiftUI
 
 struct RawatPasienPopUp: View {
     @Binding var tutupPopUp : Bool
+    
+    var deleteAction: () -> Void
+    var pasien: Pasien
+    
     var body: some View {
         VStack{
             HStack{
@@ -53,6 +57,7 @@ struct RawatPasienPopUp: View {
                 Button(action: {
                     print("Hapus")
                     tutupPopUp = false
+                    deleteAction()
                 }, label: {
                     ActionButton(title: "Hapus", width: 225, height: 44, radius: 10, bgColor: "Red")
                 })

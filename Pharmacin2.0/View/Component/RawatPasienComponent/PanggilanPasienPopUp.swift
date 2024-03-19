@@ -10,6 +10,8 @@ import SwiftUI
 struct PanggilanPasienPopUp: View {
     @Binding var showPanggilPasienPopUp : Bool
     var pasien: Pasien
+    var panggilAction: () -> Void
+    
     var body: some View {
         VStack{
             
@@ -63,6 +65,7 @@ struct PanggilanPasienPopUp: View {
                 
                 Button{
                     showPanggilPasienPopUp = false
+                    panggilAction()
                 }label: {
                     ActionButton(title: "Lanjutkan", width: 245, height: 44, radius: 10, bgColor: "Green")
                         .padding(.bottom,20)

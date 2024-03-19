@@ -11,7 +11,8 @@ import SwiftUI
 struct Pharmacin2_0App: App {
     var body: some Scene {
         WindowGroup {
-            LoginView()
+            ContentView()
+                .colorScheme(.light)
         }
     }
 }

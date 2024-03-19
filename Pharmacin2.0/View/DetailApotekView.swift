@@ -73,6 +73,8 @@ struct DetailApotekView: View {
                         
                     }
                     
+                    .padding()
+                    
                 }
             }
         }

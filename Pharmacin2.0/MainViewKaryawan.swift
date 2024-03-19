@@ -17,6 +17,12 @@ struct MainViewKaryawan: View {
     @State private var isEditing: Bool = false
     @State private var listObat: [Obat] = []
     @State private var showKonfirmasiPembayaranKasir = false
+    
+    @State private var logOut = false
+    
+    
+    
+    
 
     func tambahObatBaru(obat: Obat) {
         listObat.append(obat)
@@ -27,16 +33,16 @@ struct MainViewKaryawan: View {
     }
     
     var body: some View {
-        
-            GeometryReader { geometry in
+//        NavigationStack{
+        GeometryReader { geometry in
             ZStack {
                 
                 
                 VStack{
                     HStack(spacing:0){
-                        SidebarKaryawanView(activeView: $activeView)
+                        SidebarKaryawanView(activeView: $activeView, logOut: $logOut)
                         
-                         
+                        
                         getViewForActiveView()
                         
                         Spacer()
@@ -50,8 +56,9 @@ struct MainViewKaryawan: View {
                             showingPopUpKasirDelete = false
                         }
                     
-                    RawatPasienPopUp(tutupPopUp: $showingPopUpKasirDelete)
+                    PopUpDeleteKasir(showPopUpDeleteKasir: $showingPopUpKasirDelete)
                 }
+                
                 
                 if showingPopUpApotekDelete {
                     Color.black.opacity(0.4) // Background overlay
@@ -60,9 +67,18 @@ struct MainViewKaryawan: View {
                             showingPopUpApotekDelete = false
                         }
                     
-                    RawatPasienPopUp(tutupPopUp: $showingPopUpApotekDelete)
+                    PopUpDeletePengambilanObat(showPopUpPengambilanKasir: $showingPopUpApotekDelete)
                 }
                 
+                if logOut {
+                    Color.black.opacity(0.4) // Background overlay
+                        .edgesIgnoringSafeArea(.all)
+                        .onTapGesture {
+                            logOut = false
+                        }
+                    
+                    PopUpLogOut(showLogoutPopUp: $logOut)
+                }
                 
                 if showingPopUpTambahObat{
                     ZStack {
@@ -76,7 +92,7 @@ struct MainViewKaryawan: View {
                                         tambahObatBaru: tambahObatBaru,
                                         obatToEdit: editObatIndex != nil && listObat.indices.contains(editObatIndex!) ? listObat[editObatIndex!] : nil,
                                         isEditing: $isEditing, showPopUp: $showingPopUpTambahObat)
-                            
+                        
                     }
                 }
                 
@@ -89,12 +105,13 @@ struct MainViewKaryawan: View {
                             }
                         
                         KonfirmasiPembayaranPopUp(showKonfirmsasiPembayaranPopup: $showKonfirmasiPembayaranKasir)
-                            
+                        
                     }
-
+                    
                 }
             }.ignoresSafeArea(.keyboard)
         }
+//    }
      }
     
     @ViewBuilder
@@ -104,6 +121,7 @@ struct MainViewKaryawan: View {
             DashboardView()
         case .Kasir:
             KasirView(showPopUpDeleteKasir: $showingPopUpKasirDelete, listObat: $listObat, isShowPopUp: $showingPopUpTambahObat, editObatIndex: $editObatIndex, isEditing: $isEditing, isShowKonfirmasiPembayaran: $showKonfirmasiPembayaranKasir)
+        
         case .Apotek:
             ApotekPengambilanObatView(isShowingPopUpView: $showingPopUpApotekDelete)
         }
@@ -111,7 +129,7 @@ struct MainViewKaryawan: View {
 
 }
 
-struct ContentView_Preview: PreviewProvider {
+struct MainViewKaryawan_Preview: PreviewProvider {
     static var previews: some View {
         MainViewKaryawan().previewInterfaceOrientation(.landscapeRight)
     }

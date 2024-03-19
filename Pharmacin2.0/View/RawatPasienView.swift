@@ -6,10 +6,19 @@
 //
 
 import SwiftUI
+import Combine
 
 struct RawatPasienView: View {
     @Binding var showPopUpDelete: Bool
     @Binding var showPanggilPasienPopUp: Bool
+    @Binding var refreshView: Bool
+    
+    @State var totalAntrian = 0
+    //    @State var antrianSekarang = 0
+    @State var antrianSelanjutnya = 0
+    @State var sisaAntrian = 0
+    
+    @Binding var antrianSekarang: String
     
     
     @StateObject var viewModel = RawatPasienVM()
@@ -35,28 +44,51 @@ struct RawatPasienView: View {
                     Spacer()
                 }
                 
+                
+                
                 HStack(spacing: 14) {
-                    DashboardCard("Total Antrian", value: "190", image: "PeopleBlueIcon", sizeValue: 20)
-                    DashboardCard("Antrian Sekarang", value: "Rp.1.000.000", image: "PeopleGreenIcon", sizeValue: 14)
-                    DashboardCard("Antrian Selanjutnya", value: "33", image: "PeopleYellowIcon", sizeValue: 20)
-                    DashboardCard("Sisa Antrian", value: "421", image: "PeopleRedIcon", sizeValue: 20)
+                    //                    DashboardCard("Total Antrian", value: "\(viewModel.pasienList.count)", image: "PeopleBlueIcon", sizeValue: 20)
+                
+                    
+                    let currQueue = viewModel.pasienList.isEmpty ? "-" : antrianSekarang
+                    DashboardCard("Antrian Sekarang", value: currQueue, image: "PeopleGreenIcon", sizeValue: 20)
+                    
+                    let nextQueue = viewModel.pasienList.isEmpty ? "-" : viewModel.antrianSelanjutnya ?? "-"
+                    DashboardCard("Antrian Selanjutnya", value: "\(nextQueue)", image: "PeopleYellowIcon", sizeValue: 20)
+                    DashboardCard("Sisa Antrian", value: "\(viewModel.total)", image: "PeopleRedIcon", sizeValue: 20)
                 }
                 
                 // Display RawatPasienList for each patient
-                ForEach(viewModel.pasienList.indices, id: \.self) { index in
-                    let pasien = viewModel.pasienList[index]
-                    RawatPasienList(showingDeletePopUp: $showPopUpDelete, showingPanggilPasienPopUp: $showPanggilPasienPopUp, pasienToCall: $selectedPasien, nomorAntrian: index+1, pasien: pasien)
-                }
                 
-                Spacer()
+                ScrollView(.vertical){
+                    VStack(spacing:14){
+                        ForEach(viewModel.pasienList.indices, id: \.self) { index in
+                            let pasien = viewModel.pasienList[index]
+                            RawatPasienList(showingDeletePopUp: $showPopUpDelete, showingPanggilPasienPopUp: $showPanggilPasienPopUp, pasienToCall: $selectedPasien, nomorAntrian: index+1, pasien: pasien)
+                        }
+                        
+                        
+                        Spacer()
+                    }
+                }.refreshable {
+                    getListPasien()
+                }
             }
             .padding()
         }
-        .onAppear {
+        
+        .onAppear{
             // Call getListPasien when RawatPasienView appears
             getListPasien()
         }
+        
+        .onChange(of: refreshView) { old, new in
+            getListPasien()
+        }
+        
     }
+    
+    
     
     private func getListPasien() {
         print(GlobalVariable.authToken)
@@ -68,6 +100,8 @@ struct RawatPasienView: View {
             }
         }
     }
+    
+    
 }
 
 //struct RawatPasien_Previews: PreviewProvider {

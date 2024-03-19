@@ -16,6 +16,7 @@ struct SidebarKaryawanView: View {
     @State private var isActiveDashboard = false
     @State private var isActiveKasir = false
     @State private var isActiveApotek = false
+    @Binding var logOut : Bool
     
     var body: some View {
         ZStack{
@@ -73,9 +74,9 @@ struct SidebarKaryawanView: View {
                 .background(Color(red: 0.88, green: 0.87, blue: 0.87))
 
                 Button(action: {
-                    
+                    logOut = true
                 }) {
-                   Image("ProfileIcon")
+                   Image("Logout")
                         .padding(.bottom,10)
                 }
             }
@@ -92,6 +93,6 @@ struct SidebarKaryawanView: View {
 
 struct SideBarView_Preview: PreviewProvider {
     static var previews: some View {
-        SidebarKaryawanView(activeView: .constant(.Dashboard)).previewInterfaceOrientation(.landscapeRight)
+        SidebarKaryawanView(activeView: .constant(.Dashboard), logOut: .constant(false)).previewInterfaceOrientation(.landscapeRight)
     }
 }

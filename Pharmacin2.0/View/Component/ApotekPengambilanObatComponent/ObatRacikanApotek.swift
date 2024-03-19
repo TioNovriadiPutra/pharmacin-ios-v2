@@ -85,9 +85,6 @@ struct ObatRacikanApotek: View {
             .background(Color(red: 0.98, green: 0.98, blue: 0.99))
             .cornerRadius(10)
             
-            
-            
-            
         }
         .padding()
         .background(.white)

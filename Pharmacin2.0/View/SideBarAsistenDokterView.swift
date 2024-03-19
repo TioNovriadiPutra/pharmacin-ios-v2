@@ -39,7 +39,7 @@ struct SideBarAsistenDokterView: View {
                 Button(action: {
                     
                 }) {
-                    Image("ProfileIcon")
+                    Image("Logout")
                         .padding(.bottom,10)
                 }
             }

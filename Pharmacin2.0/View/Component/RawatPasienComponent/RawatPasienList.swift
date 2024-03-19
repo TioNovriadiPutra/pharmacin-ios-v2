@@ -37,30 +37,53 @@ struct RawatPasienList: View {
             Text("\(pasien.registration_number)")
                 .font(.custom("PlusJakartaSans-Regular", size: 14))
                 .foregroundColor(Color("Gray"))
-                
+            
                 .frame(width: 160, alignment: .leading)
             
             Spacer()
             
-            StatusAntrianBelumDipanggil()
-            //                        .frame(width: 160, alignment: .leading)
+            if pasien.status == "Belum Dipanggil"{
+                StatusAntrianBelumDipanggil()
+                    .frame(width: 160, alignment: .leading)
+            }else{
+                StatusAntrianSudahDipanggil()
+                    .frame(width: 160, alignment: .leading)
+            }
             
-            HStack(spacing:14){
-                Button{
-                    print("Check")
-                    pasienToCall = pasien
-                    showingPanggilPasienPopUp = true
-                }label: {
-                    ActionButton(title: "Panggil", width: 74, height: 32, radius: 8, bgColor: "Green")
+            Spacer()
+            if pasien.status == "Belum Dipanggil"{
+                HStack(spacing:14){
+                    Button{
+                        print("Check")
+                        pasienToCall = pasien
+                        showingPanggilPasienPopUp = true
+                    }label: {
+                        ActionButton(title: "Panggil", width: 74, height: 32, radius: 8, bgColor: "Green")
+                    }
+                    Button{
+                        print("Delete")
+                        showingDeletePopUp = true
+                        pasienToCall = pasien
+                    }label: {
+                        Image("CrossRed")
+                            .resizable()
+                            .frame(width: 32, height: 32)
+                    }
                 }
-                Button{
-                    print("Delete")
-                    showingDeletePopUp = true
-                }label: {
-                    Image("CrossRed")
-                        .resizable()
-                        .frame(width: 32, height: 32)
-                }
+                .frame(width: 100, alignment: .trailing)
+            }
+            else{
+                HStack{
+                    Button{
+                        print("Delete")
+                        showingDeletePopUp = true
+                        pasienToCall = pasien
+                    }label: {
+                        Image("CrossRed")
+                            .resizable()
+                            .frame(width: 32, height: 32)
+                    }
+                } .frame(width: 100, alignment: .center)
             }
         }
         .padding(.horizontal)

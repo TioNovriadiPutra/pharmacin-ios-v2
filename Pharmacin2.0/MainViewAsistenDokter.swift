@@ -13,6 +13,12 @@ struct MainViewAsistenDokter: View {
     
     @State private var pasienToCall: Pasien?
     
+    @StateObject var viewModel = RawatPasienVM()
+    
+    @State private var antrianSekarang = "-"
+    
+    @State private var refreshView = false
+    
     var body: some View {
         
         GeometryReader { geometry in
@@ -37,7 +43,9 @@ struct MainViewAsistenDokter: View {
                             showingPopUpRawatPasienDelete = false
                         }
                     
-                    RawatPasienPopUp(tutupPopUp: $showingPopUpRawatPasienDelete)
+                    RawatPasienPopUp(tutupPopUp: $showingPopUpRawatPasienDelete, deleteAction: {
+                        deleteQueuePasien()
+                    }, pasien: pasienToCall!)
                 }
                 
                 if showingPopUpPanggilPasien {
@@ -47,16 +55,43 @@ struct MainViewAsistenDokter: View {
                             showingPopUpRawatPasienDelete = false
                         }
                     
-                    PanggilanPasienPopUp(showPanggilPasienPopUp: $showingPopUpPanggilPasien, pasien: pasienToCall!)
+                    PanggilanPasienPopUp(showPanggilPasienPopUp: $showingPopUpPanggilPasien, pasien: pasienToCall!, panggilAction: {
+                        panggilPasien()
+                    })
                 }
 
             }.ignoresSafeArea(.keyboard)
         }
     }
     
+    private func deleteQueuePasien(){
+        viewModel.deleteAntrianPasien(id: pasienToCall?.id ?? 0) { message, success in
+            if success {
+                print(message ?? "Unknown error")
+                refreshView = true
+            } else {
+                print("GAGAL AMBIL PASIEN")
+            }
+        }
+
+    }
+    
+    private func panggilPasien(){
+        viewModel.panggilPasien(id: pasienToCall?.id ?? 0) { message, success in
+            if success {
+                print(message ?? "Unknown error")
+                self.antrianSekarang = message ?? "-"
+                refreshView = true
+            } else {
+                print("GAGAL Panggil Pasien")
+            }
+        }
+
+    }
+    
     @ViewBuilder
     func getViewForActiveView() -> some View {
-        RawatPasienView(showPopUpDelete: $showingPopUpRawatPasienDelete, showPanggilPasienPopUp: $showingPopUpPanggilPasien, selectedPasien: $pasienToCall)
+        RawatPasienView(showPopUpDelete: $showingPopUpRawatPasienDelete, showPanggilPasienPopUp: $showingPopUpPanggilPasien, refreshView: $refreshView, antrianSekarang: $antrianSekarang, selectedPasien: $pasienToCall)
 
     }
 }

@@ -46,6 +46,7 @@ struct FailedToast: View {
             .padding(.bottom,50)
         }
         
+        
     }
 }
 

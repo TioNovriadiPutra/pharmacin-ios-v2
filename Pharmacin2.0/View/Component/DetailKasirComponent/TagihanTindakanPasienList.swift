@@ -31,11 +31,11 @@ struct TagihanTindakanPasienList: View {
                         .font(.custom("PlusJakartaSans-Medium", size: 16))
                         .foregroundColor(Color("Gray"))
                         .frame(width: 150, alignment: .leading)
-                    Spacer()
-                    Text("Tindakan")
-                        .font(.custom("PlusJakartaSans-Medium", size: 16))
-                        .foregroundColor(Color("Gray"))
-                        .frame(width: 100, alignment: .center)
+//                    Spacer()
+//                    Text("Tindakan")
+//                        .font(.custom("PlusJakartaSans-Medium", size: 16))
+//                        .foregroundColor(Color("Gray"))
+//                        .frame(width: 100, alignment: .center)
                     
                     
                 }

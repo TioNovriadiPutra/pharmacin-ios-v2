@@ -13,6 +13,7 @@ class SignInViewModel : ObservableObject{
     @Published var errorMessage: String?
     @Published var successMessage: String?
     @Published var roleID: Int?
+    @Published var isSignedIn: Bool?
     
     private let nService = NetworkingService()
     typealias CompletionHandler = (_ message: String?, _ success:Bool)->Void

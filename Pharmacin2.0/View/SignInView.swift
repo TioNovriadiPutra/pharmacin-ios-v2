@@ -23,6 +23,7 @@ struct LoginView: View {
     @State private var failedToastMessage = ""
     @State private var successToastMessage = ""
     
+    @Binding var roleID: Int?
     @StateObject var signInViewModel = SignInViewModel()
     
     
@@ -122,6 +123,8 @@ struct LoginView: View {
                         
                         Button {
                             signIn()
+                            //                            isLoggedInKaryawan = true
+                            //                            roleID = 3
                         } label: {
                             ActionButton(title: "Masuk", width: 264, height: 44, radius: 10, bgColor: "Green")
                                 .padding(.top,80)
@@ -141,13 +144,13 @@ struct LoginView: View {
                     Spacer()
                 }.padding()
                 
-                    .navigationDestination(isPresented: $isLoggedInKaryawan) {
-                        MainViewKaryawan().navigationBarBackButtonHidden()
-                    }
-                
-                    .navigationDestination(isPresented: $isLoggedInAsistenDokter) {
-                        MainViewAsistenDokter().navigationBarBackButtonHidden()
-                    }
+                //                    .navigationDestination(isPresented: $isLoggedInKaryawan) {
+                //                        MainViewKaryawan().navigationBarBackButtonHidden()
+                //                    }
+                //
+                //                    .navigationDestination(isPresented: $isLoggedInAsistenDokter) {
+                //                        MainViewAsistenDokter().navigationBarBackButtonHidden()
+                //                    }
                 
                 if showFailedToast{
                     FailedToast(message: failedToastMessage)
@@ -196,22 +199,29 @@ struct LoginView: View {
                 // Sign in successful, do something
                 successToastMessage = signInViewModel.successMessage ?? "Unknown error"
                 showSuccessToast = true
-                
-                if signInViewModel.roleID == 3{
-                    DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-                        withAnimation {
-                            showSuccessToast = false
-                            isLoggedInKaryawan = true
-                        }
-                    }
-                } else if signInViewModel.roleID == 4{
-                    DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-                        withAnimation {
-                            showSuccessToast = false
-                            isLoggedInAsistenDokter = true
-                        }
+                DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                    withAnimation {
+                        roleID = signInViewModel.roleID
                     }
                 }
+                
+                
+                
+                //                if signInViewModel.roleID == 3{
+                //                    DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                //                        withAnimation {
+                //                            showSuccessToast = false
+                //                            isLoggedInKaryawan = true
+                //                        }
+                //                    }
+                //                } else if signInViewModel.roleID == 4{
+                //                    DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                //                        withAnimation {
+                //                            showSuccessToast = false
+                //                            isLoggedInAsistenDokter = true
+                //                        }
+                //                    }
+                //                }
                 
             } else {
                 failedToastMessage = signInViewModel.errorMessage ?? "Unknown error"
@@ -232,10 +242,10 @@ struct LoginView: View {
 
 
 
-struct LoginView_Preview: PreviewProvider {
-    static var previews: some View {
-        LoginView()
-        LoginView().previewInterfaceOrientation(.landscapeRight)
-        
-    }
-}
+//struct LoginView_Preview: PreviewProvider {
+//    static var previews: some View {
+//        LoginView(roleID: <#Binding<Int?>#>)
+//        LoginView().previewInterfaceOrientation(.landscapeRight)
+//
+//    }
+//}

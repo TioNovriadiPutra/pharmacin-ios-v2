@@ -8,11 +8,30 @@
 import SwiftUI
 
 struct ContentView: View {
+    @State private var roleID: Int? // Menyimpan roleID setelah login
+
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        
+            if let roleID = roleID {
+                // Tampilkan view sesuai dengan roleID
+                switch roleID {
+                    case 3:
+                        MainViewKaryawan()
+                    case 4:
+                        MainViewAsistenDokter()
+                    default:
+                        Text("Role tidak valid")
+                }
+            } else {
+                // Halaman login
+                LoginView(roleID: $roleID)
+            }
+        
     }
 }
 
-#Preview {
-    ContentView()
+struct ContentView_Preview: PreviewProvider {
+    static var previews: some View {
+        ContentView().previewInterfaceOrientation(.landscapeRight)
+    }
 }

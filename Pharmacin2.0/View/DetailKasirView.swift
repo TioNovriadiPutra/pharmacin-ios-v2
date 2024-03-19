@@ -16,6 +16,10 @@ struct DetailKasirView: View {
     
     @Environment(\.presentationMode) var presentationMode
     
+    var pasien: Pasien
+    
+    
+    
     var body: some View {
         NavigationStack{
         GeometryReader { geometry in
@@ -64,7 +68,7 @@ struct DetailKasirView: View {
                     ScrollView{
                         
                         VStack(spacing:14){
-                            RincianPembayaranHeader()
+                            RincianPembayaranHeader(pasien: pasien)
                             
                             HStack(spacing:14){
                                 VStack(alignment: .leading, spacing: 10){
@@ -132,14 +136,14 @@ struct DetailKasirView: View {
                                     
                                     
                                     HStack{
-                                        if selectionPayment.isEmpty {
-                                            Text("Pilih Jenis Pembayaran")
-                                                .font(.custom("PlusJakartaSans-Regular", size: 14))
-                                                .foregroundColor(Color("Gray"))
-                                        } else {
-                                            Text(selectionPayment)
-                                        }
-                                        Spacer()
+//                                        if selectionPayment.isEmpty {
+//                                            Text("Pilih Jenis Pembayaran")
+//                                                .font(.custom("PlusJakartaSans-Regular", size: 14))
+//                                                .foregroundColor(Color("Gray"))
+//                                        } else {
+//                                            Text(selectionPayment)
+//                                        }
+//                                        Spacer()
                                         Menu {
                                             ForEach(searchPaymentList, id: \.self) { option in
                                                 Button(action: {
@@ -149,7 +153,14 @@ struct DetailKasirView: View {
                                                 }
                                             }
                                         } label: {
-                                            Image("ArrowDownIcon")
+                                            HStack {
+                                                Text(selectionPayment.isEmpty ? "Pilih Jenis Pembayaran" : selectionPayment)
+                                                    .font(.custom("PlusJakartaSans-Regular", size: 14))
+                                                    .foregroundColor(selectionPayment.isEmpty ? Color("Gray") : .primary)
+                                                
+                                                Spacer()
+                                                Image("ArrowDownIcon")
+                                            }
                                         }
                                         .menuStyle(BorderlessButtonMenuStyle())
                                         
@@ -157,6 +168,7 @@ struct DetailKasirView: View {
                                     }
                                     .padding()
                                     .frame(height: 38)
+                                    .frame(maxWidth: .infinity)
                                     .background(
                                         RoundedRectangle(cornerRadius: 4)
                                             .stroke(Color(red: 0.93, green: 0.93, blue: 0.96))
@@ -223,20 +235,20 @@ struct DetailKasirView: View {
                         }
                     }
                     
-                    
+                 
                 }
-                
+                .padding()
             }
         }
     }
 }
 }
 
-struct DetailKasirView_Previews: PreviewProvider {
-    static var previews: some View {
-        
-        DetailKasirView().previewInterfaceOrientation(.landscapeRight)
-        
-    }
-}
+//struct DetailKasirView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        
+////        DetailKasirView().previewInterfaceOrientation(.landscapeRight)
+//        
+//    }
+//}
 

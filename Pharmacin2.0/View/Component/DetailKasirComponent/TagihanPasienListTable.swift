@@ -24,13 +24,13 @@ struct TagihanPasienListTable: View {
                 .font(.custom("PlusJakartaSans-Regular", size: 14))
                 .foregroundColor(Color("RegularText"))
                 .frame(width: 150, alignment: .leading)
-            Spacer()
-            Button {
-                
-            } label: {
-                Image("CrossRed")
-                    .frame(width: 100, alignment: .center)
-            }
+//            Spacer()
+//            Button {
+//                
+//            } label: {
+//                Image("CrossRed")
+//                    .frame(width: 100, alignment: .center)
+//            }
 
             
         }
