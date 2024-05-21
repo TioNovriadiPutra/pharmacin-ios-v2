@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct RawatPasienPopUp: View {
+struct confirmDeletePopUp: View {
     @Binding var tutupPopUp : Bool
     
     var deleteAction: () -> Void
