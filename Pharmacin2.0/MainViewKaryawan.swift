@@ -9,31 +9,17 @@ import SwiftUI
 
 struct MainViewKaryawan: View {
     @State private var activeView: ActiveView = .Dashboard
-    @State private var showingPopUpKasirDelete = false
-    @State private var showingPopUpApotekDelete = false
-
-    @State private var showingPopUpTambahObat = false
-    @State private var editObatIndex: Int? = nil
-    @State private var isEditing: Bool = false
-    @State private var listObat: [Obat] = []
-    @State private var showKonfirmasiPembayaranKasir = false
+    
+    @State private var isLoading = false
     
     @State private var logOut = false
+    var onLogout: (Int) -> Void
+    @EnvironmentObject var signInViewModel: SignInViewModel
+    @StateObject var logOutVM = LogOutViewModel()
     
-    
-    
-    
-
-    func tambahObatBaru(obat: Obat) {
-        listObat.append(obat)
-    }
-    
-    func updateItem(at index: Int, with newObat: Obat) {
-        listObat[index] = newObat
-    }
     
     var body: some View {
-//        NavigationStack{
+        //        NavigationStack{
         GeometryReader { geometry in
             ZStack {
                 
@@ -49,27 +35,6 @@ struct MainViewKaryawan: View {
                     }.background( Color(red: 0.98, green: 0.98, blue: 0.99))
                 }
                 
-                if showingPopUpKasirDelete {
-                    Color.black.opacity(0.4) // Background overlay
-                        .edgesIgnoringSafeArea(.all)
-                        .onTapGesture {
-                            showingPopUpKasirDelete = false
-                        }
-                    
-                    PopUpDeleteKasir(showPopUpDeleteKasir: $showingPopUpKasirDelete)
-                }
-                
-                
-                if showingPopUpApotekDelete {
-                    Color.black.opacity(0.4) // Background overlay
-                        .edgesIgnoringSafeArea(.all)
-                        .onTapGesture {
-                            showingPopUpApotekDelete = false
-                        }
-                    
-                    PopUpDeletePengambilanObat(showPopUpPengambilanKasir: $showingPopUpApotekDelete)
-                }
-                
                 if logOut {
                     Color.black.opacity(0.4) // Background overlay
                         .edgesIgnoringSafeArea(.all)
@@ -77,42 +42,30 @@ struct MainViewKaryawan: View {
                             logOut = false
                         }
                     
-                    PopUpLogOut(showLogoutPopUp: $logOut)
+                    PopUpLogOut(showLogoutPopUp: $logOut, logOutAcc: {
+                        logOutAcc()
+                    })
                 }
                 
-                if showingPopUpTambahObat{
-                    ZStack {
-                        Color.black.opacity(0.4)
-                            .edgesIgnoringSafeArea(.all)
-                            .onTapGesture {
-                                showingPopUpTambahObat = false
-                            }
-                        
-                        TambahObatPopUp(listObat: $listObat,
-                                        tambahObatBaru: tambahObatBaru,
-                                        obatToEdit: editObatIndex != nil && listObat.indices.contains(editObatIndex!) ? listObat[editObatIndex!] : nil,
-                                        isEditing: $isEditing, showPopUp: $showingPopUpTambahObat)
-                        
-                    }
-                }
-                
-                if showKonfirmasiPembayaranKasir{
-                    ZStack {
-                        Color.black.opacity(0.4)
-                            .edgesIgnoringSafeArea(.all)
-                            .onTapGesture {
-                                showingPopUpTambahObat = false
-                            }
-                        
-                        KonfirmasiPembayaranPopUp(showKonfirmsasiPembayaranPopup: $showKonfirmasiPembayaranKasir)
-                        
-                    }
-                    
-                }
             }.ignoresSafeArea(.keyboard)
+                .loadingView(isLoading: $isLoading)
         }
-//    }
-     }
+    }
+    
+    private func logOutAcc(){
+        isLoading = true
+        logOutVM.logOutAkun() { message, success in
+            isLoading = false
+            if success {
+                UserDefaultService.shared.deleteToken()
+                UserDefaultService.shared.deleteRoleId()
+                onLogout(UserDefaultService.shared.getId() ?? 0)
+            } else {
+                print("GAGAL LOGOUT")
+            }
+        }
+        
+    }
     
     @ViewBuilder
     func getViewForActiveView() -> some View {
@@ -120,17 +73,17 @@ struct MainViewKaryawan: View {
         case .Dashboard:
             DashboardView()
         case .Kasir:
-            KasirView(showPopUpDeleteKasir: $showingPopUpKasirDelete, listObat: $listObat, isShowPopUp: $showingPopUpTambahObat, editObatIndex: $editObatIndex, isEditing: $isEditing, isShowKonfirmasiPembayaran: $showKonfirmasiPembayaranKasir)
-        
+            KasirView()
+            
         case .Apotek:
-            ApotekPengambilanObatView(isShowingPopUpView: $showingPopUpApotekDelete)
+            ApotekPengambilanObatView()
         }
     }
-
+    
 }
 
-struct MainViewKaryawan_Preview: PreviewProvider {
-    static var previews: some View {
-        MainViewKaryawan().previewInterfaceOrientation(.landscapeRight)
-    }
-}
+//struct MainViewKaryawan_Preview: PreviewProvider {
+//    static var previews: some View {
+//        MainViewKaryawan().previewInterfaceOrientation(.landscapeRight)
+//    }
+//}

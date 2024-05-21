@@ -60,9 +60,7 @@ struct TagihanObatRacikanList: View {
             
             VStack {
                 
-                TagihanObatNonRacikanListTable()
-                TagihanObatNonRacikanListTable()
-                TagihanObatNonRacikanListTable()
+                
                 
             }
         

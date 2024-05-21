@@ -9,6 +9,8 @@ import Foundation
 
 class KasirMenungguPembayaranVM: ObservableObject{
     private let nService = NetworkingService()
+    private let token = UserDefaultService.shared.getToken()
+    
     typealias CompletionHandler = (_ message: String?, _ success:Bool)->Void
     
     @Published var pasienList: [Pasien] = []
@@ -41,9 +43,8 @@ class KasirMenungguPembayaranVM: ObservableObject{
     
     //    queue/doctor/consult-wait - getDoctorConsultWait - GET
     func getAntrianKasir(completion: @escaping CompletionHandler){
-        let endpoint = "/queue/drug-pick-up"
-        print("\(GlobalVariable.authToken)")
-        nService.requestGET(endpoint: endpoint, token: GlobalVariable.authToken, expecting: AntrianBayarKasirModel.self)
+        let endpoint = "/queue/payment"
+        nService.requestGET(endpoint: endpoint, token: token, expecting: AntrianBayarKasirModel.self)
         {result in
             DispatchQueue.main.async {
                 switch result{
@@ -59,4 +60,24 @@ class KasirMenungguPembayaranVM: ObservableObject{
             }
         }
     }
+    
+    func deleteAntrianPasien(id:Int, completion: @escaping CompletionHandler) {
+        let endpoint = "/queue/cancel/\(id)" // Sesuaikan dengan endpoint yang sesuai untuk menghapus antrian pasien
+        
+        nService.requestDELETE(endpoint: endpoint, parameters: [:], token: token, expecting: BaseResponse.self)
+        { result in
+            DispatchQueue.main.async {
+                switch result {
+                case .success(let response):
+                    // Jika penghapusan berhasil, Anda dapat menangani respons sesuai kebutuhan.
+                    completion(response.message, true)
+                case .failure(let error):
+                    // Jika terjadi kesalahan saat melakukan permintaan DELETE, tangani kesalahan tersebut.
+                    print(error.localizedDescription)
+                    completion(nil, false)
+                }
+            }
+        }
+    }
+    
 }

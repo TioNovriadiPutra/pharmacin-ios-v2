@@ -7,17 +7,17 @@
 
 import SwiftUI
 
-struct PopUpDeleteKasir: View {
-    @Binding var showPopUpDeleteKasir : Bool
+struct PopUpDelete: View {
+    @Binding var showPopUpDelete : Bool
 //
-//    var deleteAction: () -> Void
+    var deleteAction: () -> Void
 //    var pasien: Pasien
 //    
     var body: some View {
         VStack{
             HStack{
                 Button(action: {
-                    showPopUpDeleteKasir = false
+                    showPopUpDelete = false
                 }, label: {
                     Image("BackIcon")
                         .padding(.leading,46)
@@ -49,15 +49,15 @@ struct PopUpDeleteKasir: View {
             HStack(spacing:24){
                 Button(action: {
                     print("Batalkan")
-                    showPopUpDeleteKasir = false
+                    showPopUpDelete = false
                 }, label: {
                     ActionButton(title: "Batalkan", width: 225, height: 44, radius: 10, bgColor: "Gray")
                 })
                 
                 Button(action: {
                     print("Hapus")
-                    showPopUpDeleteKasir = false
-//                    deleteAction()
+                    showPopUpDelete = false
+                    deleteAction()
                 }, label: {
                     ActionButton(title: "Hapus", width: 225, height: 44, radius: 10, bgColor: "Red")
                 })
@@ -74,6 +74,6 @@ struct PopUpDeleteKasir: View {
     }
 }
 
-#Preview {
-    PopUpDeleteKasir(showPopUpDeleteKasir: .constant(true))
-}
+//#Preview {
+//    PopUpDeleteKasir(showPopUpDelete: .constant(true))
+//}

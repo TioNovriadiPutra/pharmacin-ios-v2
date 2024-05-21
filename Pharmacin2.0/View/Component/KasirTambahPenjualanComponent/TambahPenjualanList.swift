@@ -9,14 +9,14 @@ import SwiftUI
 
 struct TambahPenjualanList: View {
     
-    @Binding var listObat: [Obat]
+    @Binding var listObat: [Obat]?
     @Binding var isShowPopUp: Bool
     @Binding var editObatIndex: Int?
     @Binding var isEditing: Bool
     
     
     func deleteItem(at index: Int) {
-        listObat.remove(at: index)
+        listObat?.remove(at: index)
     }
     
     var body: some View {
@@ -58,19 +58,21 @@ struct TambahPenjualanList: View {
                 
                  
                 
-                
-                
-                ForEach(listObat.indices, id: \.self) { index in
-                    TambahPenjualanTable(obat: listObat[index], onDelete: {
-                         deleteItem(at: index)
-                        print(listObat)
-                    }, onEdit: {
-                        editObatIndex = index
-                        isEditing = true
-                        isShowPopUp = true
-                        
-                        print(listObat)
-                    })
+                if let listObat = listObat{
+                    
+                    
+                    ForEach(listObat.indices, id: \.self) { index in
+                        TambahPenjualanTable(obat: listObat[index], onDelete: {
+                            deleteItem(at: index)
+                            print(listObat)
+                        }, onEdit: {
+                            editObatIndex = index
+                            isEditing = true
+                            isShowPopUp = true
+                            
+                            print(listObat)
+                        })
+                    }
                 }
                                                          
                 

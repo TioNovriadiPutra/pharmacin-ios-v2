@@ -11,7 +11,7 @@ struct KasirList: View {
     
     @Binding var showPopUpDeleteKasir : Bool
     @Binding var showDetailKasir: Bool
-   
+    
     var pasien : Pasien
     
     var nomorAntrian: Int
@@ -39,36 +39,36 @@ struct KasirList: View {
             Text("\(pasien.registration_number)")
                 .font(.custom("PlusJakartaSans-Regular", size: 14))
                 .foregroundColor(Color("Gray"))
-                
+            
                 .frame(width: 160, alignment: .leading)
             
             Spacer()
-            if pasien.status == "drug-pick-up"{
+            if pasien.status == "Belum Dibayar"{
                 StatusKasirBelumDibayar()
                     .padding(.trailing,94)
             }else{
                 StatusKasirSudahDibayar()
                     .padding(.trailing,94)
             }
-//            StatusKasirBelumDibayar()
-            //                        .frame(width: 160, alignment: .leading)
-//                .padding(.trailing,94)
+            
             HStack(spacing:14){
-                Button{
-                    print("Check")
-                    showDetailKasir = true
-                    didSelectPasien()
-                }label: {
-                    Image("InvoiceIcon")
-                }
-                Button{
-                    print("Check")
-                    showPopUpDeleteKasir = true
-                    didSelectPasien()
-                }label: {
-                    Image("CrossRed")
-                        .resizable()
-                        .frame(width: 32, height: 32)
+                if pasien.status == "Belum Dibayar"{
+                    Button{
+                        print("Masuk Detail Kasir")
+                        showDetailKasir = true
+                        didSelectPasien()
+                    }label: {
+                        Image("InvoiceIcon")
+                    }
+                    Button{
+                        print("Hapus Pasien")
+                        showPopUpDeleteKasir = true
+                        didSelectPasien()
+                    }label: {
+                        Image("CrossRed")
+                            .resizable()
+                            .frame(width: 32, height: 32)
+                    }
                 }
             }
         }
@@ -77,12 +77,7 @@ struct KasirList: View {
         .frame(height: 68)
         .background(.white)
         .cornerRadius(10)
-        
-
-        
     }
-    
-  
 }
 
 //#Preview {

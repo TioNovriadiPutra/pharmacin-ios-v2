@@ -9,6 +9,7 @@ import SwiftUI
 
 struct PopUpLogOut: View {
     @Binding var showLogoutPopUp : Bool
+    var logOutAcc: () -> Void
     
 //    var deleteAction: () -> Void
 //    var pasien: Pasien
@@ -38,6 +39,7 @@ struct PopUpLogOut: View {
                 .font(.custom("PlusJakartaSans-Medium", size: 16))
                 .foregroundColor(Color("Gray"))
                 .multilineTextAlignment(.center)
+                .padding(.horizontal,57)
                 .padding(.bottom,56)
                 
             
@@ -56,12 +58,14 @@ struct PopUpLogOut: View {
                 
                 Button(action: {
                     print("Keluar")
+                    logOutAcc()
                     showLogoutPopUp = false
                 }, label: {
                     ActionButton(title: "Keluar", width: 225, height: 44, radius: 10, bgColor: "Red")
                 })
                 
             }
+           
             
             Spacer()
             
@@ -74,5 +78,7 @@ struct PopUpLogOut: View {
 }
 
 #Preview {
-    PopUpLogOut(showLogoutPopUp: .constant(false))
+    PopUpLogOut(showLogoutPopUp: .constant(false), logOutAcc: {
+        print("TEST")
+    })
 }

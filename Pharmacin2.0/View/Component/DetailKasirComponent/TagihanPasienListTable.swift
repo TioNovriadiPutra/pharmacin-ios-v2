@@ -8,30 +8,25 @@
 import SwiftUI
 
 struct TagihanPasienListTable: View {
+    
+    var actionCart: ActionCart
+    
     var body: some View {
         HStack {
-            Text("OBAT SJDH SISJ DSISMDH")
+            Text("\(actionCart.action_name)")
                 .font(.custom("PlusJakartaSans-Regular", size: 14))
                 .foregroundColor(Color("RegularText"))
                 .frame(width: 200, alignment: .leading)
             Spacer()
-            Text("10")
+            Text("\(actionCart.id)")
                 .font(.custom("PlusJakartaSans-Regular", size: 14))
                 .foregroundColor(Color("RegularText"))
                 .frame(width: 120, alignment: .leading)
             Spacer()
-            Text("Sachet")
+            Text("\(actionCart.action_price)")
                 .font(.custom("PlusJakartaSans-Regular", size: 14))
                 .foregroundColor(Color("RegularText"))
                 .frame(width: 150, alignment: .leading)
-//            Spacer()
-//            Button {
-//                
-//            } label: {
-//                Image("CrossRed")
-//                    .frame(width: 100, alignment: .center)
-//            }
-
             
         }
         .padding()
@@ -39,6 +34,6 @@ struct TagihanPasienListTable: View {
     }
 }
 
-#Preview {
-    TagihanPasienListTable()
-}
+//#Preview {
+//    TagihanPasienListTable()
+//}

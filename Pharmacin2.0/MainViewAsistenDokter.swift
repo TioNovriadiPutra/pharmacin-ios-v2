@@ -19,6 +19,15 @@ struct MainViewAsistenDokter: View {
     
     @State private var refreshView = false
     
+    @State private var logOut = false
+    
+    @State private var isLoading = false
+
+    @EnvironmentObject var signInViewModel: SignInViewModel
+    @StateObject var logOutVM = LogOutViewModel()
+    
+    var onLogout: (Int) -> Void
+    
     var body: some View {
         
         GeometryReader { geometry in
@@ -26,7 +35,7 @@ struct MainViewAsistenDokter: View {
 
                 VStack{
                     HStack(spacing:0){
-                        SideBarAsistenDokterView()
+                        SideBarAsistenDokterView(logOut: $logOut)
                         
                         
                         getViewForActiveView()
@@ -43,9 +52,9 @@ struct MainViewAsistenDokter: View {
                             showingPopUpRawatPasienDelete = false
                         }
                     
-                    RawatPasienPopUp(tutupPopUp: $showingPopUpRawatPasienDelete, deleteAction: {
+                    confirmDeletePopUp(tutupPopUp: $showingPopUpRawatPasienDelete, deleteAction: {
                         deleteQueuePasien()
-                    }, pasien: pasienToCall!)
+                    })
                 }
                 
                 if showingPopUpPanggilPasien {
@@ -59,10 +68,27 @@ struct MainViewAsistenDokter: View {
                         panggilPasien()
                     })
                 }
+                
+                if logOut {
+                    Color.black.opacity(0.4) // Background overlay
+                        .edgesIgnoringSafeArea(.all)
+                        .onTapGesture {
+                            logOut = false
+                        }
+                    PopUpLogOut(showLogoutPopUp: $logOut, logOutAcc: {
+                        logOutAcc()
+                    })
+          
+                }
 
             }.ignoresSafeArea(.keyboard)
+            .loadingView(isLoading: $isLoading)
         }
+
     }
+    
+
+
     
     private func deleteQueuePasien(){
         viewModel.deleteAntrianPasien(id: pasienToCall?.id ?? 0) { message, success in
@@ -73,7 +99,6 @@ struct MainViewAsistenDokter: View {
                 print("GAGAL AMBIL PASIEN")
             }
         }
-
     }
     
     private func panggilPasien(){
@@ -89,6 +114,21 @@ struct MainViewAsistenDokter: View {
 
     }
     
+    private func logOutAcc(){
+        isLoading = true
+        logOutVM.logOutAkun() { message, success in
+            isLoading = false
+            if success {
+                UserDefaultService.shared.deleteToken()
+                UserDefaultService.shared.deleteRoleId()
+                onLogout(UserDefaultService.shared.getId() ?? 0)
+            } else {
+                print("GAGAL LOGOUT")
+            }
+        }
+
+    }
+    
     @ViewBuilder
     func getViewForActiveView() -> some View {
         RawatPasienView(showPopUpDelete: $showingPopUpRawatPasienDelete, showPanggilPasienPopUp: $showingPopUpPanggilPasien, refreshView: $refreshView, antrianSekarang: $antrianSekarang, selectedPasien: $pasienToCall)
@@ -98,6 +138,6 @@ struct MainViewAsistenDokter: View {
 
 //struct MainView_Preview: PreviewProvider {
 //    static var previews: some View {
-//        MainViewAsistenDokter(pasienToCall: <#Pasien#>).previewInterfaceOrientation(.landscapeRight)
+//        MainViewAsistenDokter().previewInterfaceOrientation(.landscapeRight)
 //    }
 //}

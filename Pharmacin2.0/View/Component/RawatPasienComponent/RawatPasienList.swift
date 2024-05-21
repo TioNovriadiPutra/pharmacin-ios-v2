@@ -74,15 +74,6 @@ struct RawatPasienList: View {
             }
             else{
                 HStack{
-                    Button{
-                        print("Delete")
-                        showingDeletePopUp = true
-                        pasienToCall = pasien
-                    }label: {
-                        Image("CrossRed")
-                            .resizable()
-                            .frame(width: 32, height: 32)
-                    }
                 } .frame(width: 100, alignment: .center)
             }
         }

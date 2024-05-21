@@ -10,6 +10,11 @@ import SwiftUI
 struct KonfirmasiPembayaranPopUp: View {
     @Binding var showKonfirmsasiPembayaranPopup: Bool
     
+    var totalPembelian: String
+    var tunai: String
+    var kembalian: String
+    var confirmPayment: () -> Void
+    
     var body: some View {
         VStack{
             HStack{
@@ -35,7 +40,7 @@ struct KonfirmasiPembayaranPopUp: View {
                 .foregroundColor(Color("Gray"))
                 .padding()
             
-            Text("9999")
+            Text(totalPembelian)
                 .font(.custom("PlusJakartaSans-Bold", size: 24))
                 .foregroundColor(Color("RegularText"))
             
@@ -44,7 +49,7 @@ struct KonfirmasiPembayaranPopUp: View {
                 .foregroundColor(Color("Gray"))
                 .padding()
             
-            Text("9999")
+            Text(tunai)
                 .font(.custom("PlusJakartaSans-Bold", size: 24))
                 .foregroundColor(Color("Green"))
             
@@ -54,7 +59,7 @@ struct KonfirmasiPembayaranPopUp: View {
                 .font(.custom("PlusJakartaSans-medium", size: 16))
                 .foregroundColor(Color("Gray"))
                 .padding()
-            Text("9999")
+            Text(kembalian)
                 .font(.custom("PlusJakartaSans-Bold", size: 24))
                 .foregroundColor(Color("Red"))
             
@@ -62,6 +67,7 @@ struct KonfirmasiPembayaranPopUp: View {
                 .padding()
             
             Button{
+                confirmPayment()
                 showKonfirmsasiPembayaranPopup = false
             }label: {
                 ActionButton(title: "Konfirmasi", width: 450, height: 44, radius: 10, bgColor: "Green")
@@ -77,6 +83,6 @@ struct KonfirmasiPembayaranPopUp: View {
     }
 }
 
-#Preview {
-    KonfirmasiPembayaranPopUp(showKonfirmsasiPembayaranPopup: .constant(true))
-}
+//#Preview {
+//    KonfirmasiPembayaranPopUp(showKonfirmsasiPembayaranPopup: .constant(true))
+//}

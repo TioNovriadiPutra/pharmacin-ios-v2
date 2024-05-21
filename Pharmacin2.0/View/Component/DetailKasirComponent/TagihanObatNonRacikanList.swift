@@ -8,9 +8,17 @@
 import SwiftUI
 
 struct TagihanObatNonRacikanList: View {
+    
+    var dataPasien : DataPasien
+    @State private var showPopUpDelete: Bool = false
+    
+    @StateObject var viewModel = DetailKasirVM()
+    @State private var isLoading = false
+    @State private var id = 0
+    
     var body: some View {
         VStack(alignment: .leading) {
-            Text("Tagihan Obat Non Racikan")
+            Text("Tagihan Obat")
                 .font(.custom("PlusJakartaSans-Semibold", size: 18))
                 .foregroundColor(Color("Title"))
                 .padding()
@@ -56,16 +64,21 @@ struct TagihanObatNonRacikanList: View {
             
             .cornerRadius(10)
             
-  
+            
             
             VStack {
                 
-                TagihanObatNonRacikanListTable()
-                TagihanObatNonRacikanListTable()
-                TagihanObatNonRacikanListTable()
+                ForEach(dataPasien.drug_carts.indices, id: \.self) { index in
+                    let obat = dataPasien.drug_carts[index]
+                    TagihanObatNonRacikanListTable(drug: obat, showPopUpDelete: $showPopUpDelete)
+                        .onTapGesture {
+                            self.id = obat.id
+                        }
+                }
+                
                 
             }
-        
+            
             .background(.white)
             .cornerRadius(10)
             
@@ -76,7 +89,7 @@ struct TagihanObatNonRacikanList: View {
                     .foregroundColor(Color("Gray"))
                     .frame(width: 180, alignment: .center)
                 Spacer()
-                Text("Rp.222.000.000")
+                Text("Rp.\(dataPasien.drug_carts_total_price)")
                     .font(.custom("PlusJakartaSans-Medium", size: 16))
                     .foregroundColor(Color("RegularText"))
                     .frame(width: 150, alignment: .leading)
@@ -91,17 +104,41 @@ struct TagihanObatNonRacikanList: View {
             
             
         }
+        .loadingView(isLoading: $isLoading)
         .padding()
         .background(.white)
         .cornerRadius(10)
+        .sheet(isPresented: $showPopUpDelete, onDismiss: {
+        }) {
+            PopUpDelete(showPopUpDelete: $showPopUpDelete, deleteAction: {
+                deleteDrugItem()
+            })
+            .presentationBackground(.clear)
+            .interactiveDismissDisabled()
+            
+            
+        }
+    }
+    
+    private func deleteDrugItem() {
+        isLoading = true
+        viewModel.deleteDrugItem(id: id) {
+            message, success in
+            isLoading = false
+            if success{
+                #warning("Update Detail Kasir lagi")
+            }else{
+                print("GAGAL MENGHAPUS OBAT")
+            }
+        }
     }
 }
 
-struct TagihanObatNonRacikanList_Previews: PreviewProvider {
-    static var previews: some View {
-        
-        TagihanObatNonRacikanList().previewInterfaceOrientation(.landscapeRight)
-        
-    }
-}
+//struct TagihanObatNonRacikanList_Previews: PreviewProvider {
+//    static var previews: some View {
+//
+//        TagihanObatNonRacikanList().previewInterfaceOrientation(.landscapeRight)
+//
+//    }
+//}
 

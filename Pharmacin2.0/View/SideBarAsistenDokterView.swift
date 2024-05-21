@@ -10,6 +10,8 @@ import SwiftUI
 
 struct SideBarAsistenDokterView: View {
     
+    @Binding var logOut : Bool
+    
     var body: some View {
         ZStack{
             Rectangle()
@@ -37,7 +39,7 @@ struct SideBarAsistenDokterView: View {
                     .background(Color(red: 0.88, green: 0.87, blue: 0.87))
                 
                 Button(action: {
-                    
+                    logOut = true
                 }) {
                     Image("Logout")
                         .padding(.bottom,10)
@@ -55,5 +57,5 @@ struct SideBarAsistenDokterView: View {
 }
 
 #Preview {
-    SideBarAsistenDokterView()
+    SideBarAsistenDokterView(logOut: .constant(true))
 }

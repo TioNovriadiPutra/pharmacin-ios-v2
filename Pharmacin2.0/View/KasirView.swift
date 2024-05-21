@@ -12,23 +12,12 @@ struct KasirView: View {
     @State private var isShowingTambahPenjualanView = false
     @State private var isShowingDetailKasir = false
     
-    @Binding var showPopUpDeleteKasir : Bool
-    
-    //    @State private var selectedPatient: Pasien = Pasien(id: 1, registration_number: "", full_name: "", record_number: "", status: "")
-    
-    @Binding var listObat: [Obat]
-    @Binding var isShowPopUp: Bool
-    @Binding var editObatIndex: Int?
-    @Binding var isEditing: Bool
-    @Binding var isShowKonfirmasiPembayaran: Bool
+    @State var showPopUpDeleteKasir : Bool = false
     
     @StateObject var viewModel = KasirMenungguPembayaranVM()
-    
     @State private var pasien: Pasien?
+    @State private var id = 0
     
-    
-    
-    //    private var pasienKlik: Pasien
     
     var body: some View {
         NavigationStack{
@@ -83,14 +72,11 @@ struct KasirView: View {
                         ScrollView(.vertical){
                             VStack(spacing:14){
                                 ForEach(viewModel.pasienList.indices, id: \.self) { index in
-                                    var pasien = viewModel.pasienList[index]
+                                    let pasien = viewModel.pasienList[index]
                                     KasirList(showPopUpDeleteKasir: $showPopUpDeleteKasir, showDetailKasir: $isShowingDetailKasir, pasien: pasien, nomorAntrian: index+1){
                                         self.pasien = pasien
+                                        self.id = pasien.id
                                     }
-
-//                                        .onTapGesture {
-//                                            self.pasien = pasien
-//                                        }
                                 }
                                 
                                 Spacer()
@@ -108,36 +94,49 @@ struct KasirView: View {
                     
                     
                     .navigationDestination(isPresented: $isShowingDetailKasir) {
-                        if let pasien = pasien{
-                            DetailKasirView(pasien: pasien).navigationBarBackButtonHidden()
-                        }
+                        
+                        DetailKasirView(pasienID: id)
+                            .navigationBarBackButtonHidden()
                     }
-                    
                     .navigationDestination(isPresented: $isShowingTambahPenjualanView) {
-                        KasirTambahPenjualanView(listObat: $listObat, isShowPopUp: $isShowPopUp, editObatIndex: $editObatIndex, isEditing: $isEditing, isShowKonfirmasiPembayaran: $isShowKonfirmasiPembayaran).navigationBarBackButtonHidden()
+                        KasirTambahPenjualanView()
+                            .navigationBarBackButtonHidden()
                     }
-                    
-                    
-                    
                 }
-                
-                .onAppear{
-                    // Call getListPasien when RawatPasienView appears
+                .onAppear {
                     getAntrianKasir()
                 }
-                
-                //                .onChange(of: refreshView) { old, new in
-                //                    getAntrianKasir()
-                //                }
+                .sheet(isPresented: $showPopUpDeleteKasir, onDismiss: {
+                    //                    showConfirmPayment = false
+                }) {
+                    if let pasien = pasien {
+                        PopUpDelete(showPopUpDelete: $showPopUpDeleteKasir, deleteAction: {
+                            deletePasien()
+                        })
+                        .presentationBackground(.clear)
+                        .interactiveDismissDisabled()
+                    }
+                    
+                }
+            }
+        }
+        
+    }
+    
+    private func getAntrianKasir() {
+        viewModel.getAntrianKasir() { message, success in
+            if success {
+                print(message ?? "Unknown error")
+            } else {
+                print("GAGAL AMBIL PASIEN")
             }
         }
     }
     
-    private func getAntrianKasir() {
-        print(GlobalVariable.authToken)
-        viewModel.getAntrianKasir() { message, success in
+    private func deletePasien(){
+        viewModel.deleteAntrianPasien(id: id) { message, success in
             if success {
-                print(message ?? "Unknown error")
+                #warning("REFRESH VIEW")
             } else {
                 print("GAGAL AMBIL PASIEN")
             }

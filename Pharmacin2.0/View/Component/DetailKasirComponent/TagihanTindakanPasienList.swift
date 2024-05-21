@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct TagihanTindakanPasienList: View {
+    var dataPasien : DataPasien
     var body: some View {
         VStack(alignment: .leading) {
             Text("Tagihan Tindakan Pasien")
@@ -51,9 +52,10 @@ struct TagihanTindakanPasienList: View {
             
             VStack {
                 
-                TagihanPasienListTable()
-                TagihanPasienListTable()
-                TagihanPasienListTable()
+                ForEach(dataPasien.drug_carts.indices, id: \.self) { index in
+                    let action = dataPasien.action_carts[index]
+                    TagihanPasienListTable(actionCart: action)
+                }
                 
             }
         
@@ -67,7 +69,7 @@ struct TagihanTindakanPasienList: View {
                     .foregroundColor(Color("Gray"))
                     .frame(width: 180, alignment: .center)
                 Spacer()
-                Text("Rp.222.000.000")
+                Text("Rp.\(dataPasien.action_carts_total_price)")
                     .font(.custom("PlusJakartaSans-Medium", size: 16))
                     .foregroundColor(Color("RegularText"))
                     .frame(width: 150, alignment: .leading)
@@ -88,11 +90,11 @@ struct TagihanTindakanPasienList: View {
     }
 }
 
-struct TagihanTindakanPasienList_Previews: PreviewProvider {
-    static var previews: some View {
-        
-        TagihanTindakanPasienList().previewInterfaceOrientation(.landscapeRight)
-        
-    }
-}
+//struct TagihanTindakanPasienList_Previews: PreviewProvider {
+//    static var previews: some View {
+//        
+//        TagihanTindakanPasienList().previewInterfaceOrientation(.landscapeRight)
+//        
+//    }
+//}
 

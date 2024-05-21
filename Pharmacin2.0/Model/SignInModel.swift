@@ -26,8 +26,8 @@ struct Token: Codable {
     let name: String?
     let token: String
     let abilities: [String]
-    let lastUsedAt: String? // Jika nilainya null, Anda bisa gunakan tipe String dan atur nilainya ke nil saat inisialisasi
-    let expiresAt: String? // Jika nilainya null, Anda bisa gunakan tipe String dan atur nilainya ke nil saat inisialisasi
+    let lastUsedAt: String?
+    let expiresAt: String?
     
     init(type: String, name: String?, token: String, abilities: [String], lastUsedAt: String?, expiresAt: String?) {
         self.type = type

@@ -6,17 +6,11 @@
 //
 
 import SwiftUI
-import Combine
 
 struct RawatPasienView: View {
     @Binding var showPopUpDelete: Bool
     @Binding var showPanggilPasienPopUp: Bool
     @Binding var refreshView: Bool
-    
-    @State var totalAntrian = 0
-    //    @State var antrianSekarang = 0
-    @State var antrianSelanjutnya = 0
-    @State var sisaAntrian = 0
     
     @Binding var antrianSekarang: String
     
@@ -47,15 +41,13 @@ struct RawatPasienView: View {
                 
                 
                 HStack(spacing: 14) {
-                    //                    DashboardCard("Total Antrian", value: "\(viewModel.pasienList.count)", image: "PeopleBlueIcon", sizeValue: 20)
-                
-                    
                     let currQueue = viewModel.pasienList.isEmpty ? "-" : antrianSekarang
                     DashboardCard("Antrian Sekarang", value: currQueue, image: "PeopleGreenIcon", sizeValue: 20)
                     
                     let nextQueue = viewModel.pasienList.isEmpty ? "-" : viewModel.antrianSelanjutnya ?? "-"
                     DashboardCard("Antrian Selanjutnya", value: "\(nextQueue)", image: "PeopleYellowIcon", sizeValue: 20)
-                    DashboardCard("Sisa Antrian", value: "\(viewModel.total)", image: "PeopleRedIcon", sizeValue: 20)
+                    
+                    DashboardCard("Sisa Antrian", value: "\(viewModel.sisaAntrian ?? 0)", image: "PeopleRedIcon", sizeValue: 20)
                 }
                 
                 // Display RawatPasienList for each patient
@@ -91,7 +83,6 @@ struct RawatPasienView: View {
     
     
     private func getListPasien() {
-        print(GlobalVariable.authToken)
         viewModel.getAntrianPasien() { message, success in
             if success {
                 print(message ?? "Unknown error")

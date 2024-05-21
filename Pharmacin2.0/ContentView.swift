@@ -9,24 +9,54 @@ import SwiftUI
 
 struct ContentView: View {
     @State private var roleID: Int? // Menyimpan roleID setelah login
-
+    @EnvironmentObject var viewModel: SignInViewModel
+    @State var showSplash: Bool = false
+    
     var body: some View {
-        
-            if let roleID = roleID {
-                // Tampilkan view sesuai dengan roleID
-                switch roleID {
-                    case 3:
-                        MainViewKaryawan()
-                    case 4:
-                        MainViewAsistenDokter()
-                    default:
-                        Text("Role tidak valid")
+        ZStack{
+            if self.showSplash {
+                if UserDefaultService.shared.getToken() != ""{
+                    if UserDefaultService.shared.getId() == 3{
+                        MainViewKaryawan(onLogout: { roleID in
+                            self.roleID = UserDefaultService.shared.getId()
+                            checkUserDefault()
+                        })
+                    }else if UserDefaultService.shared.getId() == 4{
+                        MainViewAsistenDokter(onLogout: { roleID in
+                            self.roleID = UserDefaultService.shared.getId()
+                            checkUserDefault()
+                        })
+                    }
+                }else{
+                    LoginView(onLogin: { roleID in
+                        self.roleID = UserDefaultService.shared.getId()
+                        checkUserDefault()
+                    })
                 }
-            } else {
-                // Halaman login
-                LoginView(roleID: $roleID)
+            }else{
+                SplashScreenView()
             }
+        }
+        .onAppear {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
+                withAnimation {
+                    self.showSplash = true
+                }
+            }
+        }
+        .onChange(of: roleID) { newValue, _ in
+            print("Telah melakukan proses Login")
+        }
         
+        
+        
+        
+        
+    }
+    private func checkUserDefault() {
+        if let userID = UserDefaultService.shared.getId() {
+            print("RoleID saat ini: \(userID)")
+        }
     }
 }
 

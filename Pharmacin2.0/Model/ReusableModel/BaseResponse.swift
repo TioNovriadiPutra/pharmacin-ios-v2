@@ -6,3 +6,11 @@
 //
 
 import Foundation
+
+struct BaseResponse:Decodable{
+    let message: String
+    
+    init(message: String) {
+        self.message = message
+    }
+}

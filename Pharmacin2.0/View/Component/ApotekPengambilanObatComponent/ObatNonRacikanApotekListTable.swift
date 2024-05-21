@@ -8,29 +8,30 @@
 import SwiftUI
 
 struct ObatNonRacikanApotekListTable: View {
+    var drug : DrugCart
     var body: some View {
         HStack {
-            Text("OBAT SJDH SISJ DSISMDH")
+            Text("\(drug.drug_name)")
                 .font(.custom("PlusJakartaSans-Regular", size: 14))
                 .foregroundColor(Color("RegularText"))
                 .frame(width: 300, alignment: .leading)
             Spacer()
-            Text("10")
+            Text("\(drug.quantity)")
                 .font(.custom("PlusJakartaSans-Regular", size: 14))
                 .foregroundColor(Color("RegularText"))
                 .frame(width: 80, alignment: .leading)
             Spacer()
-            Text("Sachet")
+            Text("\(drug.unit_name)")
                 .font(.custom("PlusJakartaSans-Regular", size: 14))
                 .foregroundColor(Color("RegularText"))
                 .frame(width: 120, alignment: .leading)
             Spacer()
-            Text("3 x 1 setelah makan")
+            Text("\(drug.instruction)")
                 .font(.custom("PlusJakartaSans-Regular", size: 14))
                 .foregroundColor(Color("RegularText"))
                 .frame(width: 200, alignment: .leading)
             Spacer()
-            Text("222.000.000")
+            Text("\(drug.total_price)")
                 .font(.custom("PlusJakartaSans-Regular", size: 14))
                 .foregroundColor(Color("RegularText"))
                 .frame(width: 150, alignment: .leading)
@@ -41,6 +42,6 @@ struct ObatNonRacikanApotekListTable: View {
     }
 }
 
-#Preview {
-    ObatNonRacikanApotekListTable()
-}
+//#Preview {
+//    ObatNonRacikanApotekListTable()
+//}

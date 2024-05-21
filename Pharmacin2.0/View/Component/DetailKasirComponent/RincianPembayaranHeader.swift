@@ -9,7 +9,7 @@ import SwiftUI
 
 struct RincianPembayaranHeader: View {
     
-    var pasien : Pasien
+    var pasien : DataPasien
     
     var body: some View {
             VStack{
@@ -70,7 +70,7 @@ struct RincianPembayaranHeader: View {
                             Text(":")
                                 .font(.custom("PlusJakartaSans-Medium", size: 16))
                                 .foregroundColor(Color("RegularText"))
-                            Text("\(pasien.registration_number)")
+                            Text("\(pasien.ttl)")
                                 .font(.custom("PlusJakartaSans-Medium", size: 16))
                                 .foregroundColor(Color("RegularText"))
                             Text("(2 Tahun 3 Bulan)")
@@ -88,7 +88,7 @@ struct RincianPembayaranHeader: View {
                             Text(":")
                                 .font(.custom("PlusJakartaSans-Medium", size: 16))
                                 .foregroundColor(Color("RegularText"))
-                            Text("Jl. Al-Ikhlas No.2A  Rt.006/018 kp. Rawa Bogo Jatiasih")
+                            Text("\(pasien.address)")
                                 .font(.custom("PlusJakartaSans-Medium", size: 16))
                                 .foregroundColor(Color("RegularText"))
                             
@@ -109,7 +109,7 @@ struct RincianPembayaranHeader: View {
                             Text(":")
                                 .font(.custom("PlusJakartaSans-Medium", size: 16))
                                 .foregroundColor(Color("RegularText"))
-                            Text("DD-MM-YYYY")
+                            Text("\(pasien.tgl_periksa)")
                                 .font(.custom("PlusJakartaSans-Medium", size: 16))
                                 .foregroundColor(Color("RegularText"))
                             
@@ -125,7 +125,7 @@ struct RincianPembayaranHeader: View {
                             Text(":")
                                 .font(.custom("PlusJakartaSans-Medium", size: 16))
                                 .foregroundColor(Color("RegularText"))
-                            Text("dr. Lorem Ipsum")
+                            Text("\(pasien.doctor_name)")
                                 .font(.custom("PlusJakartaSans-Medium", size: 16))
                                 .foregroundColor(Color("RegularText"))
                             
@@ -141,7 +141,7 @@ struct RincianPembayaranHeader: View {
                             Text(":")
                                 .font(.custom("PlusJakartaSans-Medium", size: 16))
                                 .foregroundColor(Color("Red"))
-                            Text("Lorem Ipsum")
+                            Text("\(pasien.allergy ?? "-")")
                                 .font(.custom("PlusJakartaSans-Medium", size: 16))
                                 .foregroundColor(Color("Red"))
                         }

@@ -11,7 +11,6 @@ struct confirmDeletePopUp: View {
     @Binding var tutupPopUp : Bool
     
     var deleteAction: () -> Void
-    var pasien: Pasien
     
     var body: some View {
         VStack{

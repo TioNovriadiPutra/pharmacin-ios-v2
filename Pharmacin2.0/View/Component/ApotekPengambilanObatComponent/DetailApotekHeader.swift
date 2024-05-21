@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct DetailApotekHeader: View {
+    var pasien: DataPasienApotek
     var body: some View {
             VStack{
                 HStack (spacing:80){
@@ -22,7 +23,7 @@ struct DetailApotekHeader: View {
                             Text(":")
                                 .font(.custom("PlusJakartaSans-Medium", size: 16))
                                 .foregroundColor(Color("RegularText"))
-                            Text("REG/20230910/0012")
+                            Text("\(pasien.registration_number)")
                                 .font(.custom("PlusJakartaSans-Medium", size: 16))
                                 .foregroundColor(Color("RegularText"))
                             
@@ -38,7 +39,7 @@ struct DetailApotekHeader: View {
                             Text(":")
                                 .font(.custom("PlusJakartaSans-Medium", size: 16))
                                 .foregroundColor(Color("Gray"))
-                            Text("000000")
+                            Text("\(pasien.record_number)")
                                 .font(.custom("PlusJakartaSans-Medium", size: 16))
                                 .foregroundColor(Color("RegularText"))
                             
@@ -54,7 +55,7 @@ struct DetailApotekHeader: View {
                             Text(":")
                                 .font(.custom("PlusJakartaSans-Medium", size: 16))
                                 .foregroundColor(Color("RegularText"))
-                            Text("Naufal Athallahardi")
+                            Text("\(pasien.full_name)")
                                 .font(.custom("PlusJakartaSans-Medium", size: 16))
                                 .foregroundColor(Color("RegularText"))
                         }
@@ -67,12 +68,12 @@ struct DetailApotekHeader: View {
                             Text(":")
                                 .font(.custom("PlusJakartaSans-Medium", size: 16))
                                 .foregroundColor(Color("RegularText"))
-                            Text("Jakarta, 10 September 2001")
+                            Text("\(pasien.ttl)")
                                 .font(.custom("PlusJakartaSans-Medium", size: 16))
                                 .foregroundColor(Color("RegularText"))
-                            Text("(2 Tahun 3 Bulan)")
-                                .font(.custom("PlusJakartaSans-Medium", size: 16))
-                                .foregroundColor(Color("LightGray"))
+//                            Text("(2 Tahun 3 Bulan)")
+//                                .font(.custom("PlusJakartaSans-Medium", size: 16))
+//                                .foregroundColor(Color("LightGray"))
                             
                         }
                         
@@ -85,7 +86,7 @@ struct DetailApotekHeader: View {
                             Text(":")
                                 .font(.custom("PlusJakartaSans-Medium", size: 16))
                                 .foregroundColor(Color("RegularText"))
-                            Text("Jl. Al-Ikhlas No.2A  Rt.006/018 kp. Rawa Bogo Jatiasih")
+                            Text("\(pasien.address)")
                                 .font(.custom("PlusJakartaSans-Medium", size: 16))
                                 .foregroundColor(Color("RegularText"))
                             
@@ -106,7 +107,7 @@ struct DetailApotekHeader: View {
                             Text(":")
                                 .font(.custom("PlusJakartaSans-Medium", size: 16))
                                 .foregroundColor(Color("RegularText"))
-                            Text("DD-MM-YYYY")
+                            Text("\(pasien.tgl_periksa)")
                                 .font(.custom("PlusJakartaSans-Medium", size: 16))
                                 .foregroundColor(Color("RegularText"))
                             
@@ -122,7 +123,7 @@ struct DetailApotekHeader: View {
                             Text(":")
                                 .font(.custom("PlusJakartaSans-Medium", size: 16))
                                 .foregroundColor(Color("RegularText"))
-                            Text("dr. Lorem Ipsum")
+                            Text("\(pasien.doctor_name)")
                                 .font(.custom("PlusJakartaSans-Medium", size: 16))
                                 .foregroundColor(Color("RegularText"))
                             
@@ -138,7 +139,7 @@ struct DetailApotekHeader: View {
                             Text(":")
                                 .font(.custom("PlusJakartaSans-Medium", size: 16))
                                 .foregroundColor(Color("Red"))
-                            Text("Lorem Ipsum")
+                            Text("\(pasien.allergy ?? "-")")
                                 .font(.custom("PlusJakartaSans-Medium", size: 16))
                                 .foregroundColor(Color("Red"))
                         }
@@ -156,6 +157,6 @@ struct DetailApotekHeader: View {
     }
 }
 
-#Preview {
-    DetailApotekHeader()
-}
+//#Preview {
+//    DetailApotekHeader()
+//}

@@ -6,3 +6,13 @@
 //
 
 import Foundation
+
+struct AntrianPengambilanObatModel: Codable {
+    let message: String
+    let data: [Pasien]
+    
+    init(message: String, data: [Pasien]) {
+        self.message = message
+        self.data = data
+    }
+}

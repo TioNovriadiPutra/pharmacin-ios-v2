@@ -8,35 +8,39 @@
 import SwiftUI
 
 struct TagihanObatNonRacikanListTable: View {
+    var drug : DrugCart
+    @Binding var showPopUpDelete: Bool
+    
+    
     var body: some View {
         HStack {
-            Text("OBAT SJDH SISJ DSISMDH")
+            Text("\(drug.drug_name)")
                 .font(.custom("PlusJakartaSans-Regular", size: 14))
                 .foregroundColor(Color("RegularText"))
                 .frame(width: 200, alignment: .leading)
             Spacer()
-            Text("10")
+            Text("\(drug.quantity)")
                 .font(.custom("PlusJakartaSans-Regular", size: 14))
                 .foregroundColor(Color("RegularText"))
                 .frame(width: 80, alignment: .leading)
             Spacer()
-            Text("Sachet")
+            Text("\(drug.unit_name)")
                 .font(.custom("PlusJakartaSans-Regular", size: 14))
                 .foregroundColor(Color("RegularText"))
                 .frame(width: 120, alignment: .leading)
             Spacer()
-            Text("3 x 1 setelah makan")
+            Text("\(drug.instruction)")
                 .font(.custom("PlusJakartaSans-Regular", size: 14))
                 .foregroundColor(Color("RegularText"))
                 .frame(width: 200, alignment: .leading)
             Spacer()
-            Text("222.000.000")
+            Text("\(drug.total_price)")
                 .font(.custom("PlusJakartaSans-Regular", size: 14))
                 .foregroundColor(Color("RegularText"))
                 .frame(width: 150, alignment: .leading)
             Spacer()
             Button {
-                
+                showPopUpDelete = true
             } label: {
                 Image("CrossRed")
                     .frame(width: 100, alignment: .center)
@@ -49,6 +53,6 @@ struct TagihanObatNonRacikanListTable: View {
     }
 }
 
-#Preview {
-    TagihanObatNonRacikanListTable()
-}
+//#Preview {
+//    TagihanObatNonRacikanListTable()
+//}

@@ -42,8 +42,8 @@ struct DashboardView: View {
                 HStack(spacing: 14){
                     DashboardCard("Total Transaksi Jual", value: "190", image: "MoneyBlueIcon", sizeValue: 20)
                     DashboardCard("Total Penjualan", value: "Rp.1.000.000", image: "MoneyGreenIcon", sizeValue: 14)
-                    DashboardCard("Kadaluarsa", value: "33", image: "PeopleYellowIcon", sizeValue: 20)
-                    DashboardCard("Stok Menipis", value: "421", image: "PeopleRedIcon", sizeValue: 20)
+                    DashboardCard("Jumlah Pasien", value: "33", image: "PeopleYellowIcon", sizeValue: 20)
+                    DashboardCard("Sisa Pasien", value: "421", image: "PeopleRedIcon", sizeValue: 20)
                     
                 }
                 

@@ -12,15 +12,16 @@ import SwiftUI
 
 class RawatPasienVM: ObservableObject{
     private let nService = NetworkingService()
+    private let token = UserDefaultService.shared.getToken()
     typealias CompletionHandler = (_ message: String?, _ success:Bool)->Void
     
     var signInVM = SignInViewModel()
     
     
     @Published var pasienList: [Pasien] = []
-    @Published var total = Int()
     @Published var antrianSekarang : String?
     @Published var antrianSelanjutnya: String?
+    @Published var sisaAntrian: Int?
     
     private var timer: Timer?
     
@@ -50,16 +51,15 @@ class RawatPasienVM: ObservableObject{
     
     //    queue/doctor/consult-wait - getDoctorConsultWait - GET
     func getAntrianPasien(completion: @escaping CompletionHandler){
-        let endpoint = "/queue/doctor/consult-wait"
-        print("\(GlobalVariable.authToken)")
-        nService.requestGET(endpoint: endpoint, token: GlobalVariable.authToken, expecting: RawatPasienModel.self)
+        let endpoint = "/queue/consult-wait"
+        nService.requestGET(endpoint: endpoint, token: token, expecting: RawatPasienModel.self)
         {result in
             DispatchQueue.main.async {
                 switch result{
                 case.success(let respon):
                     let pasienData = respon.data.queue
-                    let totalPasien = respon.data.total
-                    self.total = totalPasien
+                    let sisaPasien = respon.data.total
+                    self.sisaAntrian = sisaPasien
                     self.pasienList = pasienData
                     if self.pasienList.count != 0{
                         self.antrianSelanjutnya = respon.data.queue[0].registration_number
@@ -77,7 +77,7 @@ class RawatPasienVM: ObservableObject{
     func deleteAntrianPasien(id:Int, completion: @escaping CompletionHandler) {
         let endpoint = "/queue/cancel/\(id)" // Sesuaikan dengan endpoint yang sesuai untuk menghapus antrian pasien
         
-        nService.requestDELETE(endpoint: endpoint, parameters: [:], token: GlobalVariable.authToken, expecting: DeteleQueuePasien.self)
+        nService.requestDELETE(endpoint: endpoint, parameters: [:], token: token, expecting: BaseResponse.self)
         { result in
             DispatchQueue.main.async {
                 switch result {
@@ -95,8 +95,7 @@ class RawatPasienVM: ObservableObject{
     
     func panggilPasien(id:Int, completion: @escaping CompletionHandler) {
         let endpoint = "/queue/consult-wait/\(id)" // Sesuaikan dengan endpoint yang sesuai untuk menghapus antrian pasien
-        print(id)
-        nService.requestPATCH(endpoint: endpoint, parameters: [:], token: GlobalVariable.authToken, expecting: PanggilPasien.self) { result in
+        nService.requestPATCH(endpoint: endpoint, parameters: [:], token: token, expecting: BaseResponse.self) { result in
             DispatchQueue.main.async {
                 switch result {
                 case .success(let response):

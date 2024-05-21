@@ -16,9 +16,11 @@ struct TambahObatPopUp: View {
     @State private var obatName: String = ""
     @State private var takaran: String = ""
     @State private var harga: String = ""
+    @State private var isSearching = false
     
+    let dataObat: [Obat]
     
-    @Binding var listObat: [Obat]
+    @Binding var listObat: [Obat]?
     var tambahObatBaru: (Obat) -> Void
     
     var obatToEdit: Obat?
@@ -51,7 +53,7 @@ struct TambahObatPopUp: View {
             
             VStack(spacing:18){
                 if let obat = obatToEdit, isEditing {
-                    TextField("Masukan Nama", text: $obatName)
+                    TextField("Masukan Nama", text: $searchName)
                         .padding(.leading)
                         .frame(width: 378, height: 38)
                         .autocapitalization(.none)
@@ -70,18 +72,50 @@ struct TambahObatPopUp: View {
                             QTY = obat.qty
                         }
                 } else {
-                    TextField("Masukan Nama", text: $obatName)
-                        .padding(.leading)
-                        .frame(width: 378, height: 38)
-                        .autocapitalization(.none)
-                        .font(.custom("PlusJakartaSans-Medium", size: 14))
-                        .overlay(
-                            RoundedRectangle(cornerRadius: 8)
-                                .stroke(Color(red: 0.93, green: 0.93, blue: 0.96))
-                        )
-                        .font(.custom("PlusJakartaSans-Regular", size: 14))
-                        .foregroundColor(Color("RegularText"))
-                        .padding(.bottom, 4)
+                    TextField("Masukan Nama", text: $searchName, onEditingChanged: { editing in
+                        isSearching = editing
+                    }, onCommit: {
+                        print("onCommit")
+                    })
+                    .padding(.leading)
+                    .frame(width: 378, height: 38)
+                    .autocapitalization(.none)
+                    .font(.custom("PlusJakartaSans-Medium", size: 14))
+                    .overlay(
+                        RoundedRectangle(cornerRadius: 8)
+                            .stroke(Color(red: 0.93, green: 0.93, blue: 0.96))
+                    )
+                    .font(.custom("PlusJakartaSans-Regular", size: 14))
+                    .foregroundColor(Color("RegularText"))
+                    .padding(.bottom, 4)
+                }
+                
+                if isEditing && !searchName.isEmpty {
+                    ScrollView {
+                        VStack(alignment: .leading, spacing: 0) {
+                            if searchResults.isEmpty {
+                                Text("tidak ada kontak")
+                                    .padding()
+                            } else {
+                                ForEach(searchResults, id: \.id) { obat in
+                                    Text(obat.nama)
+                                        .padding()
+                                        .onTapGesture {
+                                            searchName = obat.nama
+                                            isEditing = false
+                                        }
+                                    Divider()
+                                    
+                                }
+                            }
+                        }
+                        .frame(width: 300)
+                        .background(Color.white)
+                        .cornerRadius(8)
+                        .shadow(radius: 5)
+                        .padding()
+                    }
+                    .frame(maxHeight: 200)
                 }
                 
                 Text("Nama Obat")
@@ -166,14 +200,14 @@ struct TambahObatPopUp: View {
             Button{
                 if let obat = obatToEdit, isEditing {
                     // Update existing obat data
-                    let updatedObat = Obat(nama: obatName, takaran: takaran, harga: Double(harga) ?? 0, qty: Int(QTY) )
-                    if let editIndex = listObat.firstIndex(where: { $0.nama == obat.nama }) { // Cari index obat yang sesuai dengan id yang sama
-                        listObat[editIndex] = updatedObat // Update obat di index tersebut
+                    let updatedObat = Obat(id: obat.id, nama: obatName, takaran: takaran, harga: Double(harga) ?? 0, qty: Int(QTY) )
+                    if let editIndex = listObat?.firstIndex(where: { $0.nama == obat.nama }) { // Cari index obat yang sesuai dengan id yang sama
+                        listObat?[editIndex] = updatedObat // Update obat di index tersebut
                     }
                 } else {
                     // Tambahkan obat baru
-                    let newObat = Obat(nama: obatName, takaran: takaran, harga: Double(harga) ?? 0, qty: Int(QTY) )
-                    listObat.append(newObat)
+                    let newObat = Obat(id: 0, nama: obatName, takaran: takaran, harga: Double(harga) ?? 0, qty: Int(QTY) )
+                    listObat?.append(newObat)
                 }
                 
                 showPopUp = false
@@ -188,9 +222,19 @@ struct TambahObatPopUp: View {
         .background(.white)
         .cornerRadius(10)
         
+        
+        var searchResults: [Obat] {
+            if searchName.isEmpty {
+                return dataObat
+            } else {
+                return dataObat.filter { $0.nama.lowercased().contains(searchName.lowercased()) }
+            }
+        }
     }
+    
+    
 }
 
-#Preview {
-    TambahObatPopUp(listObat: .constant([]), tambahObatBaru: { _ in }, isEditing: .constant(true), showPopUp: .constant(false))
-}
+//#Preview {
+//    TambahObatPopUp(listObat: .constant([]), tambahObatBaru: { _ in }, isEditing: .constant(true), showPopUp: .constant(false))
+//}

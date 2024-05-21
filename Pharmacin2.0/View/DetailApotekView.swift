@@ -8,12 +8,16 @@
 import SwiftUI
 
 struct DetailApotekView: View {
-    @State private var searchText: String = ""
-    let searchPaymentList = ["Red", "Green", "Blue", "Black", "Tartan"]
-    @State private var searchName: String = ""
-    @State private var selectionPayment = ""
-    @State private var searchPayment: String = ""
+    
     @Environment(\.presentationMode) var presentationMode
+    
+    @StateObject var viewModel = DetailApotekVM()
+    @State private var pasien : DataPasienApotek?
+    @State private var isLoading = false
+    
+    @State private var showConfirmPayment = false
+    
+    var pasienID : Int?
     
     var body: some View {
         NavigationStack{
@@ -62,11 +66,11 @@ struct DetailApotekView: View {
                         
                         ScrollView{
                             VStack(spacing:14){
-                                DetailApotekHeader()
-                                
-                                
-                                ObatNonRacikanApotek()
-                                ObatRacikanApotek()
+                                if let pasien = pasien {
+                                    DetailApotekHeader(pasien: pasien)
+                                    ObatNonRacikanApotek(dataPasien: pasien)
+//                                    ObatRacikanApotek()
+                                }
                             }
                         }
                         
@@ -76,6 +80,51 @@ struct DetailApotekView: View {
                     .padding()
                     
                 }
+                .onAppear{
+                    getDetailApotek()
+                }
+                .loadingView(isLoading: $isLoading)
+                .sheet(isPresented: $showConfirmPayment, onDismiss: {
+                    //                    showConfirmPayment = false
+                }) {
+                    if let pasien = pasien {
+                        PopUpPenyerahanObat(pasien: pasien, konfirmasiPenyerahan: {
+                            konfirmasiPenyerahanObat()
+                        }, showPopUpPenyerahanObat: $showConfirmPayment)
+                        .presentationBackground(.clear)
+                        .interactiveDismissDisabled()
+                    }
+                    
+                }
+            }
+        }
+    }
+    
+    private func konfirmasiPenyerahanObat() {
+        isLoading = true
+        guard let pasienID = pasienID else{
+            return
+        }
+        viewModel.konfirmasiPenyerahanObat(id: pasienID) {
+            message, success in
+            isLoading = false
+            if success{
+                presentationMode.wrappedValue.dismiss()
+            }else{
+                print("GAGAL KONFIRMASI PEMBAYARAN")
+            }
+        }
+    }
+    
+    private func getDetailApotek() {
+        isLoading = true
+        viewModel.getDetailApotek(id: pasienID ?? 0) {
+            message, success in
+            isLoading = false
+            if success {
+                pasien = viewModel.pasien
+            } else {
+                print("GAGAL AMBIL PASIEN")
             }
         }
     }

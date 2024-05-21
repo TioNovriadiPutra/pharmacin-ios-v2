@@ -11,25 +11,32 @@ struct ApotekList: View {
     
     @Binding var showDeletePopUp : Bool
     @Binding var showDetailApotek : Bool
+    
+    var pasien : Pasien
+    
+    var nomorAntrian: Int
+    
+    var didSelectPasien: () -> Void
+    
     var body: some View {
         HStack(spacing: 35){
             HStack{
-                Text("1")
+                Text("\(nomorAntrian)")
                     .font(.custom("PlusJakartaSans-Medium", size: 16))
                     .foregroundColor(Color("Red"))
                     .frame(width: 50, alignment: .leading)
                 VStack(alignment: .leading, spacing: 7){
-                    Text("No Invoice")
+                    Text("\(pasien.full_name)")
                         .font(.custom("PlusJakartaSans-Regular", size: 14))
                         .foregroundColor(Color("RegularText"))
                     
-                    Text("No Invoice")
+                    Text("\(pasien.record_number)")
                         .font(.custom("PlusJakartaSans-Regular", size: 12))
                         .foregroundColor(Color("Gray"))
                 }
                 .frame(width: 300, alignment: .leading)
             }
-            Text("REG/20230910/0012")
+            Text("\(pasien.registration_number)")
                 .font(.custom("PlusJakartaSans-Regular", size: 14))
                 .foregroundColor(Color("Gray"))
                 
@@ -37,12 +44,18 @@ struct ApotekList: View {
             
             Spacer()
             
-            StatusPengambilanObatBelumDiserahkan()
+            if pasien.status == "Belum Diserahkan"{
+                StatusPengambilanObatBelumDiserahkan()
+                    .padding(.trailing,94)
+            }else{
+                StatusPengambilanObatDiserahkan()
+                    .padding(.trailing,94)
+            }
             
-                .padding(.trailing,94)
             HStack(spacing:14){
                 Button{
                     print("Check")
+                    didSelectPasien()
                     showDetailApotek = true
                 }label: {
                     Image("InvoiceIcon")
@@ -50,6 +63,7 @@ struct ApotekList: View {
                 }
                 Button{
                     print("Check")
+                    didSelectPasien()
                     showDeletePopUp = true
                 }label: {
                     Image("CrossRed")
@@ -63,11 +77,6 @@ struct ApotekList: View {
         .frame(height: 68)
         .background(.white)
         .cornerRadius(10)
-        
-        
-        
-        
-        
         
     }
 }

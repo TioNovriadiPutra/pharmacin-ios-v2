@@ -8,6 +8,8 @@
 import SwiftUI
 
 struct ObatNonRacikanApotek: View {
+    
+    var dataPasien: DataPasienApotek
     var body: some View {
         VStack(alignment: .leading) {
             Text("Obat Non Racikan")
@@ -53,11 +55,10 @@ struct ObatNonRacikanApotek: View {
   
             
             VStack {
-                
-                ObatNonRacikanApotekListTable()
-                ObatNonRacikanApotekListTable()
-                ObatNonRacikanApotekListTable()
-                
+                ForEach(dataPasien.drug_carts.indices, id: \.self) { index in
+                    let obat = dataPasien.drug_carts[index]
+                    ObatNonRacikanApotekListTable(drug: obat)
+                }
             }
         
             .background(.white)
@@ -70,7 +71,7 @@ struct ObatNonRacikanApotek: View {
                     .foregroundColor(Color("Gray"))
                     .frame(width: 180, alignment: .center)
                 Spacer()
-                Text("Rp.222.000.000")
+                Text("Rp.\(dataPasien.drug_carts_total_price)")
                     .font(.custom("PlusJakartaSans-Medium", size: 16))
                     .foregroundColor(Color("RegularText"))
                     .frame(width: 150, alignment: .leading)
@@ -91,11 +92,11 @@ struct ObatNonRacikanApotek: View {
     }
 }
 
-struct TagihanObatNonRacikanApotek_Previews: PreviewProvider {
-    static var previews: some View {
-        
-        ObatNonRacikanApotek().previewInterfaceOrientation(.landscapeRight)
-        
-    }
-}
+//struct TagihanObatNonRacikanApotek_Previews: PreviewProvider {
+//    static var previews: some View {
+//        
+//        ObatNonRacikanApotek().previewInterfaceOrientation(.landscapeRight)
+//        
+//    }
+//}
 

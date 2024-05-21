@@ -21,10 +21,11 @@ struct LoginView: View {
     @State private var showSuccessToast = false
     
     @State private var failedToastMessage = ""
-    @State private var successToastMessage = ""
+    @State private var isLoading = false
     
-    @Binding var roleID: Int?
-    @StateObject var signInViewModel = SignInViewModel()
+    var onLogin: (Int) -> Void
+    //    @Binding var roleID: Int?
+    @EnvironmentObject var viewModel: SignInViewModel
     
     
     var body: some View {
@@ -123,8 +124,6 @@ struct LoginView: View {
                         
                         Button {
                             signIn()
-                            //                            isLoggedInKaryawan = true
-                            //                            roleID = 3
                         } label: {
                             ActionButton(title: "Masuk", width: 264, height: 44, radius: 10, bgColor: "Green")
                                 .padding(.top,80)
@@ -144,23 +143,12 @@ struct LoginView: View {
                     Spacer()
                 }.padding()
                 
-                //                    .navigationDestination(isPresented: $isLoggedInKaryawan) {
-                //                        MainViewKaryawan().navigationBarBackButtonHidden()
-                //                    }
-                //
-                //                    .navigationDestination(isPresented: $isLoggedInAsistenDokter) {
-                //                        MainViewAsistenDokter().navigationBarBackButtonHidden()
-                //                    }
-                
                 if showFailedToast{
                     FailedToast(message: failedToastMessage)
                 }
                 
-                if showSuccessToast{
-                    SuccessToast(message: successToastMessage)
-                }
-                
             }
+            .loadingView(isLoading: $isLoading)
             
             
         }
@@ -173,6 +161,7 @@ struct LoginView: View {
     private func signIn() {
         isPasswordEmpty = false
         isEmailEmpty = false
+        
         guard !(email.isEmpty && password.isEmpty) else {
             isEmailEmpty = true
             isPasswordEmpty = true
@@ -189,52 +178,26 @@ struct LoginView: View {
             return
         }
         
+        isLoading = true
         
-        let endpoint = "/auth/login/mobile"
-        let parameters = ["email": email, "password": password]
-        
-        signInViewModel.getData(endpoint: endpoint, param: parameters, token: nil) {
+        viewModel.getData(email: email, password: password) {
             message, success  in
             if success {
-                // Sign in successful, do something
-                successToastMessage = signInViewModel.successMessage ?? "Unknown error"
-                showSuccessToast = true
-                DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-                    withAnimation {
-                        roleID = signInViewModel.roleID
-                    }
-                }
-                
-                
-                
-                //                if signInViewModel.roleID == 3{
-                //                    DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-                //                        withAnimation {
-                //                            showSuccessToast = false
-                //                            isLoggedInKaryawan = true
-                //                        }
-                //                    }
-                //                } else if signInViewModel.roleID == 4{
-                //                    DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-                //                        withAnimation {
-                //                            showSuccessToast = false
-                //                            isLoggedInAsistenDokter = true
-                //                        }
-                //                    }
-                //                }
+                onLogin(UserDefaultService.shared.getId() ?? 0)
                 
             } else {
-                failedToastMessage = signInViewModel.errorMessage ?? "Unknown error"
+                failedToastMessage = viewModel.errorMessage ?? "Unknown error"
                 showFailedToast = true
                 
                 print(failedToastMessage)
                 
-                DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+                DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
                     withAnimation {
                         showFailedToast = false
                     }
                 }
             }
+            isLoading = false
         }
     }
     

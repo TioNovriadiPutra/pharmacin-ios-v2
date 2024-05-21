@@ -8,25 +8,26 @@
 import Foundation
 
 class SignInViewModel : ObservableObject{
-    @Published var token: String?
     @Published var error: [String]?
     @Published var errorMessage: String?
     @Published var successMessage: String?
     @Published var roleID: Int?
-    @Published var isSignedIn: Bool?
     
     private let nService = NetworkingService()
     typealias CompletionHandler = (_ message: String?, _ success:Bool)->Void
     
     
-    func getData(endpoint:String, param:[String:Any], token:String? ,completion: @escaping CompletionHandler) {
-        nService.requestPOST(endpoint: endpoint, parameters: param, token: token, expecting: SignInModel.self)
+    func getData(email: String, password: String, completion: @escaping CompletionHandler) {
+        let param = ["email": email, "password": password]
+        let endpoint = "/auth/login/mobile"
+        nService.requestPOST(endpoint: endpoint, parameters: param, token: nil, expecting: SignInModel.self)
         { [weak self] result in
             switch result {
             case .success(let response):
                 // Handle successful response
-                self?.token = response.token.token
-                GlobalVariable.authToken = response.token.token
+                let token = response.token.token
+                UserDefaultService.shared.saveToken(token)
+                UserDefaultService.shared.saveId(response.roleId)
                 self?.roleID = response.roleId
                 self?.successMessage = response.message
                 
