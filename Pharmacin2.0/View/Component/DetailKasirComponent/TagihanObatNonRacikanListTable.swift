@@ -10,7 +10,7 @@ import SwiftUI
 struct TagihanObatNonRacikanListTable: View {
     var drug : DrugCart
     @Binding var showPopUpDelete: Bool
-    
+    var deleteAction: () -> Void
     
     var body: some View {
         HStack {
@@ -41,6 +41,7 @@ struct TagihanObatNonRacikanListTable: View {
             Spacer()
             Button {
                 showPopUpDelete = true
+                deleteAction()
             } label: {
                 Image("CrossRed")
                     .frame(width: 100, alignment: .center)

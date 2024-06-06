@@ -97,35 +97,12 @@ struct ApotekPengambilanObatView: View {
         .onAppear{
             getAntrianApotek()
         }
-        .sheet(isPresented: $showPopUpDeleteQueueApotek, onDismiss: {
-            //                    showConfirmPayment = false
-        }) {
-            if let pasien = pasien {
-                PopUpDelete(showPopUpDelete: $showPopUpDeleteQueueApotek, deleteAction: {
-                    deletePasien()
-                })
-                .presentationBackground(.clear)
-                .interactiveDismissDisabled()
-            }
-            
-        }
-        
     }
     
     private func getAntrianApotek() {
         viewModel.getAntrianApotek() { message, success in
             if success {
                 print(message ?? "Unknown error")
-            } else {
-                print("GAGAL AMBIL PASIEN")
-            }
-        }
-    }
-    
-    private func deletePasien(){
-        viewModel.deleteAntrianPasien(id: id) { message, success in
-            if success {
-                #warning("REFRESH VIEW")
             } else {
                 print("GAGAL AMBIL PASIEN")
             }

@@ -9,7 +9,6 @@ import SwiftUI
 
 struct KasirList: View {
     
-    @Binding var showPopUpDeleteKasir : Bool
     @Binding var showDetailKasir: Bool
     
     var pasien : Pasien
@@ -60,17 +59,9 @@ struct KasirList: View {
                     }label: {
                         Image("InvoiceIcon")
                     }
-                    Button{
-                        print("Hapus Pasien")
-                        showPopUpDeleteKasir = true
-                        didSelectPasien()
-                    }label: {
-                        Image("CrossRed")
-                            .resizable()
-                            .frame(width: 32, height: 32)
-                    }
+                    
                 }
-            }
+            }.frame(width: 64)
         }
         .padding(.horizontal)
         .padding()

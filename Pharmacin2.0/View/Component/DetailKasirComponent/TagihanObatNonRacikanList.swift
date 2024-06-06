@@ -14,7 +14,8 @@ struct TagihanObatNonRacikanList: View {
     
     @StateObject var viewModel = DetailKasirVM()
     @State private var isLoading = false
-    @State private var id = 0
+    @State private var id : Int?
+    var deleteAction: () -> Void
     
     var body: some View {
         VStack(alignment: .leading) {
@@ -70,10 +71,10 @@ struct TagihanObatNonRacikanList: View {
                 
                 ForEach(dataPasien.drug_carts.indices, id: \.self) { index in
                     let obat = dataPasien.drug_carts[index]
-                    TagihanObatNonRacikanListTable(drug: obat, showPopUpDelete: $showPopUpDelete)
-                        .onTapGesture {
-                            self.id = obat.id
-                        }
+                    TagihanObatNonRacikanListTable(drug: obat, showPopUpDelete: $showPopUpDelete, deleteAction: {
+                        id = obat.id
+                    })
+                        
                 }
                 
                 
@@ -101,8 +102,6 @@ struct TagihanObatNonRacikanList: View {
             .frame(height: 54)
             .background(Color(red: 0.98, green: 0.98, blue: 0.99))
             .cornerRadius(10)
-            
-            
         }
         .loadingView(isLoading: $isLoading)
         .padding()
@@ -122,11 +121,15 @@ struct TagihanObatNonRacikanList: View {
     
     private func deleteDrugItem() {
         isLoading = true
+        guard let id = id else{
+            return
+        }
         viewModel.deleteDrugItem(id: id) {
             message, success in
             isLoading = false
+            print("Delete obat \(id)")
             if success{
-                #warning("Update Detail Kasir lagi")
+                deleteAction()
             }else{
                 print("GAGAL MENGHAPUS OBAT")
             }

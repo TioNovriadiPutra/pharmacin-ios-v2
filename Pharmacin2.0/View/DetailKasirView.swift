@@ -204,12 +204,12 @@ struct DetailKasirView: View {
                                                     .stroke(Color(red: 0.93, green: 0.93, blue: 0.96))
                                                     .frame(height: 38)
                                             )
-                                            .onChange(of: inputCashValue) { old, new in
-                                                calculateChange()
-                                            }
                                             .onChange(of: inputCashValue) {old, new in
                                                 // Memastikan nilai baru tidak kosong dan karakter pertama adalah angka
                                                 inputCashValue = Int("\(old)".filterNumericInput())
+                                            }
+                                            .onChange(of: inputCashValue) { old, new in
+                                                calculateChange()
                                             }
                                         
                                             .padding(.bottom,15)
@@ -245,8 +245,15 @@ struct DetailKasirView: View {
                                     
                                 }
                                 if let pasien = pasien {
-                                    TagihanObatNonRacikanList(dataPasien: pasien)
-                                    TagihanTindakanPasienList(dataPasien: pasien)
+                                    if pasien.drug_carts.count != 0{
+                                        TagihanObatNonRacikanList(dataPasien: pasien, deleteAction: {
+                                            getDetailKasir()
+                                        })
+                                    }
+                                    
+                                    if pasien.action_carts.count != 0{
+                                        TagihanTindakanPasienList(dataPasien: pasien)
+                                    }
                                 }
                             }
                         }

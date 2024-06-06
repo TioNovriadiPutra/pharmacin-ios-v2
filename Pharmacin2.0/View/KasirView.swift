@@ -12,11 +12,9 @@ struct KasirView: View {
     @State private var isShowingTambahPenjualanView = false
     @State private var isShowingDetailKasir = false
     
-    @State var showPopUpDeleteKasir : Bool = false
-    
     @StateObject var viewModel = KasirMenungguPembayaranVM()
     @State private var pasien: Pasien?
-    @State private var id = 0
+    @State private var id : Int?
     
     
     var body: some View {
@@ -73,7 +71,7 @@ struct KasirView: View {
                             VStack(spacing:14){
                                 ForEach(viewModel.pasienList.indices, id: \.self) { index in
                                     let pasien = viewModel.pasienList[index]
-                                    KasirList(showPopUpDeleteKasir: $showPopUpDeleteKasir, showDetailKasir: $isShowingDetailKasir, pasien: pasien, nomorAntrian: index+1){
+                                    KasirList(showDetailKasir: $isShowingDetailKasir, pasien: pasien, nomorAntrian: index+1){
                                         self.pasien = pasien
                                         self.id = pasien.id
                                     }
@@ -106,18 +104,6 @@ struct KasirView: View {
                 .onAppear {
                     getAntrianKasir()
                 }
-                .sheet(isPresented: $showPopUpDeleteKasir, onDismiss: {
-                    //                    showConfirmPayment = false
-                }) {
-                    if let pasien = pasien {
-                        PopUpDelete(showPopUpDelete: $showPopUpDeleteKasir, deleteAction: {
-                            deletePasien()
-                        })
-                        .presentationBackground(.clear)
-                        .interactiveDismissDisabled()
-                    }
-                    
-                }
             }
         }
         
@@ -133,15 +119,6 @@ struct KasirView: View {
         }
     }
     
-    private func deletePasien(){
-        viewModel.deleteAntrianPasien(id: id) { message, success in
-            if success {
-                #warning("REFRESH VIEW")
-            } else {
-                print("GAGAL AMBIL PASIEN")
-            }
-        }
-    }
 }
 
 //struct KasirView_Previews: PreviewProvider {

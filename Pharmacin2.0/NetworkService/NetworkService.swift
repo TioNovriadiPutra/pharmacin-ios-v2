@@ -9,7 +9,7 @@ import Foundation
 
 class NetworkingService{
 //    let prefixURL = "http://103.164.219.2:7800"
-    let prefixURL = "https://13b7-2a09-bac1-3480-18-00-247-108.ngrok-free.app"
+    let prefixURL = "https://pharmacin-api-v2-development.up.railway.app"
     
     //MARK: - Retrieve Data (get method)
     func requestGET<T:Decodable>(endpoint: String,

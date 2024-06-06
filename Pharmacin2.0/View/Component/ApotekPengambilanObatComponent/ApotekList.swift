@@ -61,16 +61,7 @@ struct ApotekList: View {
                     Image("InvoiceIcon")
                     
                 }
-                Button{
-                    print("Check")
-                    didSelectPasien()
-                    showDeletePopUp = true
-                }label: {
-                    Image("CrossRed")
-                        .resizable()
-                        .frame(width: 32, height: 32)
-                }
-            }
+            }.frame(width: 64)
         }
         .padding(.horizontal)
         .padding()

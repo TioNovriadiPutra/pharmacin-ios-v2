@@ -52,7 +52,7 @@ struct TagihanTindakanPasienList: View {
             
             VStack {
                 
-                ForEach(dataPasien.drug_carts.indices, id: \.self) { index in
+                ForEach(dataPasien.action_carts.indices, id: \.self) { index in
                     let action = dataPasien.action_carts[index]
                     TagihanPasienListTable(actionCart: action)
                 }
