@@ -9,6 +9,7 @@ import SwiftUI
 
 struct KasirTambahPenjualanView: View {
     @State private var searchName: String = ""
+    @State private var insertTunai: String = ""
     let searchPaymentList = ["Tunai"]
     @State private var selectionPayment = ""
     @Environment(\.presentationMode) var presentationMode
@@ -23,9 +24,9 @@ struct KasirTambahPenjualanView: View {
         listObat?.append(obat)
     }
     
-    func updateItem(at index: Int, with newObat: Obat) {
-        listObat?[index] = newObat
-    }
+//    func updateItem(at index: Int, with newObat: Obat) {
+//        listObat?[index] = newObat
+//    }
     
     var body: some View {
         //        NavigationStack{
@@ -168,7 +169,7 @@ struct KasirTambahPenjualanView: View {
                                         .padding(.bottom,-8)
                                         .padding(.top,10)
                                     
-                                    TextField("Masukan Tunai", text: $searchName)
+                                    TextField("Masukan Tunai", text: $insertTunai)
                                         .padding()
                                         .font(.custom("PlusJakartaSans-Medium", size: 14))
                                         .keyboardType(.phonePad)
@@ -179,13 +180,13 @@ struct KasirTambahPenjualanView: View {
                                             
                                             
                                         )
-                                        .onChange(of: searchName) { newValue, _ in
+                                        .onChange(of: insertTunai) { newValue, _ in
                                             // Memastikan nilai baru tidak kosong dan karakter pertama adalah angka
-                                            searchName = newValue.filterNumericInput()
+                                            insertTunai = newValue.filterNumericInput()
                                         }
-                                        .onChange(of: searchName) { newValue, _ in
+                                        .onChange(of: insertTunai) { newValue, _ in
                                             // Memastikan nilai baru tidak kosong dan karakter pertama adalah angka
-                                            searchName = newValue.formatCurrencyText(newValue.filter { $0.isNumber })
+                                            insertTunai = newValue.formatCurrencyText(newValue.filter { $0.isNumber })
                                         }
                                     
                                         .padding(.bottom,10)
@@ -236,8 +237,8 @@ struct KasirTambahPenjualanView: View {
             }.ignoresSafeArea(.keyboard)
                 .sheet(isPresented: $isShowPopUp, onDismiss: {})
             {
-                TambahObatPopUp(dataObat: [Obat(id: 0, nama: "paracetamol", takaran: "2 kali sehari", harga: 2000, qty: 5)] , listObat: $listObat,
-                                tambahObatBaru: tambahObatBaru,
+                TambahObatPopUp(listObat: $listObat,
+                               
                                 obatToEdit: editObatIndex != nil && ((listObat?.indices.contains(editObatIndex!)) != nil) ? listObat?[editObatIndex!] : nil,
                                 isEditing: $isEditing, showPopUp: $isShowPopUp)
                 .presentationBackground(.clear)

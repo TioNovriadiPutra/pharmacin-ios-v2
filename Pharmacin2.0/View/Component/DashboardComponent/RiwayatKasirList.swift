@@ -8,19 +8,20 @@
 import SwiftUI
 
 struct RiwayatKasirList: View {
+    var data : Cashier
     var body: some View {
         HStack{
-            Text("DD-MM-YY")
+            Text("\(data.date)")
                 .font(.custom("PlusJakartaSans-Regular", size: 14))
                 .foregroundColor(Color("RegularText"))
                 .frame(width: 150, alignment: .leading)
             Spacer()
-            Text("00.00")
+            Text("\(data.open)")
                 .font(.custom("PlusJakartaSans-Regular", size: 14))
                 .foregroundColor(Color("RegularText"))
                 .frame(width: 100, alignment: .leading)
             Spacer()
-            Text("00.00")
+            Text("\(data.close)")
                 .font(.custom("PlusJakartaSans-Regular", size: 14))
                 .foregroundColor(Color("RegularText"))
                 .frame(width: 100, alignment: .leading)
@@ -30,6 +31,3 @@ struct RiwayatKasirList: View {
     }
 }
 
-#Preview {
-    RiwayatKasirList()
-}

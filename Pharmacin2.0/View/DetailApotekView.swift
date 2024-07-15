@@ -51,7 +51,7 @@ struct DetailApotekView: View {
                             Spacer()
                             
                             Button(action: {
-                                
+                                showConfirmPayment = true
                             }, label: {
                                 Image("CheckIcon")
                             })

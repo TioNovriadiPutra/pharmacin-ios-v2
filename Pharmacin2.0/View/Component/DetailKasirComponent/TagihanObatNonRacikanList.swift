@@ -103,7 +103,7 @@ struct TagihanObatNonRacikanList: View {
             .background(Color(red: 0.98, green: 0.98, blue: 0.99))
             .cornerRadius(10)
         }
-        .loadingView(isLoading: $isLoading)
+//        .loadingView(isLoading: $isLoading)
         .padding()
         .background(.white)
         .cornerRadius(10)

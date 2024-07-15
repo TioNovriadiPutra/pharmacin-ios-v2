@@ -14,6 +14,8 @@ class ApotekVM: ObservableObject{
     typealias CompletionHandler = (_ message: String?, _ success:Bool)->Void
     
     @Published var pasienList: [Pasien] = []
+    @Published var pasienListObatDiserahkan: [Pasien] = []
+    @Published var sisaAntrian : Int?
     
     private var timer: Timer?
     
@@ -43,14 +45,17 @@ class ApotekVM: ObservableObject{
     
     //    queue/doctor/consult-wait - getDoctorConsultWait - GET
     func getAntrianApotek(completion: @escaping CompletionHandler){
-        let endpoint = "/queue/payment"
-        nService.requestGET(endpoint: endpoint, token: token, expecting: AntrianPengambilanObatModel.self)
+        let endpoint = "/queue/drug-pick-up"
+        nService.requestGET(endpoint: endpoint, token: token, expecting: RawatPasienModel.self)
         {result in
             DispatchQueue.main.async {
                 switch result{
                 case.success(let respon):
-                    let pasienData = respon.data
+                    let pasienData = respon.data.queue
                     self.pasienList = pasienData
+                    self.pasienListObatDiserahkan = pasienData.filter { $0.status == "Obat Diserahkan" }
+                    self.sisaAntrian = self.pasienList.count - self.pasienListObatDiserahkan.count
+                    
                     completion(respon.message,true)
                     
                 case.failure(let error):

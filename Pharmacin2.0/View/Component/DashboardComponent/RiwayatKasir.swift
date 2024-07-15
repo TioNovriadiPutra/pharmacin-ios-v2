@@ -8,6 +8,12 @@
 import SwiftUI
 
 struct RiwayatKasirCart: View {
+    
+    private var dataCashier: [Cashier]
+    init(data: [Cashier]) {
+        self.dataCashier = data
+    }
+    
     var body: some View {
             
         VStack(spacing:24){
@@ -41,12 +47,23 @@ struct RiwayatKasirCart: View {
                     
                     .background(Color(red: 0.98, green: 0.98, blue: 0.99))
                     .cornerRadius(10)
+                
+            ScrollView(.vertical){
+                VStack(spacing:14){
+                    ForEach(dataCashier.indices, id: \.self) { index in
+//                        let pasien = viewModel.pasienList[index]
+                    RiwayatKasirList(data: dataCashier[index])
+                    }
                     
-            VStack{
-                RiwayatKasirList()
-                RiwayatKasirList()
-                RiwayatKasirList()
+                    
+                    Spacer()
+                }
             }
+//            VStack{
+//                RiwayatKasirList()
+//                RiwayatKasirList()
+//                RiwayatKasirList()
+//            }
                     
                     Spacer()
                     
@@ -60,6 +77,6 @@ struct RiwayatKasirCart: View {
     
 }
 
-#Preview {
-    RiwayatKasirCart()
-}
+//#Preview {
+//    RiwayatKasirCart()
+//}

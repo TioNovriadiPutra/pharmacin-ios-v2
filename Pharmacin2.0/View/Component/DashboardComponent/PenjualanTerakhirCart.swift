@@ -8,8 +8,12 @@
 import SwiftUI
 
 struct PenjualanTerakhirCart: View {
+    
+    private var dataSelling: [Selling]
+    init(data: [Selling]) {
+        self.dataSelling = data
+    }
     var body: some View {
-        
         
         VStack(spacing:24){
             
@@ -38,11 +42,23 @@ struct PenjualanTerakhirCart: View {
                 .background(Color(red: 0.98, green: 0.98, blue: 0.99))
                 .cornerRadius(10)
                 
-            VStack{
-                InvoiceList()
-                InvoiceList()
-                InvoiceList()
+            
+            ScrollView(.vertical){
+                VStack(spacing:14){
+                    ForEach(dataSelling.indices, id: \.self) { index in
+//                        let pasien = viewModel.pasienList[index]
+                        InvoiceList(data: dataSelling[index])
+                    }
+                    
+                    
+                    Spacer()
+                }
             }
+//            VStack{
+//                InvoiceList()
+//                InvoiceList()
+//                InvoiceList()
+//            }
      
     
                 Spacer()
@@ -55,7 +71,7 @@ struct PenjualanTerakhirCart: View {
     
 }
 
-#Preview {
-    PenjualanTerakhirCart()
-}
+//#Preview {
+//    PenjualanTerakhirCart()
+//}
 

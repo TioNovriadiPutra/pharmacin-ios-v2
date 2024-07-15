@@ -18,7 +18,7 @@ struct DataPasienApotek: Codable {
     let registration_number, record_number, full_name, ttl: String
     let address, tgl_periksa, doctor_name: String
     let allergy: String?
-    let sub_total_price, outpatient_fee, total_price: Int
+//    let sub_total_price, outpatient_fee, total_price: Int
     let drug_carts: [DrugCart]
     let drug_carts_total_price: Int
     let status: String
@@ -33,9 +33,9 @@ struct DataPasienApotek: Codable {
         self.tgl_periksa = tgl_periksa
         self.doctor_name = doctor_name
         self.allergy = allergy
-        self.sub_total_price = sub_total_price
-        self.outpatient_fee = outpatient_fee
-        self.total_price = total_price
+//        self.sub_total_price = sub_total_price
+//        self.outpatient_fee = outpatient_fee
+//        self.total_price = total_price
         self.drug_carts = drug_carts
         self.drug_carts_total_price = drug_carts_total_price
         self.status = status

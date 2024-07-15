@@ -62,7 +62,11 @@ class RawatPasienVM: ObservableObject{
                     self.sisaAntrian = sisaPasien
                     self.pasienList = pasienData
                     if self.pasienList.count != 0{
-                        self.antrianSelanjutnya = respon.data.queue[0].registration_number
+                        if respon.data.queue[0].status == "Sudah Dipanggil"{
+                            self.antrianSelanjutnya = "-"
+                        }else{
+                            self.antrianSelanjutnya = respon.data.queue[0].registration_number
+                        }
                     }
                     completion(respon.message,true)
                     

@@ -9,6 +9,9 @@ import SwiftUI
 
 struct DashboardView: View {
     @State private var isClose = false
+    @State private var isLoading = false
+    @StateObject var viewModel = DashboardVM()
+    @State private var data : DashboardModel?
     
     
     var body: some View {
@@ -36,31 +39,21 @@ struct DashboardView: View {
                             .frame(height: 40)
                             .background(isClose ? Color("Red") : Color("Green"))
                             .cornerRadius(10)
-                            
+                        
                     }
                 }
                 HStack(spacing: 14){
-                    DashboardCard("Total Transaksi Jual", value: "190", image: "MoneyBlueIcon", sizeValue: 20)
-                    DashboardCard("Total Penjualan", value: "Rp.1.000.000", image: "MoneyGreenIcon", sizeValue: 14)
-                    DashboardCard("Jumlah Pasien", value: "33", image: "PeopleYellowIcon", sizeValue: 20)
-                    DashboardCard("Sisa Pasien", value: "421", image: "PeopleRedIcon", sizeValue: 20)
+                    DashboardCard("Total Transaksi Jual", value: "\(data?.data.report[0].total_transaction ?? 0)", image: "MoneyBlueIcon", sizeValue: 20)
+                    DashboardCard("Total Penjualan", value: "\(data?.data.report[0].total_transaction_price ?? 0)", image: "MoneyGreenIcon", sizeValue: 20)
+                    DashboardCard("Jumlah Pasien", value: "\(data?.data.report[0].total_patient ?? 0)", image: "PeopleYellowIcon", sizeValue: 20)
+                    DashboardCard("Sisa Pasien", value: "\(data?.data.report[0].rest_patient ?? 0)", image: "PeopleRedIcon", sizeValue: 20)
                     
                 }
                 
-                
-                
-                
-                    HStack(spacing:16){
-                        PenjualanTerakhirCart()
-                        RiwayatKasirCart()
-                        
-                    }
-                
-        
-                 
-                
-                
-                
+                HStack(spacing:16){
+                    PenjualanTerakhirCart(data: data?.data.selling ?? [])
+                    RiwayatKasirCart(data: data?.data.cashier ?? [])
+                }
                 
             }
             
@@ -69,10 +62,26 @@ struct DashboardView: View {
             
             
         }
-        
-        
-        
-        
+        .onAppear{
+            getDataDashbord()
+        }
+        .loadingView(isLoading: $isLoading)
+    }
+    
+    private func getDataDashbord() {
+        isLoading = true
+        viewModel.getDataDashboard {
+            message, success, data in
+            isLoading = false
+            if success {
+                guard let data = data else{
+                    return
+                }
+                self.data = data
+            } else {
+                print("Gagal Ambil data Dashboard")
+            }
+        }
     }
 }
 

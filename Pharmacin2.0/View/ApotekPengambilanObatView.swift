@@ -62,10 +62,20 @@ struct ApotekPengambilanObatView: View {
                         }
                         
                         HStack(spacing: 14){
-                            DashboardCard("Total Antrian", value: "190", image: "PeopleBlueIcon", sizeValue: 20)
-                            DashboardCard("Antrian Sekarang", value: "Rp.1.000.000", image: "PeopleGreenIcon", sizeValue: 14)
-                            DashboardCard("Antrian Selanjutnya", value: "33", image: "PeopleYellowIcon", sizeValue: 20)
-                            DashboardCard("Sisa Antrian", value: "421", image: "PeopleRedIcon", sizeValue: 20)
+//                            DashboardCard("Total Antrian", value: "190", image: "PeopleBlueIcon", sizeValue: 20)
+                            if viewModel.pasienList.count != 0{
+                                DashboardCard("Antrian Sekarang", value: "\(viewModel.pasienList[0].registration_number)", image: "PeopleGreenIcon", sizeValue: 20)
+                                if viewModel.pasienList.count == 1{
+                                    DashboardCard("Antrian Selanjutnya", value: "\(viewModel.pasienList[0].registration_number)", image: "PeopleYellowIcon", sizeValue: 20)
+                                }else{
+                                    DashboardCard("Antrian Selanjutnya", value: "\(viewModel.pasienList[1].registration_number)", image: "PeopleYellowIcon", sizeValue: 20)
+                                }
+                                DashboardCard("Sisa Antrian", value: "\(viewModel.sisaAntrian ?? 0)", image: "PeopleRedIcon", sizeValue: 20)
+                            }else{
+                                DashboardCard("Antrian Sekarang", value: "0", image: "PeopleGreenIcon", sizeValue: 20)
+                                DashboardCard("Antrian Selanjutnya", value: "0", image: "PeopleYellowIcon", sizeValue: 20)
+                                DashboardCard("Sisa Antrian", value: "0", image: "PeopleRedIcon", sizeValue: 20)
+                            }
                         }
                         
                         ScrollView(.vertical){
