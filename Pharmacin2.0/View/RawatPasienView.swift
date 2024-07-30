@@ -19,6 +19,7 @@ struct RawatPasienView: View {
     
     @State private var nomorAntrian = Int()
     @Binding var selectedPasien: Pasien?
+    @State private var isLoading = false
     
     var body: some View {
         ZStack {
@@ -53,14 +54,31 @@ struct RawatPasienView: View {
                 // Display RawatPasienList for each patient
                 
                 ScrollView(.vertical){
-                    VStack(spacing:14){
-                        ForEach(viewModel.pasienList.indices, id: \.self) { index in
-                            let pasien = viewModel.pasienList[index]
-                            RawatPasienList(showingDeletePopUp: $showPopUpDelete, showingPanggilPasienPopUp: $showPanggilPasienPopUp, pasienToCall: $selectedPasien, nomorAntrian: index+1, pasien: pasien)
+                    if viewModel.pasienList.isEmpty{
+                        GeometryReader { geometry in
+                            VStack {
+                                Spacer()
+                                HStack {
+                                    Spacer()
+                                    EmptyCellView()
+                                    Spacer()
+                                }
+                                Spacer()
+                            }
+                            .frame(height: UIScreen.main.bounds.height / 2 + 70)
                         }
                         
-                        
-                        Spacer()
+                    }
+                    else{
+                        VStack(spacing:14){
+                            ForEach(viewModel.pasienList.indices, id: \.self) { index in
+                                let pasien = viewModel.pasienList[index]
+                                RawatPasienList(showingDeletePopUp: $showPopUpDelete, showingPanggilPasienPopUp: $showPanggilPasienPopUp, pasienToCall: $selectedPasien, nomorAntrian: index+1, pasien: pasien)
+                            }
+                            
+                            
+                            Spacer()
+                        }
                     }
                 }.refreshable {
                     getListPasien()
@@ -74,16 +92,18 @@ struct RawatPasienView: View {
             getListPasien()
         }
         
-        .onChange(of: refreshView) { old, new in
+        .onChange(of: refreshView) { old in
             getListPasien()
         }
-        
+        .loadingView(isLoading: $isLoading)
     }
     
     
     
     private func getListPasien() {
+        isLoading = true
         viewModel.getAntrianPasien() { message, success in
+            isLoading = false
             if success {
                 print(message ?? "Unknown error")
             } else {

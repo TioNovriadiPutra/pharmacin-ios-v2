@@ -16,6 +16,7 @@ struct DetailApotekView: View {
     @State private var isLoading = false
     
     @State private var showConfirmPayment = false
+    var updateData: () -> Void?
     
     var pasienID : Int?
     
@@ -43,18 +44,20 @@ struct DetailApotekView: View {
                                     .font(.custom("PlusJakartaSans-Medium", size: 16))
                                     .foregroundColor(Color("RegularText"))
                                 
-                                Text("(Belum Diproses)")
+                                Text("(\(pasien?.status ?? ""))")
                                     .font(.custom("PlusJakartaSans-Medium", size: 16))
                                     .foregroundColor(Color(red: 0.59, green: 0.59, blue: 0.59))
                             }
                             
                             Spacer()
                             
-                            Button(action: {
-                                showConfirmPayment = true
-                            }, label: {
-                                Image("CheckIcon")
-                            })
+                            if pasien?.status != "Obat Diserahkan"{
+                                Button(action: {
+                                    showConfirmPayment = true
+                                }, label: {
+                                    Image("CheckIcon")
+                                })
+                            }
                             
                             
                         }
@@ -84,14 +87,14 @@ struct DetailApotekView: View {
                     getDetailApotek()
                 }
                 .loadingView(isLoading: $isLoading)
-                .sheet(isPresented: $showConfirmPayment, onDismiss: {
+                .fullScreenCover(isPresented: $showConfirmPayment, onDismiss: {
                     //                    showConfirmPayment = false
                 }) {
                     if let pasien = pasien {
                         PopUpPenyerahanObat(pasien: pasien, konfirmasiPenyerahan: {
                             konfirmasiPenyerahanObat()
                         }, showPopUpPenyerahanObat: $showConfirmPayment)
-                        .presentationBackground(.clear)
+                        .presentationBackground(Color.black.opacity(0.4))
                         .interactiveDismissDisabled()
                     }
                     
@@ -110,6 +113,7 @@ struct DetailApotekView: View {
             isLoading = false
             if success{
                 presentationMode.wrappedValue.dismiss()
+                updateData()
             }else{
                 print("GAGAL KONFIRMASI PEMBAYARAN")
             }
@@ -130,10 +134,10 @@ struct DetailApotekView: View {
     }
 }
 
-struct DetailApotekView_Previews: PreviewProvider {
-    static var previews: some View {
-        
-        DetailApotekView().previewInterfaceOrientation(.landscapeRight)
-        
-    }
-}
+//struct DetailApotekView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        
+//        DetailApotekView().previewInterfaceOrientation(.landscapeRight)
+//        
+//    }
+//}

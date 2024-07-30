@@ -16,6 +16,8 @@ struct MainViewKaryawan: View {
     var onLogout: (Int) -> Void
     @EnvironmentObject var signInViewModel: SignInViewModel
     @StateObject var logOutVM = LogOutViewModel()
+    @State private var showFailedToast = false
+    @State private var failedToastMessage = ""
     
     
     var body: some View {
@@ -47,6 +49,10 @@ struct MainViewKaryawan: View {
                     })
                 }
                 
+                if showFailedToast{
+                    FailedToast(message: failedToastMessage)
+                }
+                
             }.ignoresSafeArea(.keyboard)
                 .loadingView(isLoading: $isLoading)
         }
@@ -61,7 +67,15 @@ struct MainViewKaryawan: View {
                 UserDefaultService.shared.deleteRoleId()
                 onLogout(UserDefaultService.shared.getId() ?? 0)
             } else {
-                print("GAGAL LOGOUT")
+                failedToastMessage = "Logout gagal"
+                showFailedToast = true
+                
+                DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                    withAnimation {
+                        showFailedToast = false
+                    }
+                }
+               print(failedToastMessage)
             }
         }
         

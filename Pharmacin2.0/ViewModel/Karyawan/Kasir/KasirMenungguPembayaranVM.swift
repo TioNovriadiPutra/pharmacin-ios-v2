@@ -29,7 +29,7 @@ class KasirMenungguPembayaranVM: ObservableObject{
     
     // Start timer to fetch data every 5 seconds if pasienList is empty
     private func startTimer() {
-        timer = Timer.scheduledTimer(withTimeInterval: 5, repeats: true) { [weak self] timer in
+        timer = Timer.scheduledTimer(withTimeInterval: 600, repeats: true) { [weak self] timer in
             guard let self = self else { return }
             self.getAntrianKasir() { _, _ in }
         }
@@ -62,17 +62,14 @@ class KasirMenungguPembayaranVM: ObservableObject{
     }
     
     func deleteAntrianPasien(id:Int, completion: @escaping CompletionHandler) {
-        let endpoint = "/queue/cancel/\(id)" // Sesuaikan dengan endpoint yang sesuai untuk menghapus antrian pasien
-        
+        let endpoint = "/queue/cancel/\(id)"
         nService.requestDELETE(endpoint: endpoint, parameters: [:], token: token, expecting: BaseResponse.self)
         { result in
             DispatchQueue.main.async {
                 switch result {
                 case .success(let response):
-                    // Jika penghapusan berhasil, Anda dapat menangani respons sesuai kebutuhan.
                     completion(response.message, true)
                 case .failure(let error):
-                    // Jika terjadi kesalahan saat melakukan permintaan DELETE, tangani kesalahan tersebut.
                     print(error.localizedDescription)
                     completion(nil, false)
                 }

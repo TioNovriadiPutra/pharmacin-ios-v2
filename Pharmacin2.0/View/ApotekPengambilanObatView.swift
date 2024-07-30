@@ -11,12 +11,13 @@ struct ApotekPengambilanObatView: View {
     @State private var searchText: String = ""
     @State var isShowingPopUpView : Bool = false
     @State private var isShowingDetailApotek = false
- 
+    
     @State var showPopUpDeleteQueueApotek : Bool = false
     
     @StateObject var viewModel = ApotekVM()
     @State private var pasien: Pasien?
     @State private var id = 0
+    @State private var isLoading = false
     
     var body: some View {
         NavigationStack{
@@ -62,7 +63,7 @@ struct ApotekPengambilanObatView: View {
                         }
                         
                         HStack(spacing: 14){
-//                            DashboardCard("Total Antrian", value: "190", image: "PeopleBlueIcon", sizeValue: 20)
+                            //                            DashboardCard("Total Antrian", value: "190", image: "PeopleBlueIcon", sizeValue: 20)
                             if viewModel.pasienList.count != 0{
                                 DashboardCard("Antrian Sekarang", value: "\(viewModel.pasienList[0].registration_number)", image: "PeopleGreenIcon", sizeValue: 20)
                                 if viewModel.pasienList.count == 1{
@@ -79,16 +80,33 @@ struct ApotekPengambilanObatView: View {
                         }
                         
                         ScrollView(.vertical){
-                            VStack(spacing:14){
-                                ForEach(viewModel.pasienList.indices, id: \.self) { index in
-                                    let pasien = viewModel.pasienList[index]
-                                    ApotekList(showDeletePopUp: $isShowingPopUpView, showDetailApotek: $isShowingDetailApotek, pasien: pasien, nomorAntrian: index+1) {
-                                        self.pasien = pasien
-                                        self.id = pasien.id
+                            if viewModel.pasienList.isEmpty{
+                                GeometryReader { geometry in
+                                    VStack {
+                                        Spacer()
+                                        HStack {
+                                            Spacer()
+                                            EmptyCellView()
+                                            Spacer()
+                                        }
+                                        Spacer()
                                     }
+                                    .frame(height: UIScreen.main.bounds.height / 2 + 70)
                                 }
                                 
-                                Spacer()
+                            }
+                            else{
+                                VStack(spacing:14){
+                                    ForEach(viewModel.pasienList.indices, id: \.self) { index in
+                                        let pasien = viewModel.pasienList[index]
+                                        ApotekList(showDeletePopUp: $isShowingPopUpView, showDetailApotek: $isShowingDetailApotek, pasien: pasien, nomorAntrian: index+1) {
+                                            self.pasien = pasien
+                                            self.id = pasien.id
+                                        }
+                                    }
+                                    
+                                    Spacer()
+                                }
                             }
                         }.refreshable {
                             getAntrianApotek()
@@ -98,8 +116,10 @@ struct ApotekPengambilanObatView: View {
                     
                     .padding()
                     .navigationDestination(isPresented: $isShowingDetailApotek) {
-                        DetailApotekView(pasienID: id)
-                            .navigationBarBackButtonHidden()
+                        DetailApotekView(updateData: {
+                            getAntrianApotek()
+                        }, pasienID: id)
+                        .navigationBarBackButtonHidden()
                     }
                 }
             }
@@ -107,10 +127,14 @@ struct ApotekPengambilanObatView: View {
         .onAppear{
             getAntrianApotek()
         }
+        
+        .loadingView(isLoading: $isLoading)
     }
     
     private func getAntrianApotek() {
+        isLoading = true
         viewModel.getAntrianApotek() { message, success in
+            isLoading = false
             if success {
                 print(message ?? "Unknown error")
             } else {

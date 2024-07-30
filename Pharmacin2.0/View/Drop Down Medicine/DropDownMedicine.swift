@@ -16,6 +16,7 @@ struct DropDownMedicine: View {
                })
             .padding(.leading)
             .frame(height: 38)
+            .foregroundColor(Color("RegularText"))
             .font(.custom("PlusJakartaSans-Medium", size: 14))
             .overlay(
                 RoundedRectangle(cornerRadius: 8)

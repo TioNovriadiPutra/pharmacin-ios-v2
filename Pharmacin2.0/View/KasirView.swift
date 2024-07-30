@@ -15,6 +15,7 @@ struct KasirView: View {
     @StateObject var viewModel = KasirMenungguPembayaranVM()
     @State private var pasien: Pasien?
     @State private var id : Int?
+    @State private var isLoading = false
     
     
     var body: some View {
@@ -68,16 +69,32 @@ struct KasirView: View {
                         }
                         
                         ScrollView(.vertical){
-                            VStack(spacing:14){
-                                ForEach(viewModel.pasienList.indices, id: \.self) { index in
-                                    let pasien = viewModel.pasienList[index]
-                                    KasirList(showDetailKasir: $isShowingDetailKasir, pasien: pasien, nomorAntrian: index+1){
-                                        self.pasien = pasien
-                                        self.id = pasien.id
+                            if viewModel.pasienList.isEmpty{
+                                GeometryReader { geometry in
+                                    VStack {
+                                        Spacer()
+                                        HStack {
+                                            Spacer()
+                                            EmptyCellView()
+                                            Spacer()
+                                        }
+                                        Spacer()
                                     }
+                                    .frame(height: UIScreen.main.bounds.height - 100)
                                 }
                                 
-                                Spacer()
+                            }else{
+                                VStack(spacing:14){
+                                    ForEach(viewModel.pasienList.indices, id: \.self) { index in
+                                        let pasien = viewModel.pasienList[index]
+                                        KasirList(showDetailKasir: $isShowingDetailKasir, pasien: pasien, nomorAntrian: index+1){
+                                            self.pasien = pasien
+                                            self.id = pasien.id
+                                        }
+                                    }
+                                    
+                                    Spacer()
+                                }
                             }
                         }.refreshable {
                             getAntrianKasir()
@@ -93,8 +110,10 @@ struct KasirView: View {
                     
                     .navigationDestination(isPresented: $isShowingDetailKasir) {
                         
-                        DetailKasirView(pasienID: id)
-                            .navigationBarBackButtonHidden()
+                        DetailKasirView(pasienID: id, updateData: {
+                            getAntrianKasir()
+                        })
+                        .navigationBarBackButtonHidden()
                     }
                     .navigationDestination(isPresented: $isShowingTambahPenjualanView) {
                         KasirTambahPenjualanView()
@@ -107,10 +126,14 @@ struct KasirView: View {
             }
         }
         
+        .loadingView(isLoading: $isLoading)
+        
     }
     
     private func getAntrianKasir() {
+        isLoading = true
         viewModel.getAntrianKasir() { message, success in
+            isLoading = false
             if success {
                 print(message ?? "Unknown error")
             } else {

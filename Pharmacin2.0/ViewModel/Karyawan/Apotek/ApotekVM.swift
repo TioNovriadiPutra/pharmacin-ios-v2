@@ -31,7 +31,7 @@ class ApotekVM: ObservableObject{
     
     // Start timer to fetch data every 5 seconds if pasienList is empty
     private func startTimer() {
-        timer = Timer.scheduledTimer(withTimeInterval: 5, repeats: true) { [weak self] timer in
+        timer = Timer.scheduledTimer(withTimeInterval: 600, repeats: true) { [weak self] timer in
             guard let self = self else { return }
             self.getAntrianApotek() { _, _ in }
         }

@@ -9,7 +9,34 @@ import SwiftUI
 
 struct EmptyCellView: View {
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        VStack{
+            Image("EmptyCell")
+                .resizable()
+                .frame(width: 170, height: 170)
+            
+            Text("Tarik untuk Memperbarui")
+                .font(.custom("PlusJakartaSans-Bold", size: 16))
+                .padding()
+            
+            
+            VStack{
+                Text("Tips: ")
+                    
+                    .font(.custom("PlusJakartaSans-SemiBold", size: 14))
+                    .foregroundColor(Color("Gray"))
+                    .italic()
+                +
+                Text("Jika antrian tidak muncul, pastikan koneksi internet Anda stabil dan coba lagi.")
+                    .font(.custom("PlusJakartaSans-SemiBold", size: 14))
+                    .foregroundColor(Color("Gray"))
+                
+            }
+            .frame(width: 320)
+            .multilineTextAlignment(.center)
+            
+            
+        }
+        
     }
 }
 

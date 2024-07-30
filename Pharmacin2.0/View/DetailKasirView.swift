@@ -22,6 +22,7 @@ struct DetailKasirView: View {
     @State private var isLoading = false
     
     var pasienID : Int?
+    var updateData: () -> Void?
     
     @StateObject var viewModel = DetailKasirVM()
     
@@ -204,11 +205,11 @@ struct DetailKasirView: View {
                                                     .stroke(Color(red: 0.93, green: 0.93, blue: 0.96))
                                                     .frame(height: 38)
                                             )
-                                            .onChange(of: inputCashValue) {old, new in
+                                            .onChange(of: inputCashValue) {old  in
                                                 // Memastikan nilai baru tidak kosong dan karakter pertama adalah angka
                                                 inputCashValue = Int("\(old)".filterNumericInput())
                                             }
-                                            .onChange(of: inputCashValue) { old, new in
+                                            .onChange(of: inputCashValue) { old in
                                                 calculateChange()
                                             }
                                         
@@ -266,14 +267,14 @@ struct DetailKasirView: View {
                     getDetailKasir()
                 }
                 .loadingView(isLoading: $isLoading)
-                .sheet(isPresented: $showConfirmPayment, onDismiss: {
+                .fullScreenCover(isPresented: $showConfirmPayment, onDismiss: {
                     //                    showConfirmPayment = false
                 }) {
                     if let pasien = pasien {
                         KonfirmasiPembayaranPopUp(showKonfirmsasiPembayaranPopup: $showConfirmPayment, totalPembelian: "\(pasien.total_price)", tunai: "\(inputCashValue ?? 0)", kembalian: "\(calculatedChange)", confirmPayment: {
                             paymentConfirmed()
                         })
-                        .presentationBackground(.clear)
+                        .presentationBackground(Color.black.opacity(0.4))
                         .interactiveDismissDisabled()
                     }
                     
@@ -294,6 +295,7 @@ struct DetailKasirView: View {
             isLoading = false
             if success{
                 presentationMode.wrappedValue.dismiss()
+                updateData()
             }else{
                 print("GAGAL KONFIRMASI PEMBAYARAN")
             }

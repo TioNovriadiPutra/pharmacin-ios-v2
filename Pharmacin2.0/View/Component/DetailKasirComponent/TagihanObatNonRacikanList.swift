@@ -107,12 +107,12 @@ struct TagihanObatNonRacikanList: View {
         .padding()
         .background(.white)
         .cornerRadius(10)
-        .sheet(isPresented: $showPopUpDelete, onDismiss: {
+        .fullScreenCover(isPresented: $showPopUpDelete, onDismiss: {
         }) {
             PopUpDelete(showPopUpDelete: $showPopUpDelete, deleteAction: {
                 deleteDrugItem()
             })
-            .presentationBackground(.clear)
+            .presentationBackground(Color.black.opacity(0.4))
             .interactiveDismissDisabled()
             
             

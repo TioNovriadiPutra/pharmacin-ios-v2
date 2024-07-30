@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct LoginView: View {
+    @EnvironmentObject var toastManager: ToastManager
     @State private var email: String = ""
     @State private var isSecured: Bool = true
     @State private var password: String = ""
@@ -18,7 +19,6 @@ struct LoginView: View {
     @State private var isPasswordEmpty: Bool = false
     
     @State private var showFailedToast = false
-    @State private var showSuccessToast = false
     
     @State private var failedToastMessage = ""
     @State private var isLoading = false
@@ -184,7 +184,7 @@ struct LoginView: View {
             message, success  in
             if success {
                 onLogin(UserDefaultService.shared.getId() ?? 0)
-                
+                toastManager.show(message: message ?? "")
             } else {
                 failedToastMessage = viewModel.errorMessage ?? "Unknown error"
                 showFailedToast = true

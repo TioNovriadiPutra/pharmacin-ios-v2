@@ -40,14 +40,14 @@ struct TambahObatPopUp: View {
                         showPopUp = false
                     }, label: {
                         Image("BackIcon")
-                            .padding(.leading,40)
+                            .padding(.leading,16)
                     })
                     
                     
                     Text("Tambah Obat")
                         .font(.custom("PlusJakartaSans-Bold", size: 24))
                         .foregroundColor(Color("RegularText"))
-                        .padding(.leading,40)
+                        .padding(.leading,60)
                     
                     Spacer()
                 }
@@ -59,7 +59,6 @@ struct TambahObatPopUp: View {
                             .padding(.leading)
                             .frame(width: 378, height: 38)
                             .autocapitalization(.none)
-                            .font(.custom("PlusJakartaSans-Medium", size: 14))
                             .overlay(
                                 RoundedRectangle(cornerRadius: 8)
                                     .stroke(Color(red: 0.93, green: 0.93, blue: 0.96))

@@ -24,11 +24,19 @@ struct KasirTambahPenjualanView: View {
         listObat?.append(obat)
     }
     
-//    func updateItem(at index: Int, with newObat: Obat) {
-//        listObat?[index] = newObat
-//    }
+    func getCurrentDateString() -> String {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "dd-MM-yyyy"
+        return dateFormatter.string(from: Date())
+    }
+    
+    
+    //    func updateItem(at index: Int, with newObat: Obat) {
+    //        listObat?[index] = newObat
+    //    }
     
     var body: some View {
+        let currentDateString = getCurrentDateString()
         //        NavigationStack{
         GeometryReader { geometry in
             ZStack{
@@ -130,7 +138,7 @@ struct KasirTambahPenjualanView: View {
                                         .font(.custom("PlusJakartaSans-medium", size: 16))
                                         .foregroundColor(Color("Gray"))
                                     
-                                    Text("DD-MM-YYYY")
+                                    Text(currentDateString)
                                         .font(.custom("PlusJakartaSans-Regular", size: 14))
                                         .foregroundColor(Color("RegularText"))
                                         .padding()
@@ -180,11 +188,11 @@ struct KasirTambahPenjualanView: View {
                                             
                                             
                                         )
-                                        .onChange(of: insertTunai) { newValue, _ in
+                                        .onChange(of: insertTunai) { newValue  in
                                             // Memastikan nilai baru tidak kosong dan karakter pertama adalah angka
                                             insertTunai = newValue.filterNumericInput()
                                         }
-                                        .onChange(of: insertTunai) { newValue, _ in
+                                        .onChange(of: insertTunai) { newValue  in
                                             // Memastikan nilai baru tidak kosong dan karakter pertama adalah angka
                                             insertTunai = newValue.formatCurrencyText(newValue.filter { $0.isNumber })
                                         }
@@ -218,7 +226,7 @@ struct KasirTambahPenjualanView: View {
                                 
                                 
                             }
-                            //                            
+                            //
                             TambahPenjualanList(listObat: $listObat, isShowPopUp: $isShowPopUp, editObatIndex: $editObatIndex, isEditing: $isEditing)
                             
                             
@@ -235,16 +243,18 @@ struct KasirTambahPenjualanView: View {
                 
                 
             }.ignoresSafeArea(.keyboard)
-                .sheet(isPresented: $isShowPopUp, onDismiss: {})
+                .fullScreenCover(isPresented: $isShowPopUp, onDismiss: {})
             {
                 TambahObatPopUp(listObat: $listObat,
-                               
+                                
                                 obatToEdit: editObatIndex != nil && ((listObat?.indices.contains(editObatIndex!)) != nil) ? listObat?[editObatIndex!] : nil,
                                 isEditing: $isEditing, showPopUp: $isShowPopUp)
-                .presentationBackground(.clear)
+                .presentationBackground(Color.black.opacity(0.4))
                 .interactiveDismissDisabled()
             }
         }
+        
+        
     }
     
 }

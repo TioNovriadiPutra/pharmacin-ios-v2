@@ -31,6 +31,10 @@ class SignInViewModel : ObservableObject{
                 self?.roleID = response.roleId
                 self?.successMessage = response.message
                 
+                print("-------------")
+                print(token)
+                print("-------------")
+                
                 completion(response.message, true)
                 print(response.message)
                 

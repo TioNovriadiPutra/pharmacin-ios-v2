@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct MainViewAsistenDokter: View {
+    @EnvironmentObject var toastManager: ToastManager
     @State private var showingPopUpRawatPasienDelete = false
     @State private var showingPopUpPanggilPasien = false
     
@@ -25,6 +26,9 @@ struct MainViewAsistenDokter: View {
 
     @EnvironmentObject var signInViewModel: SignInViewModel
     @StateObject var logOutVM = LogOutViewModel()
+    
+    @State private var showFailedToast = false
+    @State private var failedToastMessage = ""
     
     var onLogout: (Int) -> Void
     
@@ -81,6 +85,11 @@ struct MainViewAsistenDokter: View {
           
                 }
 
+                
+                if showFailedToast{
+                    FailedToast(message: failedToastMessage)
+                }
+                
             }.ignoresSafeArea(.keyboard)
             .loadingView(isLoading: $isLoading)
         }
@@ -93,10 +102,19 @@ struct MainViewAsistenDokter: View {
     private func deleteQueuePasien(){
         viewModel.deleteAntrianPasien(id: pasienToCall?.id ?? 0) { message, success in
             if success {
-                print(message ?? "Unknown error")
+                print(message ?? "")
+                toastManager.show(message: message ?? "")
                 refreshView = true
             } else {
-                print("GAGAL AMBIL PASIEN")
+                failedToastMessage = "Gagal menghapus antrian"
+                showFailedToast = true
+                
+                DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                    withAnimation {
+                        showFailedToast = false
+                    }
+                }
+               print(failedToastMessage)
             }
         }
     }
@@ -105,10 +123,19 @@ struct MainViewAsistenDokter: View {
         viewModel.panggilPasien(id: pasienToCall?.id ?? 0) { message, success in
             if success {
                 print(message ?? "Unknown error")
+                toastManager.show(message: "Berhasil memanggil pasien")
                 self.antrianSekarang = message ?? "-"
                 refreshView = true
             } else {
-                print("GAGAL Panggil Pasien")
+                failedToastMessage = "Gagal memanggil pasien"
+                showFailedToast = true
+                
+                DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                    withAnimation {
+                        showFailedToast = false
+                    }
+                }
+               print(failedToastMessage)
             }
         }
 
@@ -123,7 +150,15 @@ struct MainViewAsistenDokter: View {
                 UserDefaultService.shared.deleteRoleId()
                 onLogout(UserDefaultService.shared.getId() ?? 0)
             } else {
-                print("GAGAL LOGOUT")
+                failedToastMessage = "Logout gagal"
+                showFailedToast = true
+                
+                DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                    withAnimation {
+                        showFailedToast = false
+                    }
+                }
+               print(failedToastMessage)
             }
         }
 

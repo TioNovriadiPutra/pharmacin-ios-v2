@@ -10,11 +10,13 @@ import SwiftUI
 @main
 struct Pharmacin2_0App: App {
     @StateObject var signInViewModel = SignInViewModel()
+    @StateObject private var toastManager = ToastManager()
     var body: some Scene {
         WindowGroup {
             ContentView()
-                .colorScheme(.light)
                 .environmentObject(signInViewModel)
+                .environmentObject(toastManager)
+                .overlay(SuccessToast().environmentObject(toastManager))
         }
     }
 }

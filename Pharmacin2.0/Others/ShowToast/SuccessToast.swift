@@ -8,13 +8,10 @@
 import SwiftUI
 
 struct SuccessToast: View {
-    let message: String
-    
-    init(message: String) {
-        self.message = message
-    }
+    @EnvironmentObject var toastManager: ToastManager
     
     var body: some View {
+        if toastManager.showToast {
         VStack{
             Spacer()
             HStack{
@@ -27,7 +24,7 @@ struct SuccessToast: View {
                 }
                 .padding(.leading,20)
                 
-                Text(message)
+                Text(toastManager.message ?? "")
                     .font(.custom("PlusJakartaSans-Medium", size: 14))
                     .foregroundColor(Color("RegularText"))
                     .padding(.horizontal,8)
@@ -45,8 +42,9 @@ struct SuccessToast: View {
         }
         .padding(.bottom,50)
     }
+    }
 }
 
-#Preview {
-    SuccessToast(message: "Sukses")
-}
+//#Preview {
+//    SuccessToast(message: "Sukses")
+//}
