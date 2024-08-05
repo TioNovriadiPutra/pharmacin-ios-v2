@@ -19,10 +19,9 @@ struct KasirTambahPenjualanView: View {
     @State var editObatIndex: Int?
     @State var isEditing: Bool = false
     @State var isShowKonfirmasiPembayaran : Bool = false
+    @State var qty: Int = 0
     
-    func tambahObatBaru(obat: Obat) {
-        listObat?.append(obat)
-    }
+    @State private var listQty: [Int]?
     
     func getCurrentDateString() -> String {
         let dateFormatter = DateFormatter()
@@ -31,9 +30,9 @@ struct KasirTambahPenjualanView: View {
     }
     
     
-    //    func updateItem(at index: Int, with newObat: Obat) {
-    //        listObat?[index] = newObat
-    //    }
+//    func updateItem(at index: Int, with newObat: Obat) {
+//        listObat?[index] = newObat
+//    }
     
     var body: some View {
         let currentDateString = getCurrentDateString()
@@ -227,7 +226,7 @@ struct KasirTambahPenjualanView: View {
                                 
                             }
                             //
-                            TambahPenjualanList(listObat: $listObat, isShowPopUp: $isShowPopUp, editObatIndex: $editObatIndex, isEditing: $isEditing)
+                            TambahPenjualanList(listObat: $listObat, isShowPopUp: $isShowPopUp, editObatIndex: $editObatIndex, isEditing: $isEditing, listQty: $listQty)
                             
                             
                             
@@ -245,9 +244,9 @@ struct KasirTambahPenjualanView: View {
             }.ignoresSafeArea(.keyboard)
                 .fullScreenCover(isPresented: $isShowPopUp, onDismiss: {})
             {
-                TambahObatPopUp(listObat: $listObat,
-                                
-                                obatToEdit: editObatIndex != nil && ((listObat?.indices.contains(editObatIndex!)) != nil) ? listObat?[editObatIndex!] : nil,
+                TambahObatPopUp(listObat: $listObat, listQty: $listQty,
+                                obatToEdit: listObat != nil && listObat?.count != 0 ? listObat?[editObatIndex ?? 0] : nil,
+                                qtyToEdit: listQty != nil && listObat?.count != 0 ? listQty?[editObatIndex ?? 0] : nil,
                                 isEditing: $isEditing, showPopUp: $isShowPopUp)
                 .presentationBackground(Color.black.opacity(0.4))
                 .interactiveDismissDisabled()

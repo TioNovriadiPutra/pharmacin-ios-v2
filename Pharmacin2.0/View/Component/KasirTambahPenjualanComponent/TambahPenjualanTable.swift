@@ -11,6 +11,8 @@ struct TambahPenjualanTable: View {
     
     var obat: Obat
     
+    var qty: Int
+    
     var onDelete: (() -> Void)?
     var onEdit: (() -> Void)?
     
@@ -25,7 +27,7 @@ struct TambahPenjualanTable: View {
                 
                 Spacer()
                 
-                Text("\(obat.qty)")
+                Text("\(qty)")
                     .font(.custom("PlusJakartaSans-Regular", size: 14))
                     .foregroundColor(Color("RegularText"))
                     .frame(width: 100, alignment: .leading)
@@ -33,14 +35,14 @@ struct TambahPenjualanTable: View {
                 
                 Spacer()
                 
-                Text("Nama Obat")
+                Text("\(Int(obat.harga))")
                     .font(.custom("PlusJakartaSans-Regular", size: 14))
                     .foregroundColor(Color("RegularText"))
                     .frame(width: 180, alignment: .leading)
                 
                 Spacer()
                 
-                Text("100.000.000")
+                Text("\(Int(Double(qty) * obat.harga))")
                     .font(.custom("PlusJakartaSans-Regular", size: 14))
                     .foregroundColor(Color("RegularText"))
                     .frame(width: 180, alignment: .leading)

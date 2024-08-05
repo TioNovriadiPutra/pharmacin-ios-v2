@@ -13,10 +13,12 @@ struct TambahPenjualanList: View {
     @Binding var isShowPopUp: Bool
     @Binding var editObatIndex: Int?
     @Binding var isEditing: Bool
+    @Binding var listQty: [Int]?
     
     
     func deleteItem(at index: Int) {
         listObat?.remove(at: index)
+        listQty?.remove(at: index)
     }
     
     var body: some View {
@@ -58,11 +60,11 @@ struct TambahPenjualanList: View {
                 
                  
                 
-                if let listObat = listObat{
+                if let listObat = listObat, let listQty = listQty{
                     
                     
                     ForEach(listObat.indices, id: \.self) { index in
-                        TambahPenjualanTable(obat: listObat[index], onDelete: {
+                        TambahPenjualanTable(obat: listObat[index], qty: listQty[index], onDelete: {
                             deleteItem(at: index)
                             print(listObat)
                         }, onEdit: {

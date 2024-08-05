@@ -17,18 +17,25 @@ struct TambahObatPopUp: View {
     
     @State private var obatName: String?
     @State private var takaran: String?
-    @State private var harga: String?
+    @State private var harga: Int?
     @State private var isSearching = false
     
     let dataObat: [Obat] = obats
     
     @Binding var listObat: [Obat]?
+    @Binding var listQty: [Int]?
+    
     var obatToEdit: Obat?
+    var qtyToEdit: Int?
     
     @State private var obatToAdd: Obat?
+    @State private var obatToUpdate: Obat?
+    
     @Binding var isEditing: Bool
     
     @Binding var showPopUp: Bool
+    
+    //    var updateData: () -> Void?
     
     
     var body: some View {
@@ -54,24 +61,55 @@ struct TambahObatPopUp: View {
                 
                 
                 VStack(spacing:18){
-                    if let obat = obatToEdit, isEditing {
-                        TextField("Masukan Nama", text: $searchName)
-                            .padding(.leading)
-                            .frame(width: 378, height: 38)
-                            .autocapitalization(.none)
-                            .overlay(
-                                RoundedRectangle(cornerRadius: 8)
-                                    .stroke(Color(red: 0.93, green: 0.93, blue: 0.96))
-                            )
-                            .font(.custom("PlusJakartaSans-Regular", size: 14))
-                            .foregroundColor(Color("RegularText"))
-                            .padding(.bottom,4)
-                            .onAppear {
-                                obatName = obat.nama
-                                takaran = obat.takaran
-                                harga = "\(obat.harga)"
-                                QTY = obat.qty
+                    if let obat = obatToEdit, isEditing, let qty = qtyToEdit {
+                        VStack {
+                            DropDownMedicine(searchText: $searchText, isEditing: $isEditingTextField)
+                                .onTapGesture {
+                                    isEditingTextField = true
+                                }
+                            
+                            if isEditingTextField {
+                                ScrollView {
+                                    VStack(alignment: .leading, spacing: 2) {
+                                        ForEach(dataObat.filter { $0.nama.lowercased().contains(searchText.lowercased()) }) { item in
+                                            VStack(spacing: 0) {
+                                                Button(action: {
+                                                    searchText = item.nama
+                                                    obatName = item.nama
+                                                    takaran = item.takaran
+                                                    harga = Int(item.harga)
+                                                    obatToUpdate = item
+                                                    isEditingTextField = false
+                                                    UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
+                                                }) {
+                                                    VStack(alignment: .leading) {
+                                                        HStack {
+                                                            Text(item.nama)
+                                                                .padding()
+                                                                .foregroundColor(.black)
+                                                            Spacer()
+                                                        }
+                                                    }
+                                                    .frame(height: 50)
+                                                    .background(.white)
+                                                }
+                                            }
+                                            .cornerRadius(6)
+                                            .padding(.horizontal)
+                                        }
+                                    }
+                                }
+                                .frame(maxHeight: 200)
+                                .shadow(radius: 2)
                             }
+                        }
+                        .frame(maxWidth: .infinity)
+                        .onAppear {
+                            obatName = obat.nama
+                            takaran = obat.takaran
+                            harga = Int(obat.harga)
+                            QTY = qty
+                        }
                     } else {
                         
                         VStack {
@@ -82,14 +120,14 @@ struct TambahObatPopUp: View {
                             
                             if isEditingTextField {
                                 ScrollView {
-                                    VStack(alignment: .leading, spacing: 0) {
+                                    VStack(alignment: .leading, spacing: 2) {
                                         ForEach(dataObat.filter { $0.nama.lowercased().contains(searchText.lowercased()) }) { item in
                                             VStack(spacing: 0) {
                                                 Button(action: {
                                                     searchText = item.nama
                                                     obatName = item.nama
                                                     takaran = item.takaran
-                                                    harga = "\(item.harga)"
+                                                    harga = Int(item.harga)
                                                     obatToAdd = item
                                                     isEditingTextField = false
                                                     UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
@@ -103,15 +141,17 @@ struct TambahObatPopUp: View {
                                                         }
                                                     }
                                                     .frame(height: 50)
-                                                    .background(Color(uiColor: UIColor(red: 249/255, green: 249/255, blue: 252/255, alpha: 1)))
+                                                    .background(.white)
                                                 }
-                                                Divider()
-                                                    .background(Color.gray)
                                             }
+                                            .cornerRadius(6)
+                                            .padding(.horizontal)
                                         }
                                     }
+                                    
                                 }
                                 .frame(maxHeight: 200)
+                                .shadow(radius: 2)
                             }
                         }
                         .frame(maxWidth: .infinity)
@@ -137,14 +177,26 @@ struct TambahObatPopUp: View {
                         .cornerRadius(4)
                     
                     
-                    Text("\(harga ?? "Harga")")
-                        .font(.custom("PlusJakartaSans-Regular", size: 14))
-                        .foregroundColor(Color("RegularText"))
-                        .padding()
-                        .frame(width: 378, alignment: .leading)
-                        .frame(width: 378, height: 38)
-                        .background(Color(red: 0.98, green: 0.98, blue: 0.99))
-                        .cornerRadius(4)
+                    if let harga = harga{
+                        Text("\(harga)")
+                            .font(.custom("PlusJakartaSans-Regular", size: 14))
+                            .foregroundColor(Color("RegularText"))
+                            .padding()
+                            .frame(width: 378, alignment: .leading)
+                            .frame(width: 378, height: 38)
+                            .background(Color(red: 0.98, green: 0.98, blue: 0.99))
+                            .cornerRadius(4)
+                    }else{
+                        Text("Harga")
+                            .font(.custom("PlusJakartaSans-Regular", size: 14))
+                            .foregroundColor(Color("RegularText"))
+                            .padding()
+                            .frame(width: 378, alignment: .leading)
+                            .frame(width: 378, height: 38)
+                            .background(Color(red: 0.98, green: 0.98, blue: 0.99))
+                            .cornerRadius(4)
+                    }
+                    
                     
                 }
                 
@@ -155,7 +207,7 @@ struct TambahObatPopUp: View {
                     
                     Button{
                         if QTY > 1 {
-                            QTY -= 1 // Kurangi nilai QTY jika lebih besar dari 0
+                            QTY -= 1
                         }
                     }label: {
                         Image("Minus")
@@ -163,9 +215,9 @@ struct TambahObatPopUp: View {
                     }
                     
                     TextField("QTY", text: Binding(
-                        get: { "\(QTY)" }, // Convert Int to String
+                        get: { "\(QTY)" },
                         set: {
-                            if let value = Int($0) { // Convert String to Int
+                            if let value = Int($0) {
                                 QTY = value
                             }
                         }
@@ -196,17 +248,25 @@ struct TambahObatPopUp: View {
                 
                 Button{
                     if let obat = obatToEdit, isEditing {
-                        // Update existing obat data
-                        let updatedObat = Obat(id: obat.id, nama: obatName ?? "", takaran: takaran ?? "", harga: Double(harga ?? "0") ?? 0, qty: Int(QTY) )
-                        if let editIndex = listObat?.firstIndex(where: { $0.nama == obat.nama }) { // Cari index obat yang sesuai dengan id yang sama
-                            listObat?[editIndex] = updatedObat // Update obat di index tersebut
+                        if let editIndex = listObat?.firstIndex(where: { $0.nama == obat.nama }) {
+                            if let updatedObat = obatToUpdate {
+                                listObat?[editIndex] = updatedObat
+                            }
+                            listQty?[editIndex] = QTY
                         }
                     } else if let newObat = obatToAdd {
-                        // Tambahkan obat baru
+                        // Ensure listObat is not nil
+                        if listObat == nil {
+                            listObat = []
+                            listQty = []
+                        }
+                        // Append the new medicine
                         listObat?.append(newObat)
+                        listQty?.append(QTY)
                     }
-                    
                     showPopUp = false
+                    
+                    
                 }label: {
                     ActionButton(title: isEditing ? "Simpan Obat" : "Tambah Obat" , width: 245, height: 44, radius: 10, bgColor: "Green")
                 }
